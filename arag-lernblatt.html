@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<title>ARAG Aktiv-Rechtsschutz 2026 – Lernblatt</title>
+<style>
+  @page { size: A4 portrait; margin: 0; }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0; padding: 0;
+    background: #e9e9e9;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #000;
+  }
+  .page {
+    width: 210mm;
+    height: 297mm;
+    margin: 8mm auto;
+    background: #fff;
+    padding: 8mm;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 0 6px rgba(0,0,0,0.25);
+  }
+  .title {
+    text-align: center;
+    font-size: 22pt;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    margin: 0;
+  }
+  .subtitle {
+    text-align: center;
+    font-size: 11pt;
+    color: #333;
+    margin: 1mm 0 3mm 0;
+  }
+  .rule {
+    border: none;
+    border-top: 2px solid #000;
+    margin: 0 0 5mm 0;
+  }
+  .columns {
+    flex: 1;
+    display: flex;
+    gap: 8mm;
+    min-height: 0;
+  }
+  .col {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 8mm;
+    min-height: 0;
+  }
+  .box {
+    border: 1.4px solid #000;
+    border-radius: 3px;
+    padding: 3mm 4mm 4mm 4mm;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+  }
+  .box h2 {
+    font-size: 12.5pt;
+    font-weight: 800;
+    margin: 0 0 1.2mm 0;
+    padding-bottom: 1.2mm;
+    border-bottom: 1px solid #000;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+  .box.tarife { height: 149mm; }
+  .box.bausteine { height: 97mm; }
+  .box.services { height: 81mm; }
+  .box.upgrade { height: 91mm; }
+  .box.verkauf { height: 66mm; }
+
+  .sub { margin-top: 2mm; }
+  .sub:first-of-type { margin-top: 0.5mm; }
+  .sub h3 {
+    font-size: 11pt;
+    font-weight: 700;
+    margin: 0 0 0.5mm 0;
+    padding-bottom: 0.5mm;
+    border-bottom: 0.7px solid #000;
+    display: inline-block;
+  }
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  li {
+    font-size: 11pt;
+    line-height: 1.32;
+    white-space: nowrap;
+  }
+  li::before {
+    content: "– ";
+    font-weight: 700;
+  }
+  .grid2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 4mm;
+    row-gap: 2mm;
+    margin-top: 0.5mm;
+  }
+  .services ul, .upgrade ul { flex: 1; display: flex; flex-direction: column; justify-content: space-evenly; }
+  .formel {
+    font-size: 11.5pt;
+    font-weight: 700;
+    margin: 1mm 0 2.5mm 0;
+    line-height: 1.4;
+  }
+  .mvn-line { font-size: 11pt; line-height: 1.6; }
+  .legend {
+    font-size: 9pt;
+    color: #444;
+    margin-top: 2mm;
+  }
+  b { font-weight: 800; }
+
+  @media print {
+    body { background: #fff; }
+    .page { box-shadow: none; margin: 0; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+  <h1 class="title">ARAG Aktiv-Rechtsschutz 2026</h1>
+  <div class="subtitle">Verkaufs-Lernblatt</div>
+  <hr class="rule">
+
+  <div class="columns">
+    <!-- LINKE SPALTE -->
+    <div class="col">
+      <div class="box tarife">
+        <h2>1. Tarife</h2>
+
+        <div class="sub">
+          <h3>Kompakt</h3>
+          <ul>
+            <li>JuraCheck + Opfer-RS</li>
+            <li>Weltweit bis <b>350.000 €</b></li>
+            <li>Beratung: Familie/Erbe/Elterngeld/Rente</li>
+            <li>Arbeits-RS: <b>6 Mon.</b> Wartezeit</li>
+          </ul>
+        </div>
+
+        <div class="sub">
+          <h3>Komfort</h3>
+          <ul>
+            <li>Erb-RS bis <b>10.000 €</b></li>
+            <li>Soforthilfe bis <b>500 €</b></li>
+            <li>Erw. Straf-RS bis <b>300.000 €</b></li>
+            <li>Weltweit <b>unbegrenzt</b></li>
+            <li>Arbeits-RS: <b>3 Mon.</b> Wartezeit</li>
+            <li>Anti-Stalking-RS</li>
+            <li>Patienten-/Sorgerechtsvfg. bis <b>500 €</b></li>
+            <li>Betreuung bis <b>1.000 €</b></li>
+            <li>Keine SB bei Erstberatung</li>
+          </ul>
+        </div>
+
+        <div class="sub">
+          <h3>Premium</h3>
+          <ul>
+            <li>Soforthilfe bis <b>1.000 €</b></li>
+            <li>DirektSchutz optional</li>
+            <li>Anlieger/Erschließung bis <b>30.000 €</b></li>
+            <li>Planfeststellung bis <b>30.000 €</b></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="box bausteine">
+        <h2>2. Bausteine</h2>
+        <div class="grid2">
+          <div class="sub">
+            <h3>Privat</h3>
+            <ul>
+              <li>Online-Käufe</li>
+              <li>Verträge</li>
+              <li>Schadenersatz</li>
+              <li>Steuerfragen</li>
+            </ul>
+          </div>
+          <div class="sub">
+            <h3>Beruf</h3>
+            <ul>
+              <li>Arbeitsvertrag</li>
+              <li>Abmahnung</li>
+              <li>Kündigung</li>
+              <li>Arbeitszeugnis</li>
+              <li>Überstunden</li>
+            </ul>
+          </div>
+          <div class="sub">
+            <h3>Verkehr</h3>
+            <ul>
+              <li>Unfall</li>
+              <li>Bußgeld</li>
+              <li>Fahrverbot</li>
+              <li>Leasing</li>
+              <li>Autokauf</li>
+              <li>Werkstatt</li>
+            </ul>
+          </div>
+          <div class="sub">
+            <h3>Wohnen</h3>
+            <ul>
+              <li>Nebenkosten</li>
+              <li>Mieterhöhung</li>
+              <li>Kaution</li>
+              <li>Schimmel</li>
+              <li>Nachbarn</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RECHTE SPALTE -->
+    <div class="col">
+      <div class="box services">
+        <h2>3. Services</h2>
+        <ul>
+          <li>JuraTel: Telefon-Beratung</li>
+          <li>JuraCheck: Verträge prüfen</li>
+          <li>Online-Service: Musterschreiben</li>
+          <li>Mediation: neutraler Vermittler</li>
+          <li>Anwaltsempfehlung</li>
+          <li>Opfer-Rechtsschutz</li>
+        </ul>
+      </div>
+
+      <div class="box upgrade">
+        <h2>4. Upgrade Kompakt &rarr; Komfort</h2>
+        <ul>
+          <li>Erb-RS bis <b>10.000 €</b></li>
+          <li>Soforthilfe bis <b>500 €</b></li>
+          <li>Weltweit <b>unbegrenzt</b></li>
+          <li>Erw. Straf-RS inklusive</li>
+          <li>Arbeits-RS: 3 statt <b>6 Monate</b></li>
+          <li>Anti-Stalking inklusive</li>
+          <li>Keine SB bei Erstberatung</li>
+        </ul>
+      </div>
+
+      <div class="box verkauf">
+        <h2>5. Verkaufsformel + MVN</h2>
+        <div class="formel">Bedarf &rarr; Lücke &rarr; Lösung &rarr; Preis &rarr; Abschluss</div>
+        <div class="sub">
+          <h3>MVN</h3>
+          <div class="mvn-line"><b>M =</b> Merkmal – was ist enthalten?</div>
+          <div class="mvn-line"><b>V =</b> Vorteil – was kann es?</div>
+          <div class="mvn-line"><b>N =</b> Nutzen – was bringt es dem Kunden?</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="legend">RS = Rechtsschutz&nbsp;&nbsp;|&nbsp;&nbsp;SB = Selbstbeteiligung</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,64 @@
+TEXTSKIZZE – SEITENAUFTEILUNG (DIN A4 Hochformat, 1 Seite)
+============================================================
+Diese Skizze zeigt nur die STRUKTUR/ANORDNUNG, nicht die vollen
+Texte. Fuer den Inhalt siehe arag-lernblatt.html / .svg.
+
++==========================================================+
+|            ARAG AKTIV-RECHTSSCHUTZ 2026                  |
+|                 (Verkaufs-Lernblatt)                      |
+|------------------------------------------------------------|
+|                          |                                 |
+|  +--------------------+  |  +---------------------------+  |
+|  | 1. TARIFE          |  |  | 3. SERVICES               |  |
+|  |  KOMPAKT           |  |  |  - JuraTel                 |  |
+|  |   - 4 Stichpunkte  |  |  |  - JuraCheck                |  |
+|  |  KOMFORT           |  |  |  - Online-Service           |  |
+|  |   - 9 Stichpunkte  |  |  |  - Mediation                 |  |
+|  |  PREMIUM           |  |  |  - Anwaltsempfehlung         |  |
+|  |   - 4 Stichpunkte  |  |  |  - Opfer-RS                  |  |
+|  |                    |  |  +---------------------------+  |
+|  |   (groesster Kasten|  |                                 |
+|  |    der Seite)      |  |  +---------------------------+  |
+|  +--------------------+  |  | 4. UPGRADE                |  |
+|                          |  |    KOMPAKT -> KOMFORT      |  |
+|  +--------------------+  |  |  - 7 Stichpunkte            |  |
+|  | 2. BAUSTEINE       |  |  |  (Zahlen fett)               |  |
+|  |  PRIVAT | BERUF    |  |  +---------------------------+  |
+|  |  (4)    | (5)      |  |                                 |
+|  |  --------------    |  |  +---------------------------+  |
+|  |  VERKEHR| WOHNEN   |  |  | 5. VERKAUFSFORMEL + MVN   |  |
+|  |  (6)    | (5)      |  |  |  Bedarf->Luecke->Loesung   |  |
+|  |  (2x2-Raster)      |  |  |  ->Preis->Abschluss        |  |
+|  +--------------------+  |  |  MVN: M / V / N             |  |
+|                          |  +---------------------------+  |
+|--------------------------------------------------------------|
+|  RS = Rechtsschutz | SB = Selbstbeteiligung   (Fussnote klein)|
++==========================================================+
+
+SPALTEN-LOGIK
+--------------
+Linke Spalte  = 2 hohe Kaesten (TARIFE gross, BAUSTEINE mittel)
+Rechte Spalte = 3 kleinere Kaesten (SERVICES, UPGRADE, FORMEL+MVN)
+Beide Spalten sind exakt gleich hoch -> Seite wirkt ausgewogen,
+obwohl links weniger, aber laengere Bloecke stehen und rechts
+mehr, aber kuerzere Bloecke.
+
+UEBERTRAGUNGS-REIHENFOLGE (empfohlen zum Abschreiben)
+------------------------------------------------------
+1. Titelzeile oben quer durchziehen + Trennlinie
+2. Beide Kastenrahmen der linken Spalte einzeichnen (TARIFE, BAUSTEINE)
+3. Beide Kastenrahmen der rechten Spalte einzeichnen (3 Kaesten)
+4. Ueberschriften + Unterlinien in jeden Kasten schreiben
+5. Stichpunkte Zeile fuer Zeile eintragen (immer mit "-")
+6. Wichtige Zahlen im Nachhinein dick nachziehen/unterstreichen
+7. Fussnote unten klein ergaenzen
+
+FORMAT-CHECK
+------------
+[x] Passt auf 1 Seite (A4 Hochformat)
+[x] Kleinste Schrift 11 pt (digitale Vorlage)
+[x] Max. 9 Stichpunkte pro Kasten (KOMFORT = 9, Grenzwert eingehalten)
+[x] Jeder Stichpunkt = 1 Zeile
+[x] Kaesten optisch ausgewogen (beide Spalten gleiche Gesamthoehe)
+[x] Schwarz-weiss, keine Icons/Deko
+[x] Nur handgezeichnete Elemente: Rahmen, Linien, Text, Pfeile (->)
