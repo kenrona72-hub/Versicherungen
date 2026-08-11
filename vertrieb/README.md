@@ -124,19 +124,21 @@ löschen und frisch importieren.
 ## Arbeitsablauf im Alltag
 
 **Täglich, 17:00 (45 Min):**
-Cockpit auf → Dashboard → „Diese Woche" → drei Namen → Leitfaden-Text
-kopieren (Button im Kontakt-Detail) → anpassen → senden → „✓ angeschrieben".
-Das setzt automatisch die Wiedervorlage auf in 4 Tagen.
+Cockpit auf → Kachel **Heute** → die drei Namen stehen schon da → grüner
+WhatsApp-Button → Text kurz anpassen → senden. Status und Wiedervorlage
+setzen sich selbst.
 
 **Nach jedem Gespräch (2 Min):**
-Kontakt öffnen → Status setzen → nächster Schritt + Datum → Notizen.
+Kontakt öffnen → Status anklicken → Notizen ergänzen. Nächster Schritt und
+Wiedervorlage kommen automatisch.
 
 **Sonntag, 20:00 (20 Min):**
 Nächste Welle ansehen, Termine blocken, JSON-Backup ziehen.
 
 ## Neue Kontakte
 
-Empfehlungen kommen laufend dazu. Oben rechts „+ Kontakt" → Name, Beziehung,
+Empfehlungen kommen laufend dazu. Im Kontakt der Button **+ Empfehlung**, sonst in der
+Kontaktliste „+ Kontakt" → Name, Beziehung,
 Priorität, Woche. Danach im Tab *Ordner* das Skript neu laden und ausführen,
 dann existiert auch der Ordner.
 
@@ -147,9 +149,11 @@ Alles ist änderbar, ohne dass etwas kaputtgeht:
 - **Startdatum verschieben** – alle Wochen und Termine rechnen sich neu
 - **Kontakt in andere Woche** – im Detail-Drawer über „Kontaktwoche"
 - **Komplett neu verteilen** – Button „Wochen neu verteilen" (nach Priorität)
-- **Wochenthemen ändern** – im Quelltext das Array `WOCHEN_ROLLEN` bearbeiten
+- **Wochenthemen ändern** – im Quelltext das Array `WOCHEN` bearbeiten
 - **Tagesblöcke ändern** – Array `RHYTHMUS`
-- **Leitfäden ändern** – Array `LEITFAEDEN`
+- **Leitfäden ändern** – Array `GUIDES`
+- **Nachrichtentexte ändern** – Objekt `MSG` (je Segment) sowie `MSG_NACH`, `MSG_TERMIN`, `MSG_DANKE`
+- **Automatik-Regeln ändern** – Objekt `AUTO` (Status → Folgeschritt + Tage)
 - **Sparten/Datenpunkte ändern** – Arrays `SPARTEN` und `DATENPUNKTE`
 
 Alle Arrays stehen ganz oben im `<script>`-Block und sind bewusst so geschrieben,
