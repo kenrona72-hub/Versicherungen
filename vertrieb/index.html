@@ -3,887 +3,929 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Vertriebs-Cockpit · 2-Monats-Plan</title>
+<title>Vertriebs-Cockpit</title>
 <style>
   :root{
     --bg:#0f1216; --bg2:#161b22; --bg3:#1c232c; --line:#2a333f;
     --tx:#e7edf3; --tx2:#9aa8b8; --tx3:#6b7a8c;
     --acc:#4f9dff; --acc2:#7c5cff;
-    --ok:#2fbf71; --warn:#f0b429; --bad:#f2545b; --cool:#2bb6c4;
-    --radius:12px;
-    --fs:15px;
+    --ok:#2fbf71; --warn:#f0b429; --bad:#f2545b; --cool:#2bb6c4; --wa:#25d366;
+    --r:14px;
   }
   html[data-theme="light"]{
     --bg:#f4f6f9; --bg2:#ffffff; --bg3:#eef2f7; --line:#d8e0ea;
     --tx:#131922; --tx2:#4e5c6e; --tx3:#7b8798;
     --acc:#1668d6; --acc2:#6039e8;
-    --ok:#177f4d; --warn:#a4700a; --bad:#c22730; --cool:#127d89;
+    --ok:#177f4d; --warn:#a4700a; --bad:#c22730; --cool:#127d89; --wa:#128c3f;
   }
   *{box-sizing:border-box}
-  body{
-    margin:0; background:var(--bg); color:var(--tx);
-    font:var(--fs)/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-    -webkit-font-smoothing:antialiased;
-  }
-  a{color:var(--acc)}
-  h1,h2,h3,h4{margin:0 0 .5em; line-height:1.25; font-weight:700}
-  h1{font-size:1.5rem} h2{font-size:1.2rem} h3{font-size:1.02rem} h4{font-size:.92rem}
+  body{margin:0;background:var(--bg);color:var(--tx);
+    font:15px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    -webkit-font-smoothing:antialiased}
+  h1,h2,h3,h4{margin:0 0 .5em;line-height:1.25;font-weight:700}
+  h1{font-size:1.55rem} h2{font-size:1.18rem} h3{font-size:1rem} h4{font-size:.9rem}
   p{margin:0 0 .8em}
-  code,kbd{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.85em;background:var(--bg3);padding:1px 5px;border-radius:5px}
+  code{font-family:ui-monospace,Menlo,monospace;font-size:.85em;background:var(--bg3);padding:1px 5px;border-radius:5px}
 
-  /* ---------- Layout ---------- */
-  header.top{
-    position:sticky; top:0; z-index:50; background:var(--bg2);
-    border-bottom:1px solid var(--line); padding:10px 16px;
-  }
-  .topbar{display:flex; align-items:center; gap:12px; flex-wrap:wrap}
-  .brand{font-weight:800; letter-spacing:.3px; font-size:1.05rem; white-space:nowrap}
+  header.top{position:sticky;top:0;z-index:50;background:var(--bg2);border-bottom:1px solid var(--line);padding:10px 16px}
+  .topbar{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .brand{font-weight:800;font-size:1.02rem;cursor:pointer;white-space:nowrap}
   .brand span{color:var(--acc)}
+  .crumb{color:var(--tx3);font-size:.9rem}
   .spacer{flex:1}
-  nav.tabs{display:flex; gap:4px; flex-wrap:wrap; margin-top:10px; overflow-x:auto}
-  nav.tabs button{
-    background:transparent; border:1px solid transparent; color:var(--tx2);
-    padding:7px 13px; border-radius:99px; cursor:pointer; font-size:.88rem; font-weight:600; white-space:nowrap;
-  }
-  nav.tabs button:hover{background:var(--bg3); color:var(--tx)}
-  nav.tabs button.active{background:var(--acc); color:#fff; border-color:var(--acc)}
-  main{max-width:1400px; margin:0 auto; padding:20px 16px 80px}
-  section.view{display:none}
-  section.view.active{display:block}
+  main{max-width:1300px;margin:0 auto;padding:18px 16px 90px}
+  section.view{display:none} section.view.active{display:block}
 
-  /* ---------- Bits ---------- */
-  .card{background:var(--bg2); border:1px solid var(--line); border-radius:var(--radius); padding:16px; margin-bottom:16px}
+  .card{background:var(--bg2);border:1px solid var(--line);border-radius:var(--r);padding:16px;margin-bottom:14px}
   .card.tight{padding:12px}
-  .grid{display:grid; gap:14px}
-  .g2{grid-template-columns:repeat(auto-fit,minmax(320px,1fr))}
-  .g3{grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
-  .g4{grid-template-columns:repeat(auto-fit,minmax(180px,1fr))}
-  .row{display:flex; gap:8px; flex-wrap:wrap; align-items:center}
+  .grid{display:grid;gap:12px}
+  .g2{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+  .g4{grid-template-columns:repeat(auto-fit,minmax(160px,1fr))}
+  .row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
 
-  button,.btn{
-    background:var(--bg3); color:var(--tx); border:1px solid var(--line);
-    padding:7px 13px; border-radius:8px; cursor:pointer; font-size:.86rem; font-weight:600;
-    font-family:inherit;
-  }
-  button:hover,.btn:hover{border-color:var(--acc); color:var(--acc)}
-  button.primary{background:var(--acc); color:#fff; border-color:var(--acc)}
-  button.primary:hover{filter:brightness(1.1); color:#fff}
-  button.ghost{background:transparent}
-  button.sm{padding:4px 9px; font-size:.78rem}
-  button.danger:hover{border-color:var(--bad); color:var(--bad)}
+  .tiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(215px,1fr));gap:12px}
+  .tile{position:relative;background:var(--bg2);border:1px solid var(--line);border-radius:var(--r);padding:18px;
+    cursor:pointer;text-align:left;font:inherit;color:inherit;transition:transform .1s,border-color .1s;
+    display:flex;flex-direction:column;gap:6px;min-height:118px}
+  .tile:hover{border-color:var(--acc);transform:translateY(-2px)}
+  .tile .ic{font-size:1.7rem;line-height:1}
+  .tile .tt{font-weight:700;font-size:1rem}
+  .tile .td{font-size:.8rem;color:var(--tx3);line-height:1.4}
+  .tile .badge{position:absolute;top:12px;right:12px;background:var(--bad);color:#fff;
+    border-radius:99px;font-size:.7rem;font-weight:800;padding:2px 8px}
+  .tile.hero{grid-column:1/-1;min-height:auto;border-color:var(--acc);background:linear-gradient(135deg,var(--bg2),var(--bg3))}
 
-  input,select,textarea{
-    background:var(--bg); color:var(--tx); border:1px solid var(--line);
-    border-radius:8px; padding:7px 10px; font:inherit; font-size:.88rem; width:100%;
-  }
-  input:focus,select:focus,textarea:focus{outline:none; border-color:var(--acc)}
-  textarea{resize:vertical; min-height:70px}
-  label.f{display:block; font-size:.74rem; text-transform:uppercase; letter-spacing:.6px; color:var(--tx3); font-weight:700; margin-bottom:4px}
+  button,.btn{background:var(--bg3);color:var(--tx);border:1px solid var(--line);padding:7px 13px;
+    border-radius:9px;cursor:pointer;font:inherit;font-size:.86rem;font-weight:600}
+  button:hover{border-color:var(--acc);color:var(--acc)}
+  button.primary{background:var(--acc);color:#fff;border-color:var(--acc)}
+  button.primary:hover{filter:brightness(1.1);color:#fff}
+  button.wa{background:var(--wa);color:#fff;border-color:var(--wa)}
+  button.wa:hover{filter:brightness(1.08);color:#fff}
+  button.sm{padding:4px 9px;font-size:.78rem}
+  button.danger:hover{border-color:var(--bad);color:var(--bad)}
+  button.back{background:transparent;border-color:transparent;color:var(--tx2);padding:4px 8px}
+
+  input,select,textarea{background:var(--bg);color:var(--tx);border:1px solid var(--line);
+    border-radius:9px;padding:7px 10px;font:inherit;font-size:.88rem;width:100%}
+  input:focus,select:focus,textarea:focus{outline:none;border-color:var(--acc)}
+  textarea{resize:vertical;min-height:70px}
+  label.f{display:block;font-size:.72rem;text-transform:uppercase;letter-spacing:.6px;color:var(--tx3);font-weight:700;margin-bottom:4px}
   .field{margin-bottom:10px}
 
-  .pill{display:inline-block; padding:2px 9px; border-radius:99px; font-size:.72rem; font-weight:700; white-space:nowrap}
-  .t-A{background:rgba(242,84,91,.16); color:var(--bad)}
-  .t-B{background:rgba(240,180,41,.16); color:var(--warn)}
-  .t-C{background:rgba(107,122,140,.2); color:var(--tx2)}
-  .s-neu{background:rgba(107,122,140,.2); color:var(--tx2)}
-  .s-kontaktiert{background:rgba(43,182,196,.16); color:var(--cool)}
-  .s-termin{background:rgba(79,157,255,.18); color:var(--acc)}
-  .s-analyse{background:rgba(124,92,255,.18); color:var(--acc2)}
-  .s-angebot{background:rgba(240,180,41,.18); color:var(--warn)}
-  .s-abschluss{background:rgba(47,191,113,.18); color:var(--ok)}
-  .s-später{background:rgba(107,122,140,.2); color:var(--tx3)}
-  .s-kein{background:rgba(242,84,91,.14); color:var(--bad)}
+  .pill{display:inline-block;padding:2px 9px;border-radius:99px;font-size:.72rem;font-weight:700;white-space:nowrap}
+  .t-A{background:rgba(242,84,91,.16);color:var(--bad)}
+  .t-B{background:rgba(240,180,41,.16);color:var(--warn)}
+  .t-C{background:rgba(107,122,140,.2);color:var(--tx2)}
+  .s-Neu{background:rgba(107,122,140,.2);color:var(--tx2)}
+  .s-Kontaktiert{background:rgba(43,182,196,.16);color:var(--cool)}
+  .s-Termin{background:rgba(79,157,255,.18);color:var(--acc)}
+  .s-Analyse{background:rgba(124,92,255,.18);color:var(--acc2)}
+  .s-Angebot{background:rgba(240,180,41,.18);color:var(--warn)}
+  .s-Abschluss{background:rgba(47,191,113,.18);color:var(--ok)}
+  .s-Später{background:rgba(107,122,140,.2);color:var(--tx3)}
+  .s-KeinInteresse{background:rgba(242,84,91,.14);color:var(--bad)}
 
-  table{width:100%; border-collapse:collapse; font-size:.86rem}
-  th{text-align:left; font-size:.7rem; text-transform:uppercase; letter-spacing:.6px; color:var(--tx3); padding:8px 8px; border-bottom:1px solid var(--line); position:sticky; top:0; background:var(--bg2); cursor:pointer; user-select:none}
-  td{padding:8px 8px; border-bottom:1px solid var(--line); vertical-align:middle}
+  table{width:100%;border-collapse:collapse;font-size:.86rem}
+  th{text-align:left;font-size:.7rem;text-transform:uppercase;letter-spacing:.5px;color:var(--tx3);
+    padding:8px;border-bottom:1px solid var(--line);position:sticky;top:0;background:var(--bg2);cursor:pointer}
+  td{padding:8px;border-bottom:1px solid var(--line);vertical-align:middle}
   tr:hover td{background:var(--bg3)}
-  .tablewrap{overflow-x:auto; max-height:70vh; overflow-y:auto; border-radius:8px}
-  .nm{font-weight:700; cursor:pointer}
-  .nm:hover{color:var(--acc)}
-  .sub{font-size:.76rem; color:var(--tx3)}
+  .tablewrap{overflow-x:auto;max-height:68vh;overflow-y:auto;border-radius:9px}
+  .nm{font-weight:700;cursor:pointer} .nm:hover{color:var(--acc)}
+  .sub{font-size:.76rem;color:var(--tx3)}
 
-  .kpi{background:var(--bg2); border:1px solid var(--line); border-radius:var(--radius); padding:14px}
-  .kpi .n{font-size:1.9rem; font-weight:800; line-height:1}
-  .kpi .l{font-size:.74rem; text-transform:uppercase; letter-spacing:.6px; color:var(--tx3); font-weight:700; margin-top:6px}
-  .bar{height:8px; background:var(--bg3); border-radius:99px; overflow:hidden; margin-top:8px}
-  .bar>i{display:block; height:100%; background:var(--acc); border-radius:99px}
+  .kpi{background:var(--bg2);border:1px solid var(--line);border-radius:var(--r);padding:14px}
+  .kpi .n{font-size:1.8rem;font-weight:800;line-height:1}
+  .kpi .l{font-size:.72rem;text-transform:uppercase;letter-spacing:.5px;color:var(--tx3);font-weight:700;margin-top:6px}
+  .bar{height:8px;background:var(--bg3);border-radius:99px;overflow:hidden;margin-top:8px}
+  .bar>i{display:block;height:100%;background:var(--acc);border-radius:99px}
 
-  details.acc{border:1px solid var(--line); border-radius:10px; margin-bottom:10px; background:var(--bg2); overflow:hidden}
-  details.acc>summary{padding:12px 14px; cursor:pointer; font-weight:700; list-style:none; display:flex; align-items:center; gap:10px}
+  details.acc{border:1px solid var(--line);border-radius:11px;margin-bottom:10px;background:var(--bg2);overflow:hidden}
+  details.acc>summary{padding:12px 14px;cursor:pointer;font-weight:700;list-style:none;display:flex;align-items:center;gap:10px}
   details.acc>summary::-webkit-details-marker{display:none}
-  details.acc>summary::before{content:"▸"; color:var(--acc); font-size:.9em}
+  details.acc>summary::before{content:"▸";color:var(--acc)}
   details.acc[open]>summary::before{content:"▾"}
-  details.acc>.body{padding:0 14px 14px; border-top:1px solid var(--line); padding-top:12px}
+  details.acc>.body{padding:12px 14px 14px;border-top:1px solid var(--line)}
 
-  .script{background:var(--bg); border:1px solid var(--line); border-left:3px solid var(--acc); border-radius:8px; padding:12px 14px; margin:8px 0; white-space:pre-wrap; font-size:.87rem; line-height:1.6}
-  .hint{font-size:.82rem; color:var(--tx2); background:var(--bg3); border-radius:8px; padding:10px 12px; margin:8px 0}
-  ul.tick{list-style:none; padding:0; margin:0}
-  ul.tick li{padding:5px 0 5px 24px; position:relative; font-size:.88rem; border-bottom:1px solid var(--line)}
+  .script{background:var(--bg);border:1px solid var(--line);border-left:3px solid var(--acc);border-radius:9px;
+    padding:12px 14px;margin:8px 0;white-space:pre-wrap;font-size:.88rem;line-height:1.6}
+  .hint{font-size:.83rem;color:var(--tx2);background:var(--bg3);border-radius:9px;padding:10px 12px;margin:8px 0}
+  .warn{background:rgba(240,180,41,.12);border:1px solid var(--warn);border-radius:9px;padding:10px 13px;margin-bottom:14px;font-size:.87rem}
+  ul.tick{list-style:none;padding:0;margin:0}
+  ul.tick li{padding:6px 0 6px 24px;position:relative;font-size:.88rem;border-bottom:1px solid var(--line)}
   ul.tick li:last-child{border-bottom:none}
-  ul.tick li::before{content:"✓"; position:absolute; left:0; color:var(--ok); font-weight:800}
+  ul.tick li::before{content:"✓";position:absolute;left:0;color:var(--ok);font-weight:800}
 
-  /* Drawer */
-  .drawer-bg{position:fixed; inset:0; background:rgba(0,0,0,.55); z-index:100; display:none}
+  .drawer-bg{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:100;display:none}
   .drawer-bg.open{display:block}
-  .drawer{position:fixed; top:0; right:0; height:100%; width:min(560px,100%); background:var(--bg2);
-    border-left:1px solid var(--line); z-index:101; transform:translateX(100%); transition:transform .18s ease;
-    display:flex; flex-direction:column}
+  .drawer{position:fixed;top:0;right:0;height:100%;width:min(560px,100%);background:var(--bg2);
+    border-left:1px solid var(--line);z-index:101;transform:translateX(100%);transition:transform .18s;
+    display:flex;flex-direction:column}
   .drawer.open{transform:none}
-  .drawer .dh{padding:14px 16px; border-bottom:1px solid var(--line); display:flex; gap:10px; align-items:center}
-  .drawer .db{padding:16px; overflow-y:auto; flex:1}
-  .drawer .df{padding:12px 16px; border-top:1px solid var(--line); display:flex; gap:8px}
+  .drawer .dh{padding:14px 16px;border-bottom:1px solid var(--line);display:flex;gap:10px;align-items:center}
+  .drawer .db{padding:16px;overflow-y:auto;flex:1}
+  .drawer .df{padding:12px 16px;border-top:1px solid var(--line);display:flex;gap:8px}
 
-  .chk{display:flex; align-items:center; gap:7px; font-size:.85rem; padding:4px 0}
-  .chk input{width:auto; margin:0}
-  .weekhead{display:flex; align-items:baseline; gap:10px; flex-wrap:wrap}
-  .weekhead .dt{font-size:.8rem; color:var(--tx3); font-weight:600}
-  .mini{font-size:.8rem; color:var(--tx2)}
-  .todo{display:flex; align-items:flex-start; gap:10px; padding:9px 0; border-bottom:1px solid var(--line)}
-  .todo:last-child{border-bottom:none}
-  .todo .w{flex:1}
-  .overdue{color:var(--bad); font-weight:700}
-  .today{color:var(--warn); font-weight:700}
-  .toast{position:fixed; bottom:20px; left:50%; transform:translateX(-50%); background:var(--ok); color:#fff;
-    padding:10px 18px; border-radius:99px; font-weight:700; font-size:.85rem; z-index:200; opacity:0; pointer-events:none; transition:opacity .2s}
+  .chk{display:flex;align-items:center;gap:7px;font-size:.85rem;padding:4px 0}
+  .chk input{width:auto;margin:0}
+  .item{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--line)}
+  .item:last-child{border-bottom:none}
+  .item .w{flex:1;min-width:0}
+  .mini{font-size:.82rem;color:var(--tx2)}
+  .overdue{color:var(--bad);font-weight:700}
+  .toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--ok);color:#fff;
+    padding:10px 18px;border-radius:99px;font-weight:700;font-size:.85rem;z-index:200;opacity:0;pointer-events:none;transition:opacity .2s}
   .toast.show{opacity:1}
-  @media print{ header.top,nav.tabs,.noprint{display:none!important} body{background:#fff;color:#000} .card{break-inside:avoid} }
+  .stepbox{border:1px solid var(--line);border-radius:12px;padding:16px;background:var(--bg2);margin-bottom:12px}
+  .stepno{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;
+    background:var(--acc);color:#fff;font-weight:800;font-size:.8rem;margin-right:8px}
+  @media print{header.top,.noprint,.tile{display:none!important}body{background:#fff;color:#000}}
 </style>
 </head>
 <body>
 
 <header class="top">
   <div class="topbar">
-    <div class="brand">Vertriebs<span>·</span>Cockpit</div>
+    <div class="brand" onclick="go('home')">Vertriebs<span>·</span>Cockpit</div>
+    <span class="crumb" id="crumb"></span>
     <div class="spacer"></div>
-    <div class="row">
-      <span class="mini" id="hdrStat"></span>
-      <button class="sm" onclick="toggleTheme()" title="Hell/Dunkel">◐</button>
-      <button class="sm" onclick="go('export')">Export</button>
-      <button class="sm primary" onclick="addContact()">+ Kontakt</button>
-    </div>
+    <button class="sm" onclick="toggleTheme()" title="Hell/Dunkel">◐</button>
+    <button class="sm" onclick="go('home')">☰ Start</button>
   </div>
-  <nav class="tabs" id="tabs"></nav>
 </header>
 
 <main>
-  <!-- ============ DASHBOARD ============ -->
-  <section class="view" id="v-dash">
-    <div class="grid g4" style="margin-bottom:16px">
-      <div class="kpi"><div class="n" id="k1">0</div><div class="l">Kontakte gesamt</div></div>
-      <div class="kpi"><div class="n" id="k2">0</div><div class="l">Angesprochen</div><div class="bar"><i id="b2"></i></div></div>
-      <div class="kpi"><div class="n" id="k3">0</div><div class="l">Termine</div></div>
-      <div class="kpi"><div class="n" id="k4">0</div><div class="l">Abschlüsse</div></div>
-    </div>
-
-    <div class="grid g2">
-      <div class="card">
-        <h2>🔥 Heute &amp; überfällig</h2>
-        <div id="todayList"></div>
-      </div>
-      <div class="card">
-        <h2>📅 Diese Woche</h2>
-        <div id="thisWeek"></div>
-      </div>
-    </div>
-
-    <div class="card">
-      <h2>Pipeline</h2>
-      <div id="pipeline" class="grid g4"></div>
-    </div>
-
-    <div class="card">
-      <h2>Fortschritt der 8 Wochen</h2>
-      <div id="weekProgress"></div>
-    </div>
+  <section class="view active" id="v-home">
+    <div id="homeAlert"></div>
+    <div class="tiles" id="homeTiles"></div>
   </section>
 
-  <!-- ============ KONTAKTE ============ -->
+  <section class="view" id="v-heute">
+    <button class="back" onclick="go('home')">← Start</button>
+    <h1>Heute</h1>
+    <div id="heuteOut"></div>
+  </section>
+
   <section class="view" id="v-kontakte">
+    <button class="back" onclick="go('home')">← Start</button>
     <div class="card tight">
       <div class="row">
-        <input id="q" placeholder="Suchen (Name, Notiz, Ort)…" style="max-width:280px" oninput="renderTable()">
-        <select id="fTier" style="max-width:130px" onchange="renderTable()"><option value="">Alle Prio</option><option>A</option><option>B</option><option>C</option></select>
-        <select id="fStatus" style="max-width:170px" onchange="renderTable()"></select>
-        <select id="fWeek" style="max-width:150px" onchange="renderTable()"></select>
-        <select id="fSeg" style="max-width:190px" onchange="renderTable()"></select>
+        <input id="q" placeholder="Suchen…" style="max-width:220px" oninput="renderTable()">
+        <select id="fTier" style="max-width:115px" onchange="renderTable()"><option value="">Alle Prio</option><option>A</option><option>B</option><option>C</option></select>
+        <select id="fStatus" style="max-width:155px" onchange="renderTable()"></select>
+        <select id="fWeek" style="max-width:140px" onchange="renderTable()"></select>
+        <select id="fSeg" style="max-width:175px" onchange="renderTable()"></select>
         <div class="spacer"></div>
         <span class="mini" id="cnt"></span>
+        <button class="sm primary" onclick="addContact()">+ Kontakt</button>
       </div>
     </div>
     <div class="card tight">
-      <div class="tablewrap">
-        <table id="tbl">
-          <thead><tr>
-            <th onclick="sortBy('name')">Name</th>
-            <th onclick="sortBy('tier')">Prio</th>
-            <th onclick="sortBy('seg')">Segment</th>
-            <th onclick="sortBy('week')">Woche</th>
-            <th onclick="sortBy('status')">Status</th>
-            <th onclick="sortBy('nextDate')">Nächster Schritt</th>
-            <th class="noprint"></th>
-          </tr></thead>
-          <tbody id="tbody"></tbody>
-        </table>
-      </div>
+      <div class="tablewrap"><table><thead><tr>
+        <th onclick="sortBy('name')">Name</th><th onclick="sortBy('tier')">Prio</th>
+        <th onclick="sortBy('week')">W</th><th onclick="sortBy('status')">Status</th>
+        <th onclick="sortBy('nextDate')">Nächster Schritt</th><th class="noprint">Aktion</th>
+      </tr></thead><tbody id="tbody"></tbody></table></div>
     </div>
   </section>
 
-  <!-- ============ 8-WOCHEN-PLAN ============ -->
   <section class="view" id="v-plan">
+    <button class="back" onclick="go('home')">← Start</button>
     <div class="card">
       <div class="row">
         <div class="field" style="margin:0"><label class="f">Start (Montag)</label><input type="date" id="startDate" onchange="setStart(this.value)" style="width:170px"></div>
         <div class="spacer"></div>
-        <button class="sm" onclick="autoAssign()">Wochen neu verteilen</button>
+        <button class="sm" onclick="autoAssign()">Neu verteilen</button>
         <button class="sm" onclick="window.print()">Drucken</button>
       </div>
-      <p class="mini" style="margin-top:10px">Jede Woche hat eine feste Rolle. Verschiebe Kontakte jederzeit über die Detailansicht – der Plan rechnet sich automatisch neu.</p>
     </div>
     <div id="planOut"></div>
   </section>
 
-  <!-- ============ WOCHENRHYTHMUS ============ -->
   <section class="view" id="v-rhythmus">
-    <div class="card">
-      <h1>Dein Wochenrhythmus</h1>
-      <p class="mini">Das ist das Skelett. Alles andere hängt daran. Wenn du nur <b>eins</b> aus diesem Cockpit umsetzt, dann das hier: feste Blöcke, jeden Tag gleich.</p>
-    </div>
+    <button class="back" onclick="go('home')">← Start</button>
+    <h1>Wochenrhythmus</h1>
+    <p class="mini">Feste Blöcke, jeden Tag gleich. Wenn du nur eins umsetzt, dann das.</p>
     <div id="rhythmOut"></div>
-    <div class="card">
-      <h2>Die 3 Regeln, die alles tragen</h2>
-      <ul class="tick">
-        <li><b>Kontaktblock ist heilig.</b> 45 Min, Handy auf "Nicht stören", Liste offen, keine Ausreden. Lieber 3 Nachrichten täglich als 20 am Sonntag.</li>
-        <li><b>Nach jedem Gespräch sofort 2 Minuten dokumentieren.</b> Status + nächster Schritt + Datum. Sonst ist es in 3 Tagen weg.</li>
-        <li><b>Sonntagabend 20 Min Wochenplanung.</b> Nächste Wochenwelle ansehen, Termine im Kalender blocken, Prioritäten setzen.</li>
-      </ul>
-    </div>
   </section>
 
-  <!-- ============ LEITFÄDEN ============ -->
   <section class="view" id="v-leitfaden">
-    <div class="card">
-      <h1>Gesprächsleitfäden</h1>
-      <p class="mini">Nicht auswendig lernen – Struktur verinnerlichen. Die Texte sind Startpunkte, formulier sie in deiner Sprache. Bei Freunden &amp; Familie gilt: <b>ehrlich statt verkäuferisch</b>. Du bist neu, das ist dein größter Vorteil – nutze ihn.</p>
-    </div>
+    <button class="back" onclick="go('home')">← Start</button>
+    <h1>Leitfäden</h1>
+    <p class="mini">Wähl die Situation, in der du gerade bist.</p>
+    <div class="tiles" id="guideTiles"></div>
+  </section>
+  <section class="view" id="v-guide">
+    <button class="back" onclick="go('leitfaden')">← Leitfäden</button>
     <div id="guideOut"></div>
   </section>
 
-  <!-- ============ DATENAUFNAHME ============ -->
   <section class="view" id="v-daten">
-    <div class="card">
-      <h1>Datenaufnahme &amp; Unterlagen</h1>
-      <p class="mini">Diese Liste arbeitest du in <b>jedem</b> Analysegespräch ab. Pro Kunde findest du sie auch in der Detailansicht als Häkchenliste wieder.</p>
-    </div>
+    <button class="back" onclick="go('home')">← Start</button>
+    <h1>Datenaufnahme</h1>
     <div id="dataOut"></div>
   </section>
 
-  <!-- ============ ORDNER ============ -->
   <section class="view" id="v-ordner">
-    <div class="card">
-      <h1>Ordnerstruktur &amp; Ablage</h1>
-      <p class="mini">Ein Ordner pro Kunde – identisch aufgebaut, lokal <b>und</b> in iCloud, dazu eine Obsidian-Notiz. Das Setup-Skript unten legt alles in einem Rutsch an.</p>
-    </div>
+    <button class="back" onclick="go('home')">← Start</button>
+    <h1>Ordner &amp; Ablage</h1>
     <div id="folderOut"></div>
   </section>
 
-  <!-- ============ EXPORT ============ -->
+  <section class="view" id="v-stats">
+    <button class="back" onclick="go('home')">← Start</button>
+    <h1>Auswertung</h1>
+    <div id="statsOut"></div>
+  </section>
+
   <section class="view" id="v-export">
-    <div class="card">
-      <h1>Export &amp; Sicherung</h1>
-      <p class="mini">Alle Daten liegen nur in diesem Browser (localStorage). <b>Mach regelmäßig ein JSON-Backup</b> – am besten in deinen iCloud-Ordner.</p>
-    </div>
+    <button class="back" onclick="go('home')">← Start</button>
+    <h1>Export &amp; Backup</h1>
     <div class="grid g2" id="exportOut"></div>
     <div class="card">
       <h2>Backup einspielen</h2>
       <div class="row">
-        <input type="file" id="importFile" accept=".json" style="max-width:340px">
-        <button onclick="doImport()">JSON importieren</button>
+        <input type="file" id="importFile" accept=".json" style="max-width:320px">
+        <button onclick="doImport()">Importieren</button>
         <div class="spacer"></div>
-        <button class="danger" onclick="resetAll()">Alles zurücksetzen</button>
+        <button class="danger" onclick="resetAll()">Zurücksetzen</button>
       </div>
     </div>
   </section>
 </main>
 
-<!-- ============ DRAWER ============ -->
 <div class="drawer-bg" id="dbg" onclick="closeDrawer()"></div>
 <aside class="drawer" id="drawer">
-  <div class="dh">
-    <b id="dTitle" style="flex:1; font-size:1.05rem"></b>
-    <button class="sm" onclick="closeDrawer()">✕</button>
-  </div>
+  <div class="dh"><b id="dTitle" style="flex:1;font-size:1.05rem"></b><button class="sm" onclick="closeDrawer()">✕</button></div>
   <div class="db" id="dBody"></div>
   <div class="df">
     <button class="primary" style="flex:1" onclick="saveDrawer()">Speichern</button>
     <button class="danger" onclick="deleteContact()">Löschen</button>
   </div>
 </aside>
-
 <div class="toast" id="toast"></div>
 
 <script>
-/* ================= KONSTANTEN ================= */
-const STATUS = ["Neu","Kontaktiert","Termin","Analyse","Angebot","Abschluss","Später","Kein Interesse"];
-const STATUS_CLASS = {"Neu":"s-neu","Kontaktiert":"s-kontaktiert","Termin":"s-termin","Analyse":"s-analyse","Angebot":"s-angebot","Abschluss":"s-abschluss","Später":"s-später","Kein Interesse":"s-kein"};
-const SEGMENTS = ["Familie","Enger Freundeskreis","Selbstständig / Firma","Angestellt","Student / Azubi","Sportler","Noch unklar"];
-const SPARTEN = ["Privathaftpflicht","Hausrat","Rechtsschutz","KFZ","Berufsunfähigkeit","Altersvorsorge","Kranken-Zusatz","Unfall","Wohngebäude","Tierhalterhaftpflicht","Gewerbe / Betrieb","Risikoleben"];
-const DATENPUNKTE = [
-  "Vollständiger Name + Geburtsdatum","Adresse + seit wann dort","Telefon + E-Mail","Familienstand / Partner",
-  "Kinder (Anzahl, Alter)","Beruf + Arbeitgeber + seit wann","Netto-Einkommen monatlich","Miete oder Eigentum",
-  "Bestehende Verträge (Police-Nummern!)","Bisherige Gesellschaft(en)","Fahrzeug (Typ, Halter, SF-Klasse)",
-  "Vorschäden letzte 5 Jahre","Hobbys / Risiko-Sportarten","Gesundheitsfragen relevant?","Sparziele / Wünsche 5–10 Jahre",
-  "IBAN (erst beim Abschluss)","Wer entscheidet mit? (Partner)"
-];
-const KAPAZITAET = [6,8,10,12,12,12,12,10];
+/* ══════════ STAMMDATEN ══════════ */
+const STATUS=["Neu","Kontaktiert","Termin","Analyse","Angebot","Abschluss","Später","Kein Interesse"];
+const SEGMENTS=["Familie","Enger Freundeskreis","Selbstständig / Firma","Angestellt","Student / Azubi","Sportler","Noch unklar"];
+const SPARTEN=["Privathaftpflicht","Hausrat","Rechtsschutz","KFZ","Berufsunfähigkeit","Altersvorsorge","Kranken-Zusatz","Unfall","Wohngebäude","Tierhalterhaftpflicht","Gewerbe / Betrieb","Risikoleben"];
+const DATENPUNKTE=["Name + Geburtsdatum","Adresse","Telefon + E-Mail","Familienstand / Partner","Kinder (Anzahl, Alter)",
+"Beruf + Arbeitgeber","Netto-Einkommen","Miete oder Eigentum","Bestehende Verträge (Police-Nr.)","Bisherige Gesellschaft(en)",
+"Fahrzeug (Typ, SF-Klasse)","Vorschäden 5 Jahre","Hobbys / Risikosport","Gesundheitsfragen relevant?","Ziele 5–10 Jahre",
+"IBAN (erst bei Abschluss)","Wer entscheidet mit?"];
+const KAPAZITAET=[6,8,10,12,12,12,12,10];
 
-const WOCHEN_ROLLEN = [
-  {t:"Aufwärmen im engsten Kreis", z:"Familie + beste Freunde. Ziel ist nicht der Abschluss, sondern Routine.", f:["6 Erstkontakte","2 Analysegespräche","Leitfaden 3× laut üben"]},
-  {t:"Erste echte Analysen", z:"Die warmen Kontakte in Termine bringen. Fehler machen ist hier billig.", f:["8 Erstkontakte","4 Analysegespräche","Erste Unterlagen sammeln"]},
-  {t:"Volumen aufbauen", z:"Rhythmus steht, jetzt Menge. Erste Angebote raus.", f:["10 Erstkontakte","5 Analysen","2 Angebote"]},
-  {t:"Erste Abschlüsse", z:"Nachfassen wird zur Hauptarbeit. Angebote konsequent nachverfolgen.", f:["12 Erstkontakte","6 Analysen","4 Angebote","Ziel: 1–2 Abschlüsse"]},
-  {t:"Empfehlungen starten", z:"Jeder zufriedene Kunde nennt dir 2 Namen. Ab jetzt wächst die Liste von selbst.", f:["12 Erstkontakte","6 Analysen","Empfehlungsfrage in JEDEM Gespräch"]},
-  {t:"Selbstständige &amp; Firmen", z:"Höhere Beiträge, längere Wege. Die Woche gehört den Unternehmern.", f:["12 Erstkontakte","Fokus Gewerbe / BU / Altersvorsorge","5 Angebote"]},
-  {t:"Nachfassen &amp; Aufräumen", z:"Alles, was liegen geblieben ist. Kein Kontakt ohne definierten nächsten Schritt.", f:["12 Erstkontakte","Alle offenen Angebote nachfassen","Doku vollständig"]},
-  {t:"Restliste &amp; Auswertung", z:"Letzte Namen abarbeiten, Bilanz ziehen, Plan für Monat 3 bauen.", f:["Restliche Kontakte","Auswertung: Quote je Segment","Neue Liste aus Empfehlungen"]}
-];
+/* Automatik: Status → nächster Schritt + Tage bis Wiedervorlage */
+const AUTO={
+ "Neu":          ["Erstkontakt schreiben",0],
+ "Kontaktiert":  ["Nachfassen – keine Antwort?",4],
+ "Termin":       ["Analysegespräch führen",7],
+ "Analyse":      ["Auswertung / Angebot vorbereiten",3],
+ "Angebot":      ["Angebot nachfassen",4],
+ "Abschluss":    ["Unterlagen + Empfehlung fragen",2],
+ "Später":       ["Wiedervorlage",42],
+ "Kein Interesse":["",null]
+};
 
-const RHYTHMUS = [
-  {d:"Montag", bl:[["07:30–08:15","Tagesstart: Liste prüfen, 3 Namen für heute festlegen"],["Vormittag","Schulung / Lernen"],["17:00–17:45","🔴 Kontaktblock: 3 Erstkontakte"],["18:00–19:00","Analysegespräch-Slot (Termin oder Vorbereitung)"],["21:00","2 Min Doku, Status pflegen"]]},
-  {d:"Dienstag", bl:[["Vormittag","Schulung / Lernen"],["17:00–17:45","🔴 Kontaktblock: 3 Erstkontakte"],["18:00–20:00","Kundentermin-Slot"],["21:00","Doku"]]},
-  {d:"Mittwoch", bl:[["Vormittag","Schulung / Lernen"],["17:00–17:45","🔴 Kontaktblock: 3 Erstkontakte + Nachfassen"],["18:00–20:00","Kundentermin-Slot"],["21:00","Doku"]]},
-  {d:"Donnerstag", bl:[["Vormittag","Schulung / Lernen"],["17:00–17:45","🔴 Kontaktblock: 3 Erstkontakte"],["18:00–20:00","Kundentermin-Slot"],["21:00","Doku"]]},
-  {d:"Freitag", bl:[["Vormittag","Schulung / Lernen"],["16:00–17:00","☎️ Nachfass-Block: alle offenen Angebote"],["17:00–18:00","Papierkram: Anträge, Unterlagen, Ordner"],["Abend","Frei – bewusst abschalten"]]},
-  {d:"Samstag", bl:[["10:00–13:00","Termin-Fenster (die beste Zeit für Berufstätige)"],["14:00–15:00","Puffer / Fahrtzeit"],["Rest","Frei"]]},
-  {d:"Sonntag", bl:[["Frei","Wirklich frei – ohne schlechtes Gewissen"],["20:00–20:20","📋 Wochenplanung: nächste Welle, Termine blocken, Prioritäten"]]}
+const WOCHEN=[
+ ["Aufwärmen im engsten Kreis","Familie + beste Freunde. Ziel ist Routine, nicht der Abschluss.",["6 Erstkontakte","2 Analysegespräche","Leitfaden 3× laut üben"]],
+ ["Erste echte Analysen","Warme Kontakte in Termine bringen. Fehler sind hier billig.",["8 Erstkontakte","4 Analysen","Erste Unterlagen sammeln"]],
+ ["Volumen aufbauen","Rhythmus steht, jetzt Menge. Erste Angebote raus.",["10 Erstkontakte","5 Analysen","2 Angebote"]],
+ ["Erste Abschlüsse","Nachfassen wird zur Hauptarbeit.",["12 Erstkontakte","6 Analysen","4 Angebote","Ziel: 1–2 Abschlüsse"]],
+ ["Empfehlungen starten","Jeder zufriedene Kunde nennt dir 2 Namen. Ab jetzt wächst die Liste von selbst.",["12 Erstkontakte","6 Analysen","Empfehlungsfrage in JEDEM Gespräch"]],
+ ["Selbstständige & Firmen","Höhere Beiträge. Diese Woche gehört den Unternehmern.",["12 Erstkontakte","Fokus Gewerbe / BU / Vorsorge","5 Angebote"]],
+ ["Nachfassen & Aufräumen","Alles, was liegen geblieben ist.",["12 Erstkontakte","Alle Angebote nachfassen","Doku vollständig"]],
+ ["Restliste & Auswertung","Bilanz ziehen, Plan für Monat 3 bauen.",["Restliche Kontakte","Quote je Segment","Neue Liste aus Empfehlungen"]]
 ];
 
-const LEITFAEDEN = [
-  {
-    id:"kontakt", t:"1 · Erstkontakt per WhatsApp",
-    intro:"Kurz, ehrlich, kein Verkaufsdruck. Du bittest um 20 Minuten, nicht um einen Abschluss. Schick es einzeln – nie als Broadcast.",
-    parts:[
-      {h:"Standard (Freunde &amp; Bekannte)", s:"Hey [Name], alles gut bei dir?\n\nIch mach seit Kurzem was Neues: Ich bin jetzt im Versicherungsbereich und arbeite mich gerade richtig rein – erste Prüfung hab ich schon bestanden.\n\nIch bau mir gerade meinen Kundenstamm auf und geh dafür mit Leuten, die ich kenne, einmal in Ruhe durch, was sie überhaupt an Verträgen haben. Ganz oft zahlt man irgendwo doppelt oder hat was Wichtiges gar nicht.\n\nKostet dich 20–30 Minuten und nix. Und wenn am Ende rauskommt, dass alles passt – auch gut, dann weißt du's wenigstens.\n\nHättest du diese oder nächste Woche mal Zeit?"},
-      {h:"Familie / engster Kreis", s:"Hey [Name],\n\ndu weißt ja, dass ich jetzt in der Versicherungsbranche angefangen hab. Ich brauch am Anfang Leute, mit denen ich das Ganze mal sauber durchgehen kann.\n\nHättest du Bock, dass wir uns mal hinsetzen und deine Verträge zusammen anschauen? Ich bring dir auch was mit. 😄\n\nWann passt's dir?"},
-      {h:"Selbstständige / Unternehmer", s:"Hey [Name],\n\nkurze Sache: Ich arbeite jetzt im Versicherungsbereich und schau mir gerade gezielt an, wie Selbstständige abgesichert sind – da ist erfahrungsgemäß oft eine große Lücke, gerade beim Thema Einkommen und Betrieb.\n\nIch würd mir gern mal 30 Minuten mit dir hinsetzen und einfach durchgehen, was du hast und was fehlt. Unverbindlich.\n\nWann passt es dir besser – unter der Woche abends oder Samstag vormittags?"},
-      {h:"Wenn keine Antwort kommt (nach 4–5 Tagen)", s:"Hey [Name], ich weiß du hast viel um die Ohren – wollte nur nochmal kurz nachhaken wegen dem Termin. Sag einfach kurz Bescheid, ob's gerade passt oder ob ich mich in ein paar Wochen nochmal melden soll. 👍"}
-    ],
-    tips:["Nie mehr als 2× nachfassen, dann Status auf <i>Später</i> und Wiedervorlage in 6–8 Wochen.","Sprachnachricht wirkt bei engen Kontakten oft stärker als Text.","Immer mit einer konkreten Frage enden – nie mit einer Aussage."]
-  },
-  {
-    id:"termin", t:"2 · Terminvereinbarung am Telefon",
-    intro:"Ziel des Anrufs ist ausschließlich der Termin. Nicht beraten, nicht erklären, nicht diskutieren.",
-    parts:[
-      {h:"Aufbau", s:"1. Begrüßung + Name\n2. \"Hast du gerade 2 Minuten?\"\n3. Grund in einem Satz\n4. Nutzen in einem Satz\n5. Terminfrage mit zwei Alternativen\n6. Bestätigen + Unterlagen ankündigen\n7. Verabschieden"},
-      {h:"Formulierung", s:"\"Hey [Name], hast du kurz zwei Minuten?\n\nIch ruf an wegen dem, was ich dir geschrieben hab. Ich mach jetzt Versicherungen und geh gerade mit Leuten, die ich kenne, einmal ihre Verträge durch.\n\nDu siehst danach schwarz auf weiß, was du zahlst, wofür – und wo du entweder was doppelt hast oder was Wichtiges fehlt.\n\nWas passt dir besser: Mittwoch abends um 18 Uhr oder Samstag vormittags um 11?\"\n\n→ [Termin bestätigen]\n\n\"Perfekt. Leg dir bitte bis dahin einfach alles hin, was du an Versicherungsunterlagen findest – Ordner, PDFs, E-Mails, egal. Ich schick dir morgen nochmal eine kurze Liste. Bis [Tag]!\""},
-      {h:"Einwand: \"Ich hab schon alles\"", s:"\"Das glaub ich dir sofort – die meisten haben was. Die Frage ist eher, ob's noch passt. Verträge werden ja gemacht und dann nie wieder angeschaut, und in der Zwischenzeit ändert sich das Leben.\n\nGenau das schauen wir uns an. Wenn alles gut ist, sag ich dir das ehrlich und du hast trotzdem den Überblick.\""},
-      {h:"Einwand: \"Ich hab keine Zeit\"", s:"\"Versteh ich total. Deswegen dauert's auch nur 20 bis 30 Minuten und wir machen's genau dann, wann es dir passt – auch spät abends oder am Wochenende.\n\nWann wäre denn in den nächsten zwei Wochen überhaupt mal ein Fenster?\""},
-      {h:"Einwand: \"Ich will nichts kaufen\"", s:"\"Musst du auch nicht. Ich verkauf dir beim ersten Termin gar nichts – ich schau mir nur an, was du hast. Ob danach überhaupt was Sinnvolles für dich dabei ist, entscheidest du komplett selbst.\""}
-    ],
-    tips:["Steh beim Telefonieren auf – die Stimme klingt sofort anders.","Zwei Terminvorschläge statt \"Wann hättest du Zeit?\".","Termin sofort in den Kalender + Erinnerung 1 Tag vorher."]
-  },
-  {
-    id:"analyse", t:"3 · Das Analysegespräch",
-    intro:"Der wichtigste Termin. 70 % zuhören, 30 % reden. Du verkaufst hier nichts – du sammelst.",
-    parts:[
-      {h:"Ablauf (ca. 45 Min)", s:"1. Smalltalk (5 Min) – ankommen lassen\n2. Rahmen setzen (2 Min): \"Ich stell dir jetzt ein paar Fragen, mach mir Notizen, und beim nächsten Mal bring ich dir eine Auswertung mit. Heute verkauf ich dir nichts.\"\n3. Situation aufnehmen (15 Min) – Datenaufnahme-Liste\n4. Bestehende Verträge durchgehen (10 Min) – alles fotografieren!\n5. Ziele &amp; Wünsche (8 Min)\n6. Zusammenfassen (3 Min): \"Hab ich das richtig verstanden…\"\n7. Folgetermin fix vereinbaren (2 Min)\n8. Empfehlungsfrage"},
-      {h:"Die Fragen, die wirklich etwas bringen", s:"• \"Was hast du aktuell an Versicherungen – auch das, wo du nicht genau weißt, was es ist?\"\n• \"Wann hast du da das letzte Mal draufgeschaut?\"\n• \"Was zahlst du insgesamt im Monat, grob geschätzt?\"\n• \"Wenn du morgen 6 Monate nicht arbeiten könntest – wie lange würdest du finanziell durchhalten?\"\n• \"Was ist dein Ziel in den nächsten 5 Jahren – Wohnung, Familie, Selbstständigkeit?\"\n• \"Gibt's was, wo du selbst schon mal gedacht hast: darum müsste ich mich mal kümmern?\"\n• \"Was war deine bisher schlechteste Erfahrung mit Versicherungen?\"\n• \"Entscheidest du sowas allein oder redest du da mit jemandem drüber?\""},
-      {h:"Abschluss des Termins", s:"\"Super, das hilft mir sehr. Ich setz mich damit hin und bereite dir eine Übersicht vor – was du hast, was es kostet, wo Lücken sind.\n\nWann passt's dir nächste Woche? [Tag] um [Zeit]?\n\nUnd noch was: Fällt dir jemand ein, für den so ein Überblick auch mal sinnvoll wäre? Ich bau mir gerade meinen Kundenstamm auf und freu mich über jeden Namen.\""}
-    ],
-    tips:["Alle Policen mit dem Handy abfotografieren – spart später Stunden.","Mitschreiben, sichtbar. Das signalisiert: Ich nehm dich ernst.","Nie ohne fixen Folgetermin rausgehen. Nie."]
-  },
-  {
-    id:"angebot", t:"4 · Angebot &amp; Abschluss",
-    intro:"Du präsentierst eine Lösung für ein Problem, das der Kunde dir selbst genannt hat. Zitiere ihn wörtlich.",
-    parts:[
-      {h:"Aufbau", s:"1. Rückblick: \"Beim letzten Mal hast du gesagt: [wörtliches Zitat].\"\n2. Ist-Zustand zeigen: was da ist, was es kostet\n3. Lücke benennen – ruhig, ohne Panikmache\n4. Lösung: maximal 2–3 Optionen, nie mehr\n5. Preis nennen und dann schweigen\n6. Fragen beantworten\n7. Abschlussfrage"},
-      {h:"Abschlussfragen (such dir eine aus)", s:"• \"Passt das für dich so? Dann machen wir's fertig.\"\n• \"Wollen wir's zum Ersten des nächsten Monats starten lassen?\"\n• \"Was spricht aus deiner Sicht noch dagegen?\"\n• \"Auf einer Skala von 1 bis 10 – wie gut passt das für dich?\" (bei &lt;10: \"Was fehlt zur 10?\")"},
-      {h:"Einwand: \"Zu teuer\"", s:"\"Verstehe. Darf ich fragen – zu teuer im Vergleich wozu?\n\n[zuhören]\n\nLass uns kurz anders draufschauen: Was passiert finanziell, wenn genau der Fall eintritt, gegen den das absichert? … Und jetzt vergleich das mit [Betrag] im Monat.\n\nWir können auch beim Selbstbehalt oder der Höhe was drehen. Was wäre für dich ein Betrag, bei dem du sagst: das passt?\""},
-      {h:"Einwand: \"Ich muss drüber nachdenken\"", s:"\"Klar, absolut. Damit ich dir dabei helfen kann – worüber genau denkst du nach? Ist es der Preis, der Umfang, oder das Gefühl, dass es zu schnell geht?\n\n[zuhören, gezielt beantworten]\n\nSollen wir so machen: Ich ruf dich [konkreter Tag] um [Zeit] an, dann hast du in Ruhe drüber geschlafen?\""},
-      {h:"Einwand: \"Muss erst mit meiner Partnerin reden\"", s:"\"Total richtig, sowas entscheidet man zusammen. Sollen wir einen kurzen Termin machen, bei dem sie dabei ist? Dann kann sie direkt fragen, was sie wissen will, statt dass du alles weitergeben musst.\""}
-    ],
-    tips:["Nach dem Preis: <b>schweigen</b>. Wer zuerst redet, verliert.","Nie mehr als 3 Optionen – sonst entscheidet niemand.","Nach dem Abschluss: bedanken, Unterlagen erklären, Empfehlung fragen."]
-  },
-  {
-    id:"empfehlung", t:"5 · Empfehlungen holen",
-    intro:"Deine Liste hat 82 Namen. Empfehlungen sind der einzige Weg, dass daraus 200 werden. Frag <b>immer</b> – auch bei Absagen.",
-    parts:[
-      {h:"Nach dem Abschluss", s:"\"Ich freu mich, dass wir das gemacht haben. Eine Sache noch: Ich bau mir gerade meinen Kundenstamm auf und lebe komplett davon, dass Leute mich weiterempfehlen.\n\nFällt dir spontan jemand ein, bei dem so ein Überblick auch Sinn machen würde? Muss nichts Fixes sein – zwei Namen reichen mir völlig.\""},
-      {h:"Präziser fragen (funktioniert deutlich besser)", s:"Statt \"Kennst du jemanden?\" lieber konkret:\n\n• \"Wer aus deinem Umfeld hat gerade ein Kind bekommen?\"\n• \"Wer ist bei euch in der Firma neu angefangen?\"\n• \"Wer von deinen Leuten hat sich gerade selbstständig gemacht?\"\n• \"Wer zieht demnächst um oder hat gerade eine Wohnung gekauft?\"\n• \"Wer hat sich gerade ein Auto geholt?\""},
-      {h:"Auch bei einer Absage", s:"\"Alles gut, kein Problem – dafür ist es ja unverbindlich.\n\nEine Frage hätt ich trotzdem: Kennst du jemanden, für den es gerade interessanter wäre als für dich? Ich freu mich über jeden Namen.\""},
-      {h:"Der Übergang zum Empfohlenen", s:"\"Hey [Name], wir kennen uns noch nicht – ich bin [dein Name], ein Freund/Bekannter von [Empfehlungsgeber].\n\nEr/Sie hat mir erzählt, dass [Anlass]. Ich arbeite im Versicherungsbereich und geh mit Leuten einmal in Ruhe ihre Verträge durch.\n\n[Empfehlungsgeber] meinte, das könnte für dich auch interessant sein. Hättest du in den nächsten zwei Wochen mal 20 Minuten?\""}
-    ],
-    tips:["Sofort fragen, solange die gute Stimmung da ist.","Um Erlaubnis bitten, den Namen des Empfehlungsgebers zu nennen.","Empfohlene Kontakte innerhalb von 48 Stunden anschreiben.","Dem Empfehlungsgeber Rückmeldung geben – das erzeugt die nächste Empfehlung."]
-  },
-  {
-    id:"mindset", t:"6 · Wenn es hakt",
-    intro:"Kommt garantiert. Meistens in Woche 3 und 4.",
-    parts:[
-      {h:"\"Ich trau mich nicht, Freunde anzuschreiben\"", s:"Du verkaufst niemandem etwas, das er nicht braucht. Du bietest an, einmal draufzuschauen. Der Schaden, wenn jemand Nein sagt: null. Der Schaden, wenn jemand ohne Berufsunfähigkeitsschutz dasteht und du hättest fragen können: erheblich.\n\nSchreib die einfachsten drei zuerst. Nach dem dritten ist die Hemmung weg."},
-      {h:"\"Keiner antwortet\"", s:"Normal. Rechne mit: von 10 Nachrichten antworten 6, davon wollen 3 einen Termin, davon kommt 1–2 zum Abschluss.\n\nDas heißt: Du brauchst die Menge. Nicht die perfekte Nachricht – die Menge. Und Nachfassen nach 4–5 Tagen holt erfahrungsgemäß nochmal die Hälfte der Nichtantworter."},
-      {h:"\"Ich weiß die Antwort nicht\"", s:"Der beste Satz, den du lernen kannst:\n\n\"Gute Frage – da will ich dir nichts Falsches sagen. Ich schau das nach und melde mich morgen bei dir.\"\n\nDas wirkt kompetenter als jede improvisierte Antwort. Und: du hast einen legitimen Grund, nochmal anzurufen."},
-      {h:"Die Zahlen, an denen du dich festhältst", s:"Kontrollierbar (darauf schaust du täglich):\n• Anzahl Erstkontakte\n• Anzahl vereinbarter Termine\n• Anzahl geführter Analysen\n\nNicht kontrollierbar (darauf schaust du monatlich):\n• Abschlüsse\n• Umsatz\n\nWer auf die erste Liste schaut, hält durch. Wer auf die zweite schaut, hört auf."}
-    ],
-    tips:[]
-  }
+const RHYTHMUS=[
+ ["Montag",[["07:30","Tagesstart: 3 Namen für heute festlegen"],["Vormittag","Schulung"],["17:00–17:45","🔴 Kontaktblock: 3 Erstkontakte"],["18:00–19:00","Termin-Slot"],["21:00","2 Min Doku"]]],
+ ["Dienstag",[["Vormittag","Schulung"],["17:00–17:45","🔴 Kontaktblock"],["18:00–20:00","Kundentermin"],["21:00","Doku"]]],
+ ["Mittwoch",[["Vormittag","Schulung"],["17:00–17:45","🔴 Kontaktblock + Nachfassen"],["18:00–20:00","Kundentermin"],["21:00","Doku"]]],
+ ["Donnerstag",[["Vormittag","Schulung"],["17:00–17:45","🔴 Kontaktblock"],["18:00–20:00","Kundentermin"],["21:00","Doku"]]],
+ ["Freitag",[["Vormittag","Schulung"],["16:00–17:00","☎️ Nachfass-Block"],["17:00–18:00","Papierkram + Backup"],["Abend","Frei"]]],
+ ["Samstag",[["10:00–13:00","Termin-Fenster (beste Zeit für Berufstätige)"],["14:00","Puffer"],["Rest","Frei"]]],
+ ["Sonntag",[["Tagsüber","Frei – ohne schlechtes Gewissen"],["20:00–20:20","📋 Wochenplanung"]]]
 ];
 
-/* ================= SEED-KONTAKTE ================= */
-const SEED = [
-["Mervan Aydin","","Noch unklar","B"],
-["Dian Hashani","","Noch unklar","B"],
-["Dogukan Tok","Bruder","Familie","A"],
-["Yusuf Tok","Vater","Familie","A"],
-["Hanife Savas","Verlobte des Bruders","Familie","A"],
-["Eris Uka","bester Freund","Enger Freundeskreis","A"],
-["Mohams","TOP-PRIORITÄT (!!!) – zuerst angehen","Enger Freundeskreis","A"],
-["Luciano","","Noch unklar","B"],
-["Marcello","","Noch unklar","B"],
-["Gencer","Cousin","Familie","A"],
-["Ilyas","","Noch unklar","B"],
-["Tyrone","","Noch unklar","B"],
-["Kevin","","Noch unklar","B"],
-["Arlin","","Noch unklar","B"],
-["Artim","","Noch unklar","B"],
-["Leuart","","Noch unklar","B"],
-["Aykut Demir","Cousin","Familie","A"],
-["Emirhan Safak","Cousin","Familie","A"],
-["Nedim","","Noch unklar","B"],
-["Osman","","Noch unklar","B"],
-["Semi","","Noch unklar","B"],
-["Sandro Jd","JD","Noch unklar","B"],
-["Onur","","Noch unklar","B"],
-["Saner","","Noch unklar","B"],
-["Koray Zengin","","Noch unklar","B"],
-["Miko Colak","","Noch unklar","B"],
-["Munir","","Noch unklar","B"],
-["Samu","","Noch unklar","B"],
-["Erblina","","Noch unklar","B"],
-["Fatma Kaynar","Tante","Familie","A"],
-["Cem","Freund vom Bruder","Enger Freundeskreis","A"],
-["Alvin","","Noch unklar","B"],
-["Marcel","","Noch unklar","B"],
-["Ahmed","Ostplatz","Noch unklar","B"],
-["Oguzhan","","Noch unklar","B"],
-["Murat Bahce","","Noch unklar","B"],
-["Phillip Kley","","Noch unklar","B"],
-["Mikail","Neu-Ulm","Noch unklar","B"],
-["Nils","","Noch unklar","B"],
-["Arbnor","","Noch unklar","B"],
-["Mensur","","Noch unklar","B"],
-["Mert Saglam","","Noch unklar","B"],
-["Musab","","Noch unklar","B"],
-["Sami Taha","","Noch unklar","B"],
-["Can","DJ – selbstständig, unregelmäßiges Einkommen","Selbstständig / Firma","A"],
-["Marcinio","","Noch unklar","B"],
-["Lamin","Restaurant","Selbstständig / Firma","A"],
-["Bilal","","Noch unklar","B"],
-["Malek","","Noch unklar","B"],
-["Semi (Locki)","","Noch unklar","B"],
-["Baran","JD","Noch unklar","B"],
-["Erduan","","Noch unklar","B"],
-["Arminnn","eigene Brand – selbstständig","Selbstständig / Firma","A"],
-["Armin","Pizzeria","Selbstständig / Firma","A"],
-["Jayden","","Noch unklar","B"],
-["Ezer","","Noch unklar","B"],
-["Thyago","","Noch unklar","B"],
-["Zeynep","JD","Noch unklar","B"],
-["Daniel","Wiblingen","Noch unklar","B"],
-["Volkan","eigene Firma","Selbstständig / Firma","A"],
-["Justin","Polizist – Beamter, eigene Absicherungslogik","Angestellt","A"],
-["Emir Spahic","","Noch unklar","B"],
-["Alex Tunger","Eselsberg","Noch unklar","B"],
-["Niveto","","Noch unklar","B"],
-["Michael","","Noch unklar","B"],
-["Ömer Senel","Wiblingen","Noch unklar","B"],
-["Hussein","Wiblingen (Shu)","Noch unklar","B"],
-["Enes Bostan","","Noch unklar","B"],
-["Tufan","Beat Producer + angestellt","Angestellt","B"],
-["Laris","","Noch unklar","B"],
-["Mert Yavuz","","Noch unklar","B"],
-["Lucas","München","Noch unklar","B"],
-["Len","München – Trikot-Shop (Insta)","Selbstständig / Firma","A"],
-["Maermoe","München – eigene Brand + Pop-up-Stores","Selbstständig / Firma","A"],
-["Finn Annsbring","Fußballer","Sportler","A"],
-["Mohamed Fofanah","Fußballer + angestellt","Sportler","A"],
-["Harun","Dönerladen","Selbstständig / Firma","A"],
-["Ermal","Wiblingen","Noch unklar","B"],
-["Mashal","Student","Student / Azubi","C"],
-["Batin","","Noch unklar","B"],
-["Melih Ayhan","","Noch unklar","B"],
-["Ediz Demir","Cousin","Familie","A"]
+/* ══════════ NACHRICHTEN ══════════ */
+const MSG={
+ "Familie":{l:"Familie",t:`Hey [V], alles gut?
+
+Du weißt ja, dass ich jetzt Versicherungen mache. Ich brauch am Anfang ein paar Leute, mit denen ich das mal komplett durchgehen kann.
+
+Hättest du Bock, dass wir uns hinsetzen und deine Verträge zusammen anschauen? Dauert ne halbe Stunde.
+
+Wann passt's dir?`},
+ "Enger Freundeskreis":{l:"Enger Freund",t:`Hey [V], alles gut bei dir?
+
+Kurz was Neues: Ich bin jetzt im Versicherungsbereich, erste Prüfung hab ich schon.
+
+Ich geh gerade mit Leuten, die ich kenne, einmal durch, was sie überhaupt an Verträgen haben. Ganz oft zahlt man irgendwo doppelt oder es fehlt was Wichtiges.
+
+30 Minuten, kostet nix. Hättest du diese oder nächste Woche mal Zeit?`},
+ "Selbstständig / Firma":{l:"Selbstständig",t:`Hey [V],
+
+kurze Sache: Ich arbeite jetzt im Versicherungsbereich und schau mir gerade gezielt an, wie Selbstständige abgesichert sind. Da ist meistens eine große Lücke – vor allem beim Einkommen.
+
+Ich würd mich gern mal 30 Minuten mit dir hinsetzen und durchgehen, was du hast und was fehlt. Unverbindlich.
+
+Was passt besser: abends unter der Woche oder Samstag vormittag?`},
+ "Angestellt":{l:"Angestellt",t:`Hey [V], alles gut?
+
+Ich mach jetzt Versicherungen und geh gerade mit Leuten, die ich kenne, ihre Verträge durch.
+
+Gerade bei Angestellten lohnt sich das – man zahlt oft für Sachen, die der Arbeitgeber eh abdeckt, und was Wichtiges fehlt dafür.
+
+30 Minuten. Hättest du diese oder nächste Woche mal Zeit?`},
+ "Student / Azubi":{l:"Student / Azubi",t:`Hey [V], alles gut?
+
+Ich bin jetzt im Versicherungsbereich. Bei Studenten und Azubis ist das meiste zum Glück noch günstig – aber genau deswegen lohnt es sich, es jetzt richtig zu machen statt später teuer.
+
+Sollen wir uns mal 20 Minuten zusammensetzen? Kostet nix.`},
+ "Sportler":{l:"Sportler",t:`Hey [V], alles gut?
+
+Ich arbeite jetzt im Versicherungsbereich. Bei dir ist ein Thema besonders wichtig: Was passiert eigentlich, wenn du dich ernsthaft verletzt und länger ausfällst?
+
+Das würd ich gern mal mit dir durchgehen – 30 Minuten, unverbindlich. Wann passt's?`},
+ "Noch unklar":{l:"Standard",t:`Hey [V], alles gut bei dir?
+
+Ich mach seit Kurzem was Neues – ich bin jetzt im Versicherungsbereich, erste Prüfung ist bestanden.
+
+Ich geh gerade mit Leuten, die ich kenne, einmal in Ruhe durch, was sie an Verträgen haben. Sehr oft zahlt man irgendwo doppelt oder es fehlt was Wichtiges.
+
+Kostet dich 30 Minuten und sonst nix. Hättest du diese oder nächste Woche mal Zeit?`}
+};
+const MSG_NACH=`Hey [V], ich weiß du hast viel um die Ohren – wollte nur kurz nachhaken wegen dem Termin.
+
+Sag einfach Bescheid, ob's gerade passt oder ob ich mich in ein paar Wochen nochmal melden soll. 👍`;
+const MSG_TERMIN=`Hey [V], freu mich auf [TAG]!
+
+Leg dir bitte bis dahin alles hin, was du an Versicherungsunterlagen findest – Ordner, PDFs, E-Mails, egal was. Foto reicht völlig.
+
+Wenn du was nicht findest, kriegen wir das zusammen raus. Bis dann!`;
+const MSG_DANKE=`Hey [V], danke nochmal für heute!
+
+Ich setz mich jetzt dran und bereite dir die Übersicht vor. Melde mich wie besprochen.
+
+Und falls dir jemand einfällt, für den so ein Überblick auch Sinn machen würde – immer her damit. 🙏`;
+
+/* ══════════ LEITFÄDEN ══════════ */
+const GUIDES=[
+{id:"kontakt",ic:"💬",t:"Erstkontakt",d:"Die erste Nachricht – pro Segment vorformuliert",
+ intro:"Kurz, ehrlich, kein Druck. Du bittest um 30 Minuten, nicht um einen Abschluss. Einzeln schicken, nie als Broadcast.",
+ parts:[["Wenn keine Antwort kommt (nach 4–5 Tagen)",MSG_NACH],["Vor dem Termin (1–2 Tage vorher)",MSG_TERMIN],["Nach dem Termin (am selben Abend)",MSG_DANKE]],
+ tips:["Die Texte gehen aus jedem Kontakt direkt an WhatsApp – mit eingesetztem Vornamen.","Max. 2× nachfassen, dann Status auf <i>Später</i>.","Sprachnachricht wirkt bei engen Kontakten oft stärker."]},
+
+{id:"termin",ic:"☎️",t:"Termin am Telefon",d:"Ziel des Anrufs ist nur der Termin",
+ intro:"Nicht beraten, nicht erklären, nicht diskutieren. Nur den Termin holen.",
+ parts:[
+ ["Ablauf","1. Begrüßung + „Hast du kurz 2 Minuten?\"\n2. Grund in einem Satz\n3. Nutzen in einem Satz\n4. Termin mit zwei Alternativen\n5. Bestätigen + Unterlagen ankündigen"],
+ ["Formulierung",`„Hey [Name], hast du kurz zwei Minuten?
+
+Ich ruf an wegen dem, was ich dir geschrieben hab. Ich mach jetzt Versicherungen und geh gerade mit Leuten, die ich kenne, ihre Verträge durch.
+
+Du siehst danach schwarz auf weiß, was du zahlst, wofür – und wo was doppelt ist oder fehlt.
+
+Was passt dir besser: Mittwoch um 18 Uhr oder Samstag um 11?"`],
+ ["Einwand: „Ich hab schon alles\"",`„Glaub ich dir sofort – die meisten haben was. Die Frage ist eher, ob's noch passt. Verträge werden gemacht und dann nie wieder angeschaut, und in der Zwischenzeit ändert sich das Leben.
+
+Wenn alles gut ist, sag ich dir das ehrlich und du hast trotzdem den Überblick."`],
+ ["Einwand: „Keine Zeit\"",`„Versteh ich. Deswegen dauert's auch nur 30 Minuten und wir machen's genau dann, wann es dir passt – auch spät abends oder samstags.
+
+Wann wäre denn in den nächsten zwei Wochen überhaupt mal ein Fenster?"`],
+ ["Einwand: „Ich will nichts kaufen\"",`„Musst du auch nicht. Beim ersten Termin verkauf ich gar nichts – ich schau mir nur an, was du hast. Ob danach überhaupt was Sinnvolles dabei ist, entscheidest du komplett selbst."`]],
+ tips:["Steh beim Telefonieren auf – die Stimme klingt sofort anders.","Zwei Vorschläge statt „Wann hättest du Zeit?\".","Termin sofort im Cockpit eintragen."]},
+
+{id:"analyse",ic:"📝",t:"Analysegespräch",d:"Der wichtigste Termin – 70 % zuhören",
+ intro:"Du verkaufst hier nichts. Du sammelst.",
+ parts:[
+ ["Ablauf (ca. 45 Min)","1. Smalltalk (5 Min)\n2. Rahmen setzen: „Ich stell Fragen, mach Notizen, und beim nächsten Mal bring ich dir eine Auswertung. Heute verkauf ich dir nichts.\"\n3. Situation aufnehmen (15 Min)\n4. Verträge durchgehen – alles fotografieren! (10 Min)\n5. Ziele & Wünsche (8 Min)\n6. Zusammenfassen: „Hab ich das richtig verstanden…\"\n7. Folgetermin FIX vereinbaren\n8. Empfehlungsfrage"],
+ ["Die Fragen, die wirklich was bringen",`• „Was hast du aktuell – auch das, wo du nicht genau weißt, was es ist?"
+• „Wann hast du da das letzte Mal draufgeschaut?"
+• „Was zahlst du insgesamt im Monat, grob?"
+• „Wenn du morgen 6 Monate nicht arbeiten könntest – wie lange hältst du finanziell durch?"
+• „Was ist dein Ziel in den nächsten 5 Jahren?"
+• „Gibt's was, wo du selbst denkst: darum müsste ich mich mal kümmern?"
+• „Entscheidest du sowas allein oder redest du mit jemandem drüber?"`],
+ ["Abschluss des Termins",`„Super, das hilft mir sehr. Ich bereite dir eine Übersicht vor – was du hast, was es kostet, wo Lücken sind.
+
+Wann passt's nächste Woche? [Tag] um [Zeit]?
+
+Und noch was: Fällt dir jemand ein, für den so ein Überblick auch sinnvoll wäre? Ich bau mir gerade meinen Kundenstamm auf."`]],
+ tips:["Alle Policen abfotografieren – spart später Stunden.","Sichtbar mitschreiben. Das signalisiert: ich nehm dich ernst.","Nie ohne fixen Folgetermin rausgehen."]},
+
+{id:"angebot",ic:"🤝",t:"Angebot & Abschluss",d:"Einwände und Abschlussfragen",
+ intro:"Du löst ein Problem, das der Kunde dir selbst genannt hat. Zitiere ihn wörtlich.",
+ parts:[
+ ["Aufbau","1. Rückblick: „Du hast gesagt: [wörtliches Zitat].\"\n2. Ist-Zustand: was da ist, was es kostet\n3. Lücke benennen – ruhig, ohne Panik\n4. Lösung: max. 2–3 Optionen\n5. Preis nennen und dann SCHWEIGEN\n6. Fragen beantworten\n7. Abschlussfrage"],
+ ["Abschlussfragen",`• „Passt das für dich so? Dann machen wir's fertig."
+• „Wollen wir's zum Ersten starten lassen?"
+• „Was spricht aus deiner Sicht noch dagegen?"
+• „Auf einer Skala von 1 bis 10 – wie gut passt das?" (bei <10: „Was fehlt zur 10?")`],
+ ["Einwand: „Zu teuer\"",`„Verstehe. Darf ich fragen – zu teuer im Vergleich wozu?
+
+[zuhören]
+
+Lass uns anders draufschauen: Was passiert finanziell, wenn genau der Fall eintritt? … Und jetzt vergleich das mit [Betrag] im Monat.
+
+Wir können auch beim Selbstbehalt was drehen. Was wäre für dich ein Betrag, bei dem du sagst: passt?"`],
+ ["Einwand: „Muss drüber nachdenken\"",`„Klar. Damit ich dir helfen kann – worüber genau denkst du nach? Der Preis, der Umfang, oder das Gefühl, dass es zu schnell geht?
+
+[zuhören, gezielt beantworten]
+
+Sollen wir so machen: Ich ruf dich [Tag] um [Zeit] an, dann hast du in Ruhe drüber geschlafen?"`],
+ ["Einwand: „Erst mit Partnerin reden\"",`„Total richtig, sowas entscheidet man zusammen. Sollen wir einen kurzen Termin machen, bei dem sie dabei ist? Dann kann sie direkt fragen, statt dass du alles weitergeben musst."`]],
+ tips:["Nach dem Preis: <b>schweigen</b>. Wer zuerst redet, verliert.","Nie mehr als 3 Optionen – sonst entscheidet niemand.","Danach: bedanken, Unterlagen erklären, Empfehlung fragen."]},
+
+{id:"empfehlung",ic:"🔁",t:"Empfehlungen",d:"So wächst deine Liste von selbst",
+ intro:"Deine Liste ist endlich. Empfehlungen sind der einzige Weg, dass daraus 200 werden. Frag <b>immer</b> – auch bei Absagen.",
+ parts:[
+ ["Nach dem Abschluss",`„Ich freu mich, dass wir das gemacht haben. Eine Sache noch: Ich bau mir gerade meinen Kundenstamm auf und lebe davon, dass Leute mich weiterempfehlen.
+
+Fällt dir spontan jemand ein, bei dem so ein Überblick auch Sinn machen würde? Zwei Namen reichen mir völlig."`],
+ ["Präziser fragen (funktioniert deutlich besser)",`Statt „Kennst du jemanden?" lieber konkret:
+
+• „Wer aus deinem Umfeld hat gerade ein Kind bekommen?"
+• „Wer ist bei euch in der Firma neu angefangen?"
+• „Wer hat sich gerade selbstständig gemacht?"
+• „Wer zieht demnächst um oder hat eine Wohnung gekauft?"
+• „Wer hat sich gerade ein Auto geholt?"`],
+ ["Auch bei einer Absage",`„Alles gut, kein Problem – dafür ist es ja unverbindlich.
+
+Eine Frage trotzdem: Kennst du jemanden, für den es gerade interessanter wäre als für dich?"`],
+ ["Der Übergang zum Empfohlenen",`„Hey [Name], wir kennen uns noch nicht – ich bin [dein Name], ein Bekannter von [Empfehlungsgeber].
+
+Er/Sie meinte, dass [Anlass]. Ich arbeite im Versicherungsbereich und geh mit Leuten einmal in Ruhe ihre Verträge durch.
+
+[Empfehlungsgeber] meinte, das könnte für dich auch interessant sein. Hättest du in den nächsten zwei Wochen mal 30 Minuten?"`]],
+ tips:["Sofort fragen, solange die gute Stimmung da ist.","Im Kontakt gibt's dafür den Button <b>+ Empfehlung</b> – legt den neuen Kontakt mit 48h-Wiedervorlage an.","Dem Empfehlungsgeber Rückmeldung geben – das erzeugt die nächste Empfehlung."]},
+
+{id:"mindset",ic:"🧠",t:"Wenn es hakt",d:"Für Woche 3 und 4",
+ intro:"Kommt garantiert. Meistens genau dann.",
+ parts:[
+ ["„Ich trau mich nicht, Freunde anzuschreiben\"","Du verkaufst niemandem was, das er nicht braucht. Du bietest an, einmal draufzuschauen.\n\nSchaden, wenn jemand Nein sagt: null.\nSchaden, wenn jemand ohne BU dasteht und du hättest fragen können: erheblich.\n\nSchreib die drei einfachsten zuerst. Nach dem dritten ist die Hemmung weg."],
+ ["„Keiner antwortet\"","Normal. Rechne mit: von 10 Nachrichten antworten 6, davon wollen 3 einen Termin, davon kommen 1–2 zum Abschluss.\n\nDu brauchst die Menge, nicht die perfekte Nachricht. Nachfassen nach 4–5 Tagen holt nochmal die Hälfte der Nichtantworter."],
+ ["„Ich weiß die Antwort nicht\"","Der beste Satz, den du lernen kannst:\n\n„Gute Frage – da will ich dir nichts Falsches sagen. Ich schau das nach und melde mich morgen.\"\n\nDas wirkt kompetenter als jede improvisierte Antwort. Und du hast einen Grund, nochmal anzurufen."],
+ ["Woran du dich festhältst","Kontrollierbar (täglich anschauen):\n• Anzahl Erstkontakte\n• Anzahl Termine\n• Anzahl Analysen\n\nNicht kontrollierbar (monatlich):\n• Abschlüsse\n• Umsatz\n\nWer auf die erste Liste schaut, hält durch."]],
+ tips:[]}
 ];
 
-/* ================= STATE ================= */
-const LS = "vertriebscockpit_v1";
-let S = null, sortKey="week", sortDir=1, editId=null;
+/* ══════════ SEED ══════════ */
+const SEED=[["Mervan Aydin","","Noch unklar","B"],["Dian Hashani","","Noch unklar","B"],["Dogukan Tok","Bruder","Familie","A"],
+["Yusuf Tok","Vater","Familie","A"],["Hanife Savas","Verlobte des Bruders","Familie","A"],["Eris Uka","bester Freund","Enger Freundeskreis","A"],
+["Mohams","TOP-PRIORITÄT (!!!)","Enger Freundeskreis","A"],["Luciano","","Noch unklar","B"],["Marcello","","Noch unklar","B"],
+["Gencer","Cousin","Familie","A"],["Ilyas","","Noch unklar","B"],["Tyrone","","Noch unklar","B"],["Kevin","","Noch unklar","B"],
+["Arlin","","Noch unklar","B"],["Artim","","Noch unklar","B"],["Leuart","","Noch unklar","B"],["Aykut Demir","Cousin","Familie","A"],
+["Emirhan Safak","Cousin","Familie","A"],["Nedim","","Noch unklar","B"],["Osman","","Noch unklar","B"],["Semi","","Noch unklar","B"],
+["Sandro Jd","JD","Noch unklar","B"],["Onur","","Noch unklar","B"],["Saner","","Noch unklar","B"],["Koray Zengin","","Noch unklar","B"],
+["Miko Colak","","Noch unklar","B"],["Munir","","Noch unklar","B"],["Samu","","Noch unklar","B"],["Erblina","","Noch unklar","B"],
+["Fatma Kaynar","Tante","Familie","A"],["Cem","Freund vom Bruder","Enger Freundeskreis","A"],["Alvin","","Noch unklar","B"],
+["Marcel","","Noch unklar","B"],["Ahmed","Ostplatz","Noch unklar","B"],["Oguzhan","","Noch unklar","B"],["Murat Bahce","","Noch unklar","B"],
+["Phillip Kley","","Noch unklar","B"],["Mikail","Neu-Ulm","Noch unklar","B"],["Nils","","Noch unklar","B"],["Arbnor","","Noch unklar","B"],
+["Mensur","","Noch unklar","B"],["Mert Saglam","","Noch unklar","B"],["Musab","","Noch unklar","B"],["Sami Taha","","Noch unklar","B"],
+["Can","DJ – unregelmäßiges Einkommen","Selbstständig / Firma","A"],["Marcinio","","Noch unklar","B"],["Lamin","Restaurant","Selbstständig / Firma","A"],
+["Bilal","","Noch unklar","B"],["Malek","","Noch unklar","B"],["Semi (Locki)","","Noch unklar","B"],["Baran","JD","Noch unklar","B"],
+["Erduan","","Noch unklar","B"],["Arminnn","eigene Brand","Selbstständig / Firma","A"],["Armin","Pizzeria","Selbstständig / Firma","A"],
+["Jayden","","Noch unklar","B"],["Ezer","","Noch unklar","B"],["Thyago","","Noch unklar","B"],["Zeynep","JD","Noch unklar","B"],
+["Daniel","Wiblingen","Noch unklar","B"],["Volkan","eigene Firma","Selbstständig / Firma","A"],["Justin","Polizist – Beamter","Angestellt","A"],
+["Emir Spahic","","Noch unklar","B"],["Alex Tunger","Eselsberg","Noch unklar","B"],["Niveto","","Noch unklar","B"],["Michael","","Noch unklar","B"],
+["Ömer Senel","Wiblingen","Noch unklar","B"],["Hussein","Wiblingen (Shu)","Noch unklar","B"],["Enes Bostan","","Noch unklar","B"],
+["Tufan","Beat Producer + angestellt","Angestellt","B"],["Laris","","Noch unklar","B"],["Mert Yavuz","","Noch unklar","B"],
+["Lucas","München","Noch unklar","B"],["Len","München – Trikot-Shop","Selbstständig / Firma","A"],
+["Maermoe","München – Brand + Pop-up-Stores","Selbstständig / Firma","A"],["Finn Annsbring","Fußballer","Sportler","A"],
+["Mohamed Fofanah","Fußballer + angestellt","Sportler","A"],["Harun","Dönerladen","Selbstständig / Firma","A"],
+["Ermal","Wiblingen","Noch unklar","B"],["Mashal","Student","Student / Azubi","C"],["Batin","","Noch unklar","B"],
+["Melih Ayhan","","Noch unklar","B"],["Ediz Demir","Cousin","Familie","A"]];
 
-function uid(){ return "c"+Math.random().toString(36).slice(2,9); }
+/* ══════════ STATE ══════════ */
+const LS="vertriebscockpit_v1";
+let S=null,sortKey="week",sortDir=1,editId=null,view="home";
+const uid=()=>"c"+Math.random().toString(36).slice(2,9);
 
-function seedState(){
-  return {
-    start: nextMonday(),
-    contacts: SEED.map((r,i)=>({
-      id: uid(), name:r[0], rel:r[1], seg:r[2], tier:r[3],
-      week: 0, status:"Neu", phone:"", email:"", ort:"",
-      nextAction:"Erstkontakt schreiben", nextDate:"", lastContact:"",
-      notes:"", sparten:[], daten:[], quelle:"Eigene Liste", ord:i
-    }))
-  };
-}
 function load(){
-  try{ const r = localStorage.getItem(LS); if(r){ S = JSON.parse(r); } }catch(e){}
-  if(!S || !S.contacts){ S = seedState(); autoAssign(true); }
-  save();
-}
-function save(){ localStorage.setItem(LS, JSON.stringify(S)); }
-
-/* ================= DATUM ================= */
-function nextMonday(){
-  const d = new Date(); const wd = d.getDay();
-  const add = wd===1 ? 7 : (8-wd)%7 || 7;
-  d.setDate(d.getDate()+add);
-  return iso(d);
-}
-function iso(d){ return d.toISOString().slice(0,10); }
-function parse(s){ const [y,m,dd]=s.split("-").map(Number); return new Date(y,m-1,dd); }
-function fmt(s){ if(!s) return "—"; const d=parse(s); return d.toLocaleDateString("de-DE",{day:"2-digit",month:"2-digit",year:"2-digit"}); }
-function fmtLong(d){ return d.toLocaleDateString("de-DE",{day:"2-digit",month:"2-digit"}); }
-function weekStart(n){ const d=parse(S.start); d.setDate(d.getDate()+(n-1)*7); return d; }
-function weekEnd(n){ const d=weekStart(n); d.setDate(d.getDate()+6); return d; }
-function todayISO(){ return iso(new Date()); }
-function currentWeek(){
-  const t = new Date(); t.setHours(0,0,0,0);
-  const s = parse(S.start);
-  const diff = Math.floor((t-s)/86400000);
-  if(diff<0) return 0;
-  const w = Math.floor(diff/7)+1;
-  return w>8 ? 9 : w;
-}
-
-/* ================= WOCHEN-ZUTEILUNG ================= */
-function autoAssign(silent){
-  const order = {A:0,B:1,C:2};
-  const list = [...S.contacts].sort((a,b)=> (order[a.tier]-order[b.tier]) || (a.ord-b.ord));
-  let w=1, left=KAPAZITAET[0];
-  for(const c of list){
-    if(left<=0 && w<8){ w++; left=KAPAZITAET[w-1]; }
-    c.week = w; left--;
+  try{const r=localStorage.getItem(LS); if(r) S=JSON.parse(r);}catch(e){}
+  if(!S||!S.contacts){
+    S={start:nextMonday(),lastBackup:"",log:{},contacts:SEED.map((r,i)=>({
+      id:uid(),name:r[0],rel:r[1],seg:r[2],tier:r[3],week:0,status:"Neu",phone:"",email:"",ort:"",
+      nextAction:"Erstkontakt schreiben",nextDate:"",lastContact:"",notes:"",sparten:[],daten:[],quelle:"Eigene Liste",ord:i}))};
+    autoAssign(true);
   }
+  S.log=S.log||{}; S.lastBackup=S.lastBackup||"";
+  S.contacts.forEach(c=>{c.sparten=c.sparten||[];c.daten=c.daten||[];c.quelle=c.quelle||"Eigene Liste";});
   save();
-  if(!silent){ renderAll(); toast("Wochen neu verteilt"); }
 }
-function setStart(v){ S.start=v; save(); renderAll(); }
+const save=()=>localStorage.setItem(LS,JSON.stringify(S));
 
-/* ================= RENDER ================= */
-const TABS = [
-  ["dash","📊 Dashboard"],["kontakte","👥 Kontakte"],["plan","🗓 8-Wochen-Plan"],
-  ["rhythmus","⏱ Wochenrhythmus"],["leitfaden","💬 Leitfäden"],["daten","📋 Datenaufnahme"],
-  ["ordner","📁 Ordner"],["export","⬇️ Export"]
-];
-let view = "dash";
-function go(v){ view=v; renderTabs(); document.querySelectorAll("section.view").forEach(s=>s.classList.remove("active"));
-  document.getElementById("v-"+v).classList.add("active"); window.scrollTo(0,0); }
-function renderTabs(){
-  document.getElementById("tabs").innerHTML = TABS.map(([k,l])=>
-    `<button class="${k===view?'active':''}" onclick="go('${k}')">${l}</button>`).join("");
+/* ══════════ DATUM ══════════ */
+function nextMonday(){const d=new Date(),w=d.getDay();d.setDate(d.getDate()+(w===1?7:(8-w)%7||7));return iso(d);}
+const iso=d=>d.toISOString().slice(0,10);
+const parse=s=>{const a=s.split("-").map(Number);return new Date(a[0],a[1]-1,a[2]);};
+const fmt=s=>s?parse(s).toLocaleDateString("de-DE",{day:"2-digit",month:"2-digit",year:"2-digit"}):"—";
+const fmtS=d=>d.toLocaleDateString("de-DE",{day:"2-digit",month:"2-digit"});
+const todayISO=()=>iso(new Date());
+function weekStart(n){const d=parse(S.start);d.setDate(d.getDate()+(n-1)*7);return d;}
+function weekEnd(n){const d=weekStart(n);d.setDate(d.getDate()+6);return d;}
+function currentWeek(){const t=new Date();t.setHours(0,0,0,0);const diff=Math.floor((t-parse(S.start))/864e5);
+  if(diff<0)return 0;const w=Math.floor(diff/7)+1;return w>8?9:w;}
+function plusD(n){const d=new Date();d.setDate(d.getDate()+n);return iso(d);}
+
+/* ══════════ AUTOMATIK ══════════ */
+function applyAuto(c,st){
+  c.status=st;
+  const a=AUTO[st]; if(!a)return;
+  c.nextAction=a[0];
+  c.nextDate=(a[1]===null||a[1]===0)?"":plusD(a[1]);
+  if(st!=="Neu")c.lastContact=todayISO();
+}
+function logToday(){const t=todayISO();S.log[t]=(S.log[t]||0)+1;}
+const todayCount=()=>S.log[todayISO()]||0;
+
+function autoAssign(silent){
+  const o={A:0,B:1,C:2};
+  const list=[...S.contacts].sort((a,b)=>(o[a.tier]-o[b.tier])||(a.ord-b.ord));
+  let w=1,left=KAPAZITAET[0];
+  for(const c of list){ if(left<=0&&w<8){w++;left=KAPAZITAET[w-1];} c.week=w;left--; }
+  save(); if(!silent){renderAll();toast("Wochen neu verteilt");}
+}
+function setStart(v){S.start=v;save();renderAll();}
+
+function stragglers(){const w=currentWeek();return w<1?[]:S.contacts.filter(c=>c.status==="Neu"&&c.week<w);}
+function rollover(){
+  const w=currentWeek(),l=stragglers();
+  l.forEach(c=>c.week=w>8?8:w);
+  save();renderAll();toast(l.length+" Kontakte nachgezogen");
 }
 
+function todaysPicks(n){
+  const t=todayISO(),w=Math.max(currentWeek(),1);   // vor dem Start schon Welle 1 zeigen
+  const due=S.contacts.filter(c=>c.nextDate&&c.nextDate<=t&&["Neu","Kontaktiert","Später"].includes(c.status))
+    .sort((a,b)=>a.nextDate.localeCompare(b.nextDate));
+  const wave=S.contacts.filter(c=>c.status==="Neu"&&c.week===w).sort((a,b)=>({A:0,B:1,C:2}[a.tier]-{A:0,B:1,C:2}[b.tier]));
+  const rest=S.contacts.filter(c=>c.status==="Neu"&&c.week<w);
+  const out=[],seen=new Set();
+  for(const c of due.concat(wave,rest)){ if(!seen.has(c.id)){seen.add(c.id);out.push(c);} if(out.length>=n)break; }
+  return out;
+}
+
+/* ══════════ WHATSAPP / TELEFON ══════════ */
+function waNum(p){
+  let d=(p||"").replace(/[^\d+]/g,"");
+  if(!d)return "";
+  if(d.charAt(0)==="+")d=d.slice(1);
+  else if(d.slice(0,2)==="00")d=d.slice(2);
+  else if(d.charAt(0)==="0")d="49"+d.slice(1);
+  return d;
+}
+function msgFor(c,kind){
+  const v=(c.name||"").trim().split(" ")[0];
+  let t;
+  if(kind==="nach")t=MSG_NACH;
+  else if(kind==="termin")t=MSG_TERMIN;
+  else if(kind==="danke")t=MSG_DANKE;
+  else t=(MSG[c.seg]||MSG["Noch unklar"]).t;
+  return t.replace(/\[V\]/g,v).replace(/\[TAG\]/g,c.nextDate?fmt(c.nextDate):"unseren Termin");
+}
+function sendWA(id,kind){
+  const c=S.contacts.find(x=>x.id===id); if(!c)return;
+  const n=waNum(c.phone),txt=encodeURIComponent(msgFor(c,kind));
+  window.open(n?"https://wa.me/"+n+"?text="+txt:"https://wa.me/?text="+txt,"_blank");
+  if(c.status==="Neu"){applyAuto(c,"Kontaktiert");logToday();save();renderAll();toast("→ Status: Kontaktiert");}
+}
+function callNow(id){
+  const c=S.contacts.find(x=>x.id===id);
+  if(!c||!c.phone){toast("Keine Nummer hinterlegt");return;}
+  window.location.href="tel:"+c.phone.replace(/[^\d+]/g,"");
+}
+function copyMsg(id,kind){
+  const c=S.contacts.find(x=>x.id===id);
+  navigator.clipboard.writeText(msgFor(c,kind)).then(()=>toast("Nachricht kopiert"));
+}
+function setStatus(id,st){
+  const c=S.contacts.find(x=>x.id===id); if(!c)return;
+  const wasNew=c.status==="Neu";
+  applyAuto(c,st);
+  if(wasNew&&st!=="Neu")logToday();
+  save();renderAll();toast(c.name+" → "+st);
+}
+
+/* ══════════ NAVIGATION ══════════ */
+const TITLES={home:"",heute:"Heute",kontakte:"Kontakte",plan:"8-Wochen-Plan",rhythmus:"Wochenrhythmus",
+  leitfaden:"Leitfäden",guide:"Leitfaden",daten:"Datenaufnahme",ordner:"Ordner",stats:"Auswertung",export:"Export"};
+function go(v){
+  view=v;
+  document.querySelectorAll("section.view").forEach(s=>s.classList.remove("active"));
+  document.getElementById("v-"+v).classList.add("active");
+  document.getElementById("crumb").textContent=TITLES[v]?"› "+TITLES[v]:"";
+  window.scrollTo(0,0);
+  if(v==="heute")renderHeute();
+}
+function openGuide(id){
+  const g=GUIDES.find(x=>x.id===id);
+  document.getElementById("guideOut").innerHTML=
+    "<h1>"+g.ic+" "+g.t+"</h1><p class='mini'>"+g.intro+"</p>"+
+    (g.id==="kontakt"?`<div class="card"><h3>Erstkontakt je Segment</h3>
+      <p class="mini">Diese Texte gehen aus jedem Kontakt direkt an WhatsApp – mit eingesetztem Vornamen.</p>`+
+      Object.keys(MSG).map(k=>`<details class="acc"><summary>${MSG[k].l}</summary><div class="body">
+        <div class="script">${esc(MSG[k].t)}</div><button class="sm" onclick="cp(this)">📋 Kopieren</button></div></details>`).join("")+
+      `</div>`:"")+
+    g.parts.map(p=>`<div class="card"><h3>${p[0]}</h3><div class="script">${esc(p[1])}</div>
+      <button class="sm noprint" onclick="cp(this)">📋 Kopieren</button></div>`).join("")+
+    (g.tips.length?`<div class="card"><h3>Merken</h3><ul style="margin:0;padding-left:18px;font-size:.88rem">${g.tips.map(t=>`<li style="margin-bottom:6px">${t}</li>`).join("")}</ul></div>`:"");
+  go("guide");
+}
+
+/* ══════════ RENDER ══════════ */
 function renderAll(){
-  document.getElementById("startDate").value = S.start;
-  renderDash(); renderFilters(); renderTable(); renderPlan();
-  renderRhythm(); renderGuides(); renderData(); renderFolder(); renderExport();
-  const done = S.contacts.filter(c=>c.status!=="Neu").length;
-  document.getElementById("hdrStat").textContent = `${done}/${S.contacts.length} angesprochen · Woche ${currentWeek()||"—"}`;
+  document.getElementById("startDate").value=S.start;
+  renderHome();renderFilters();renderTable();renderPlan();renderRhythm();
+  renderGuideTiles();renderData();renderFolder();renderStats();renderExport();
+  if(view==="heute")renderHeute();
 }
 
-/* ---- Dashboard ---- */
-function renderDash(){
-  const c = S.contacts;
-  const done = c.filter(x=>x.status!=="Neu").length;
-  document.getElementById("k1").textContent = c.length;
-  document.getElementById("k2").textContent = done;
-  document.getElementById("b2").style.width = (c.length? done/c.length*100:0)+"%";
-  document.getElementById("k3").textContent = c.filter(x=>x.status==="Termin").length;
-  document.getElementById("k4").textContent = c.filter(x=>x.status==="Abschluss").length;
+function renderHome(){
+  const c=S.contacts,t=todayISO(),w=currentWeek();
+  const due=c.filter(x=>x.nextDate&&x.nextDate<=t&&!["Abschluss","Kein Interesse"].includes(x.status)).length;
+  const offen=(w>=1&&w<=8)?c.filter(x=>x.week===w&&x.status==="Neu").length:0;
+  const str=stragglers().length;
+  const done=c.filter(x=>x.status!=="Neu").length;
 
-  // heute + überfällig
-  const t = todayISO();
-  const due = c.filter(x=>x.nextDate && x.nextDate<=t && !["Abschluss","Kein Interesse"].includes(x.status))
-               .sort((a,b)=>a.nextDate.localeCompare(b.nextDate));
-  document.getElementById("todayList").innerHTML = due.length ? due.map(x=>`
-    <div class="todo">
-      <div class="w">
-        <div class="nm" onclick="openDrawer('${x.id}')">${esc(x.name)} <span class="pill t-${x.tier}">${x.tier}</span></div>
-        <div class="sub">${esc(x.nextAction||"—")}</div>
-      </div>
-      <div class="${x.nextDate<t?'overdue':'today'}" style="font-size:.8rem">${x.nextDate<t?"überfällig · ":""}${fmt(x.nextDate)}</div>
-    </div>`).join("")
-    : `<p class="mini">Nichts fällig. Nutz die Zeit für Erstkontakte aus der aktuellen Wochenwelle. 👇</p>`;
+  let al="";
+  const bk=S.lastBackup?Math.floor((new Date()-parse(S.lastBackup))/864e5):999;
+  if(bk>7)al+=`<div class="warn">💾 Letztes Backup ${S.lastBackup?"vor "+bk+" Tagen":"noch nie gemacht"}. <button class="sm" onclick="go('export')">Jetzt sichern</button></div>`;
+  if(str>0)al+=`<div class="warn">⏪ ${str} Kontakte aus vergangenen Wochen sind noch nicht angesprochen. <button class="sm" onclick="rollover()">In diese Woche holen</button></div>`;
+  document.getElementById("homeAlert").innerHTML=al;
 
-  // diese Woche
-  const w = currentWeek();
-  const wk = w>=1&&w<=8 ? c.filter(x=>x.week===w) : [];
-  const offen = wk.filter(x=>x.status==="Neu");
-  document.getElementById("thisWeek").innerHTML = (w<1)
-    ? `<p class="mini">Start ist am ${fmt(S.start)}. Bis dahin: Leitfäden durchlesen und Ordnerstruktur anlegen.</p>`
-    : (w>8) ? `<p class="mini">Die 8 Wochen sind durch. Zieh Bilanz und setz ein neues Startdatum.</p>`
-    : `<p><b>Woche ${w}: ${WOCHEN_ROLLEN[w-1].t}</b><br><span class="mini">${WOCHEN_ROLLEN[w-1].z}</span></p>
-       <div class="bar"><i style="width:${wk.length?(wk.length-offen.length)/wk.length*100:0}%"></i></div>
-       <p class="mini" style="margin-top:8px">${wk.length-offen.length} von ${wk.length} Kontakten dieser Welle angesprochen.</p>
-       ${offen.slice(0,8).map(x=>`<div class="todo"><div class="w"><span class="nm" onclick="openDrawer('${x.id}')">${esc(x.name)}</span> <span class="pill t-${x.tier}">${x.tier}</span><div class="sub">${esc(x.rel||x.seg)}</div></div><button class="sm" onclick="quickStatus('${x.id}','Kontaktiert')">✓ angeschrieben</button></div>`).join("")}
-       ${offen.length>8?`<p class="mini" style="margin-top:8px">+ ${offen.length-8} weitere</p>`:""}`;
-
-  // pipeline
-  document.getElementById("pipeline").innerHTML = STATUS.map(s=>{
-    const n = c.filter(x=>x.status===s).length;
-    return `<div class="card tight" style="margin:0"><div style="font-size:1.5rem;font-weight:800">${n}</div><span class="pill ${STATUS_CLASS[s]}">${s}</span></div>`;
-  }).join("");
-
-  // wochenfortschritt
-  document.getElementById("weekProgress").innerHTML = [1,2,3,4,5,6,7,8].map(n=>{
-    const l = c.filter(x=>x.week===n);
-    const d = l.filter(x=>x.status!=="Neu").length;
-    const cur = currentWeek()===n;
-    return `<div style="margin-bottom:10px">
-      <div class="row" style="font-size:.82rem"><b style="${cur?'color:var(--acc)':''}">W${n} · ${WOCHEN_ROLLEN[n-1].t}</b>
-      <div class="spacer"></div><span class="mini">${fmtLong(weekStart(n))}–${fmtLong(weekEnd(n))} · ${d}/${l.length}</span></div>
-      <div class="bar"><i style="width:${l.length?d/l.length*100:0}%;${cur?'background:var(--acc2)':''}"></i></div></div>`;
-  }).join("");
+  const wt=(w>=1&&w<=8)?`Woche ${w}: ${WOCHEN[w-1][0]}`:(w<1?`Start am ${fmt(S.start)}`:"8 Wochen durch – Bilanz ziehen");
+  const tiles=[
+   {hero:1,ic:"🔥",t:"Heute loslegen",d:`${todayCount()} von 3 Kontakten heute erledigt · ${wt}`,v:"heute",badge:due||null},
+   {ic:"👥",t:"Kontakte",d:`${done} von ${c.length} angesprochen · suchen, filtern, pflegen`,v:"kontakte"},
+   {ic:"🗓",t:"8-Wochen-Plan",d:`Wer kommt wann dran · ${offen} offen in dieser Welle`,v:"plan"},
+   {ic:"⏱",t:"Wochenrhythmus",d:"Deine festen Tagesblöcke",v:"rhythmus"},
+   {ic:"💬",t:"Leitfäden",d:"Nachrichten, Telefon, Gespräch, Einwände",v:"leitfaden"},
+   {ic:"📋",t:"Datenaufnahme",d:"Was du je Kunde brauchst",v:"daten"},
+   {ic:"📁",t:"Ordner & Ablage",d:"iCloud, Obsidian, Setup-Skript",v:"ordner"},
+   {ic:"📊",t:"Auswertung",d:"Quoten je Segment und Priorität",v:"stats"},
+   {ic:"⬇️",t:"Export & Backup",d:"Kalender, Obsidian, Sicherung",v:"export"}
+  ];
+  document.getElementById("homeTiles").innerHTML=tiles.map(x=>
+   `<button class="tile ${x.hero?"hero":""}" onclick="go('${x.v}')">
+      ${x.badge?`<span class="badge">${x.badge} fällig</span>`:""}
+      <span class="ic">${x.ic}</span><span class="tt">${x.t}</span><span class="td">${x.d}</span>
+    </button>`).join("");
 }
-function quickStatus(id,s){
-  const c = S.contacts.find(x=>x.id===id); if(!c) return;
-  c.status=s; c.lastContact=todayISO();
-  const d=new Date(); d.setDate(d.getDate()+4);
-  c.nextDate=iso(d); c.nextAction="Nachfassen (keine Antwort?)";
-  save(); renderAll(); toast(c.name+" → "+s);
+
+function renderHeute(){
+  const w=currentWeek(),picks=todaysPicks(3),t=todayISO(),doneT=todayCount();
+  const termine=S.contacts.filter(c=>c.status==="Termin"&&c.nextDate).sort((a,b)=>a.nextDate.localeCompare(b.nextDate)).slice(0,5);
+  const nach=S.contacts.filter(c=>["Kontaktiert","Angebot"].includes(c.status)&&c.nextDate&&c.nextDate<=t);
+
+  document.getElementById("heuteOut").innerHTML=`
+  <div class="card">
+    <div class="row"><b>${(w>=1&&w<=8)?`Woche ${w} · ${WOCHEN[w-1][0]}`:"Noch nicht gestartet"}</b>
+    <div class="spacer"></div><span class="mini">${doneT}/3 heute</span></div>
+    <div class="bar"><i style="width:${Math.min(doneT/3*100,100)}%;background:${doneT>=3?"var(--ok)":"var(--acc)"}"></i></div>
+    ${doneT>=3?`<p class="mini" style="margin-top:10px">✅ Tagesziel erreicht. Alles darüber ist Bonus.</p>`:""}
+  </div>
+
+  <div class="stepbox">
+    <h2><span class="stepno">1</span>Deine 3 Kontakte für heute</h2>
+    <p class="mini">Automatisch ausgewählt: überfällige zuerst, dann die aktuelle Welle. Ein Klick auf WhatsApp öffnet den Chat mit fertiger Nachricht und setzt den Status.</p>
+    ${picks.length?picks.map(c=>`
+      <div class="item">
+        <div class="w">
+          <span class="nm" onclick="openDrawer('${c.id}')">${esc(c.name)}</span>
+          <span class="pill t-${c.tier}">${c.tier}</span>
+          <span class="pill s-${c.status.replace(/ /g,"")}">${c.status}</span>
+          <div class="sub">${esc(c.rel||c.seg)}${c.nextDate?" · "+(c.nextDate<t?'<span class="overdue">überfällig</span> ':"")+fmt(c.nextDate):""}</div>
+        </div>
+        <button class="sm wa" onclick="sendWA('${c.id}','${c.status==="Neu"?"erst":"nach"}')">WhatsApp</button>
+        <button class="sm" onclick="callNow('${c.id}')">☎️</button>
+      </div>`).join(""):`<p class="mini">Nichts offen. Stark. 👏</p>`}
+  </div>
+
+  <div class="stepbox">
+    <h2><span class="stepno">2</span>Nachfassen (${nach.length})</h2>
+    ${nach.length?nach.map(c=>`
+      <div class="item"><div class="w">
+        <span class="nm" onclick="openDrawer('${c.id}')">${esc(c.name)}</span>
+        <div class="sub">${esc(c.nextAction)} · ${fmt(c.nextDate)}</div></div>
+        <button class="sm wa" onclick="sendWA('${c.id}','nach')">Erinnern</button>
+        <button class="sm" onclick="setStatus('${c.id}','Später')">Später</button>
+      </div>`).join(""):`<p class="mini">Nichts fällig.</p>`}
+  </div>
+
+  <div class="stepbox">
+    <h2><span class="stepno">3</span>Nächste Termine</h2>
+    ${termine.length?termine.map(c=>`
+      <div class="item"><div class="w">
+        <span class="nm" onclick="openDrawer('${c.id}')">${esc(c.name)}</span>
+        <div class="sub">${fmt(c.nextDate)} · ${esc(c.nextAction)}</div></div>
+        <button class="sm wa" onclick="sendWA('${c.id}','termin')">Unterlagen</button>
+        <button class="sm" onclick="setStatus('${c.id}','Analyse')">✓ gemacht</button>
+      </div>`).join(""):`<p class="mini">Noch keine Termine vereinbart.</p>`}
+  </div>
+
+  <div class="card">
+    <h3>Abends: 2 Minuten Doku</h3>
+    <p class="mini">Jeden Kontakt, mit dem du heute gesprochen hast, öffnen und den Status setzen. Nächster Schritt und Wiedervorlage kommen automatisch.</p>
+    <button class="sm" onclick="go('kontakte')">→ Zu den Kontakten</button>
+  </div>`;
 }
 
 /* ---- Kontakte ---- */
 function renderFilters(){
-  const fs=document.getElementById("fStatus");
-  if(!fs.options.length) fs.innerHTML = `<option value="">Alle Status</option>`+STATUS.map(s=>`<option>${s}</option>`).join("");
-  const fw=document.getElementById("fWeek");
-  if(!fw.options.length) fw.innerHTML = `<option value="">Alle Wochen</option>`+[1,2,3,4,5,6,7,8].map(n=>`<option value="${n}">Woche ${n}</option>`).join("");
-  const fg=document.getElementById("fSeg");
-  if(!fg.options.length) fg.innerHTML = `<option value="">Alle Segmente</option>`+SEGMENTS.map(s=>`<option>${s}</option>`).join("");
+  const f=(id,html)=>{const e=document.getElementById(id);if(!e.options.length)e.innerHTML=html;};
+  f("fStatus",`<option value="">Alle Status</option>`+STATUS.map(s=>`<option>${s}</option>`).join(""));
+  f("fWeek",`<option value="">Alle Wochen</option>`+[1,2,3,4,5,6,7,8].map(n=>`<option value="${n}">Woche ${n}</option>`).join(""));
+  f("fSeg",`<option value="">Alle Segmente</option>`+SEGMENTS.map(s=>`<option>${s}</option>`).join(""));
 }
-function sortBy(k){ if(sortKey===k) sortDir*=-1; else {sortKey=k; sortDir=1;} renderTable(); }
+function sortBy(k){if(sortKey===k)sortDir*=-1;else{sortKey=k;sortDir=1;}renderTable();}
 function filtered(){
-  const q=(document.getElementById("q").value||"").toLowerCase();
-  const t=document.getElementById("fTier").value, st=document.getElementById("fStatus").value;
-  const w=document.getElementById("fWeek").value, sg=document.getElementById("fSeg").value;
-  return S.contacts.filter(c=>{
-    if(t&&c.tier!==t) return false;
-    if(st&&c.status!==st) return false;
-    if(w&&String(c.week)!==w) return false;
-    if(sg&&c.seg!==sg) return false;
-    if(q && !(c.name+" "+c.rel+" "+c.notes+" "+c.ort).toLowerCase().includes(q)) return false;
-    return true;
-  }).sort((a,b)=>{
-    let x=a[sortKey], y=b[sortKey];
-    if(sortKey==="tier"){ const o={A:0,B:1,C:2}; x=o[x]; y=o[y]; }
-    if(x==null)x=""; if(y==null)y="";
+  const g=id=>document.getElementById(id).value;
+  const q=(g("q")||"").toLowerCase(),ti=g("fTier"),st=g("fStatus"),wk=g("fWeek"),sg=g("fSeg");
+  return S.contacts.filter(c=>
+    (!ti||c.tier===ti)&&(!st||c.status===st)&&(!wk||String(c.week)===wk)&&(!sg||c.seg===sg)&&
+    (!q||(c.name+" "+c.rel+" "+c.notes+" "+c.ort).toLowerCase().indexOf(q)>=0)
+  ).sort((a,b)=>{
+    let x=a[sortKey],y=b[sortKey];
+    if(sortKey==="tier"){const o={A:0,B:1,C:2};x=o[x];y=o[y];}
+    if(x==null)x="";if(y==null)y="";
     return (x>y?1:x<y?-1:0)*sortDir;
   });
 }
 function renderTable(){
-  const list=filtered();
-  document.getElementById("cnt").textContent = list.length+" von "+S.contacts.length;
-  const t=todayISO();
-  document.getElementById("tbody").innerHTML = list.map(c=>`
+  const l=filtered(),t=todayISO();
+  document.getElementById("cnt").textContent=l.length+"/"+S.contacts.length;
+  document.getElementById("tbody").innerHTML=l.map(c=>`
     <tr>
       <td><div class="nm" onclick="openDrawer('${c.id}')">${esc(c.name)}</div>${c.rel?`<div class="sub">${esc(c.rel)}</div>`:""}</td>
       <td><span class="pill t-${c.tier}">${c.tier}</span></td>
-      <td class="sub">${esc(c.seg)}</td>
-      <td>W${c.week}</td>
-      <td><span class="pill ${STATUS_CLASS[c.status]}">${c.status}</span></td>
+      <td>${c.week}</td>
+      <td><span class="pill s-${c.status.replace(/ /g,"")}">${c.status}</span></td>
       <td><div style="font-size:.82rem">${esc(c.nextAction||"—")}</div>
-          <div class="sub ${c.nextDate&&c.nextDate<t?'overdue':''}">${fmt(c.nextDate)}</div></td>
-      <td class="noprint"><button class="sm" onclick="openDrawer('${c.id}')">Öffnen</button></td>
-    </tr>`).join("") || `<tr><td colspan="7" class="mini" style="padding:20px">Keine Treffer.</td></tr>`;
+          <div class="sub ${c.nextDate&&c.nextDate<t?"overdue":""}">${fmt(c.nextDate)}</div></td>
+      <td class="noprint" style="white-space:nowrap">
+        <button class="sm wa" onclick="sendWA('${c.id}','${c.status==="Neu"?"erst":"nach"}')" title="WhatsApp">💬</button>
+        <button class="sm" onclick="callNow('${c.id}')" title="Anrufen">☎️</button>
+        <button class="sm" onclick="openDrawer('${c.id}')">Öffnen</button>
+      </td>
+    </tr>`).join("")||`<tr><td colspan="6" class="mini" style="padding:20px">Keine Treffer.</td></tr>`;
 }
 
 /* ---- Drawer ---- */
 function openDrawer(id){
-  editId=id; const c=S.contacts.find(x=>x.id===id); if(!c) return;
-  document.getElementById("dTitle").textContent = c.name;
-  document.getElementById("dBody").innerHTML = `
-    <div class="grid g2" style="gap:0 12px">
-      <div class="field"><label class="f">Name</label><input id="e_name" value="${attr(c.name)}"></div>
-      <div class="field"><label class="f">Beziehung / Kontext</label><input id="e_rel" value="${attr(c.rel)}"></div>
-      <div class="field"><label class="f">Priorität</label><select id="e_tier">${["A","B","C"].map(v=>`<option ${v===c.tier?"selected":""}>${v}</option>`).join("")}</select></div>
-      <div class="field"><label class="f">Segment</label><select id="e_seg">${SEGMENTS.map(v=>`<option ${v===c.seg?"selected":""}>${v}</option>`).join("")}</select></div>
-      <div class="field"><label class="f">Telefon</label><input id="e_phone" value="${attr(c.phone)}"></div>
-      <div class="field"><label class="f">E-Mail</label><input id="e_email" value="${attr(c.email)}"></div>
-      <div class="field"><label class="f">Ort</label><input id="e_ort" value="${attr(c.ort)}"></div>
-      <div class="field"><label class="f">Kontaktwoche</label><select id="e_week">${[1,2,3,4,5,6,7,8].map(n=>`<option value="${n}" ${n===c.week?"selected":""}>Woche ${n} (${fmtLong(weekStart(n))})</option>`).join("")}</select></div>
-      <div class="field"><label class="f">Status</label><select id="e_status">${STATUS.map(v=>`<option ${v===c.status?"selected":""}>${v}</option>`).join("")}</select></div>
-      <div class="field"><label class="f">Letzter Kontakt</label><input type="date" id="e_last" value="${attr(c.lastContact)}"></div>
+  editId=id;const c=S.contacts.find(x=>x.id===id);if(!c)return;
+  document.getElementById("dTitle").textContent=c.name;
+  document.getElementById("dBody").innerHTML=`
+    <div class="card tight" style="background:var(--bg3)">
+      <label class="f">Schnellaktionen</label>
+      <div class="row">
+        <button class="sm wa" onclick="sendWA('${c.id}','erst')">💬 Erstkontakt</button>
+        <button class="sm wa" onclick="sendWA('${c.id}','nach')">💬 Nachfassen</button>
+        <button class="sm" onclick="callNow('${c.id}')">☎️ Anrufen</button>
+        <button class="sm" onclick="addRef('${c.id}')">+ Empfehlung</button>
+      </div>
+      <label class="f" style="margin-top:12px">Status setzen – Folgeschritt kommt automatisch</label>
+      <div class="row">${STATUS.map(s=>`<button class="sm ${s===c.status?"primary":""}" onclick="setStatus('${c.id}','${s}');openDrawer('${c.id}')">${s}</button>`).join("")}</div>
     </div>
-    <div class="field"><label class="f">Nächster Schritt</label><input id="e_na" value="${attr(c.nextAction)}" list="naList">
-      <datalist id="naList">
-        <option>Erstkontakt schreiben</option><option>Nachfassen (keine Antwort?)</option>
-        <option>Anrufen für Termin</option><option>Analysegespräch führen</option>
-        <option>Unterlagen anfordern</option><option>Angebot vorbereiten</option>
-        <option>Angebot präsentieren</option><option>Abschluss nachfassen</option>
-        <option>Antrag einreichen</option><option>Wiedervorlage</option>
-      </datalist></div>
+    <div class="grid g2" style="gap:0 12px">
+      <div class="field"><label class="f">Name</label><input id="e_name" value="${at(c.name)}"></div>
+      <div class="field"><label class="f">Beziehung</label><input id="e_rel" value="${at(c.rel)}"></div>
+      <div class="field"><label class="f">Telefon</label><input id="e_phone" value="${at(c.phone)}" placeholder="0170 1234567"></div>
+      <div class="field"><label class="f">E-Mail</label><input id="e_email" value="${at(c.email)}"></div>
+      <div class="field"><label class="f">Priorität</label><select id="e_tier">${["A","B","C"].map(v=>`<option ${v===c.tier?"selected":""}>${v}</option>`).join("")}</select></div>
+      <div class="field"><label class="f">Segment – steuert die Nachricht</label><select id="e_seg">${SEGMENTS.map(v=>`<option ${v===c.seg?"selected":""}>${v}</option>`).join("")}</select></div>
+      <div class="field"><label class="f">Ort</label><input id="e_ort" value="${at(c.ort)}"></div>
+      <div class="field"><label class="f">Kontaktwoche</label><select id="e_week">${[1,2,3,4,5,6,7,8].map(n=>`<option value="${n}" ${n===c.week?"selected":""}>W${n} (${fmtS(weekStart(n))})</option>`).join("")}</select></div>
+    </div>
+    <div class="field"><label class="f">Nächster Schritt</label><input id="e_na" value="${at(c.nextAction)}"></div>
     <div class="field"><label class="f">Termin / Wiedervorlage</label>
-      <div class="row"><input type="date" id="e_nd" value="${attr(c.nextDate)}" style="flex:1">
-      <button class="sm" onclick="plusDays(3)">+3T</button><button class="sm" onclick="plusDays(7)">+1W</button><button class="sm" onclick="plusDays(28)">+4W</button></div></div>
-
+      <div class="row"><input type="date" id="e_nd" value="${at(c.nextDate)}" style="flex:1">
+      <button class="sm" onclick="setD(3)">+3T</button><button class="sm" onclick="setD(7)">+1W</button><button class="sm" onclick="setD(28)">+4W</button></div></div>
     <div class="card tight" style="background:var(--bg3)">
       <label class="f">Bedarf / offene Sparten</label>
-      <div class="grid g2" style="gap:0">${SPARTEN.map(s=>`<label class="chk"><input type="checkbox" class="e_sp" value="${attr(s)}" ${c.sparten&&c.sparten.includes(s)?"checked":""}> ${s}</label>`).join("")}</div>
+      <div class="grid g2" style="gap:0">${SPARTEN.map(s=>`<label class="chk"><input type="checkbox" class="e_sp" value="${at(s)}" ${c.sparten.indexOf(s)>=0?"checked":""}> ${s}</label>`).join("")}</div>
     </div>
-
     <div class="card tight" style="background:var(--bg3)">
-      <label class="f">Datenaufnahme – erledigt?</label>
-      <div>${DATENPUNKTE.map(s=>`<label class="chk"><input type="checkbox" class="e_dp" value="${attr(s)}" ${c.daten&&c.daten.includes(s)?"checked":""}> ${s}</label>`).join("")}</div>
+      <label class="f">Datenaufnahme</label>
+      ${DATENPUNKTE.map(s=>`<label class="chk"><input type="checkbox" class="e_dp" value="${at(s)}" ${c.daten.indexOf(s)>=0?"checked":""}> ${s}</label>`).join("")}
     </div>
-
-    <div class="field"><label class="f">Notizen</label><textarea id="e_notes" style="min-height:140px">${esc(c.notes)}</textarea></div>
+    <div class="field"><label class="f">Notizen</label><textarea id="e_notes" style="min-height:130px">${esc(c.notes)}</textarea></div>
     <div class="row noprint">
-      <button class="sm" onclick="copyMsg('${c.id}')">📋 Erstkontakt-Text kopieren</button>
-      <button class="sm" onclick="copyNote('${c.id}')">📋 Obsidian-Notiz kopieren</button>
+      <button class="sm" onclick="copyMsg('${c.id}','erst')">📋 Nachricht</button>
+      <button class="sm" onclick="copyNote('${c.id}')">📋 Obsidian-Notiz</button>
+      <span class="mini">Quelle: ${esc(c.quelle)}</span>
     </div>`;
   document.getElementById("drawer").classList.add("open");
   document.getElementById("dbg").classList.add("open");
 }
-function plusDays(n){ const d=new Date(); d.setDate(d.getDate()+n); document.getElementById("e_nd").value=iso(d); }
-function closeDrawer(){ document.getElementById("drawer").classList.remove("open"); document.getElementById("dbg").classList.remove("open"); editId=null; }
+function setD(n){document.getElementById("e_nd").value=plusD(n);}
+function closeDrawer(){document.getElementById("drawer").classList.remove("open");document.getElementById("dbg").classList.remove("open");editId=null;}
 function saveDrawer(){
-  const c=S.contacts.find(x=>x.id===editId); if(!c) return;
+  const c=S.contacts.find(x=>x.id===editId);if(!c)return;
   const g=id=>document.getElementById(id).value;
-  c.name=g("e_name"); c.rel=g("e_rel"); c.tier=g("e_tier"); c.seg=g("e_seg");
-  c.phone=g("e_phone"); c.email=g("e_email"); c.ort=g("e_ort");
-  c.week=+g("e_week"); c.status=g("e_status"); c.lastContact=g("e_last");
-  c.nextAction=g("e_na"); c.nextDate=g("e_nd"); c.notes=g("e_notes");
-  c.sparten=[...document.querySelectorAll(".e_sp:checked")].map(e=>e.value);
-  c.daten=[...document.querySelectorAll(".e_dp:checked")].map(e=>e.value);
-  save(); closeDrawer(); renderAll(); toast("Gespeichert");
+  c.name=g("e_name");c.rel=g("e_rel");c.tier=g("e_tier");c.seg=g("e_seg");c.phone=g("e_phone");
+  c.email=g("e_email");c.ort=g("e_ort");c.week=+g("e_week");c.nextAction=g("e_na");
+  c.nextDate=g("e_nd");c.notes=g("e_notes");
+  c.sparten=[].slice.call(document.querySelectorAll(".e_sp:checked")).map(e=>e.value);
+  c.daten=[].slice.call(document.querySelectorAll(".e_dp:checked")).map(e=>e.value);
+  save();closeDrawer();renderAll();toast("Gespeichert");
 }
-function addContact(){
-  const c={id:uid(),name:"Neuer Kontakt",rel:"",seg:"Noch unklar",tier:"B",week:currentWeek()||1,
+function addContact(quelle){
+  const c={id:uid(),name:"Neuer Kontakt",rel:"",seg:"Noch unklar",tier:"B",week:Math.max(currentWeek(),1),
     status:"Neu",phone:"",email:"",ort:"",nextAction:"Erstkontakt schreiben",nextDate:"",lastContact:"",
-    notes:"",sparten:[],daten:[],quelle:"Empfehlung",ord:S.contacts.length};
-  S.contacts.push(c); save(); go("kontakte"); renderAll(); openDrawer(c.id);
+    notes:"",sparten:[],daten:[],quelle:quelle||"Eigene Liste",ord:S.contacts.length};
+  S.contacts.push(c);save();go("kontakte");renderAll();openDrawer(c.id);return c;
+}
+function addRef(id){
+  const from=S.contacts.find(x=>x.id===id);
+  closeDrawer();
+  const c=addContact("Empfehlung von "+from.name);
+  c.notes="Empfohlen von "+from.name+" am "+fmt(todayISO())+".\n";
+  c.nextDate=plusD(2);c.nextAction="Empfohlenen anschreiben – innerhalb 48h!";
+  save();openDrawer(c.id);toast("Empfehlung angelegt – Name eintragen");
 }
 function deleteContact(){
-  const c=S.contacts.find(x=>x.id===editId); if(!c) return;
-  if(!confirm(`"${c.name}" wirklich löschen?`)) return;
-  S.contacts=S.contacts.filter(x=>x.id!==editId); save(); closeDrawer(); renderAll(); toast("Gelöscht");
+  const c=S.contacts.find(x=>x.id===editId);if(!c)return;
+  if(!confirm('"'+c.name+'" löschen?'))return;
+  S.contacts=S.contacts.filter(x=>x.id!==editId);save();closeDrawer();renderAll();toast("Gelöscht");
 }
 
 /* ---- Plan ---- */
 function renderPlan(){
-  document.getElementById("planOut").innerHTML = [1,2,3,4,5,6,7,8].map(n=>{
-    const r=WOCHEN_ROLLEN[n-1];
+  document.getElementById("planOut").innerHTML=[1,2,3,4,5,6,7,8].map(n=>{
+    const r=WOCHEN[n-1],cur=currentWeek()===n;
     const l=S.contacts.filter(c=>c.week===n).sort((a,b)=>({A:0,B:1,C:2}[a.tier]-{A:0,B:1,C:2}[b.tier]));
-    const cur=currentWeek()===n;
-    return `<details class="acc" ${cur||n<=2?"open":""}>
-      <summary><div class="weekhead" style="flex:1">
-        <span style="${cur?'color:var(--acc)':''}">Woche ${n} · ${r.t}</span>
-        <span class="dt">${fmtLong(weekStart(n))}–${fmtLong(weekEnd(n))}</span>
-        <span class="dt">· ${l.length} Kontakte</span>
-        ${cur?'<span class="pill s-termin">aktuell</span>':''}
-      </div></summary>
-      <div class="body">
-        <p class="mini">${r.z}</p>
-        <div class="grid g2">
-          <div><label class="f">Wochenziele</label><ul class="tick">${r.f.map(x=>`<li>${x}</li>`).join("")}</ul></div>
-          <div><label class="f">Kontakte dieser Welle</label>
-            <div>${l.map(c=>`<div class="todo"><div class="w"><span class="nm" onclick="openDrawer('${c.id}')">${esc(c.name)}</span> <span class="pill t-${c.tier}">${c.tier}</span>${c.rel?`<div class="sub">${esc(c.rel)}</div>`:""}</div><span class="pill ${STATUS_CLASS[c.status]}">${c.status}</span></div>`).join("")||'<p class="mini">Keine Kontakte zugeordnet.</p>'}</div>
-          </div>
-        </div>
-      </div></details>`;
+    const d=l.filter(c=>c.status!=="Neu").length;
+    return `<details class="acc" ${cur||n<=1?"open":""}><summary>
+      <span style="${cur?"color:var(--acc)":""}">W${n} · ${r[0]}</span>
+      <span class="mini">${fmtS(weekStart(n))}–${fmtS(weekEnd(n))} · ${d}/${l.length}</span>
+      ${cur?'<span class="pill s-Termin">aktuell</span>':""}</summary>
+      <div class="body"><p class="mini">${r[1]}</p>
+      <div class="grid g2">
+        <div><label class="f">Wochenziele</label><ul class="tick">${r[2].map(x=>`<li>${x}</li>`).join("")}</ul></div>
+        <div><label class="f">Kontakte</label>${l.map(c=>`<div class="item"><div class="w">
+          <span class="nm" onclick="openDrawer('${c.id}')">${esc(c.name)}</span> <span class="pill t-${c.tier}">${c.tier}</span>
+          ${c.rel?`<div class="sub">${esc(c.rel)}</div>`:""}</div>
+          <span class="pill s-${c.status.replace(/ /g,"")}">${c.status}</span></div>`).join("")||'<p class="mini">—</p>'}</div>
+      </div></div></details>`;
   }).join("");
 }
 
-/* ---- Rhythmus ---- */
+/* ---- Rhythmus / Leitfäden / Daten / Ordner ---- */
 function renderRhythm(){
-  document.getElementById("rhythmOut").innerHTML = `<div class="grid g2">`+RHYTHMUS.map(d=>`
-    <div class="card"><h3>${d.d}</h3>
-      ${d.bl.map(([t,x])=>`<div class="todo"><div style="width:110px;font-size:.78rem;color:var(--tx3);font-weight:700">${t}</div><div class="w" style="font-size:.86rem">${x}</div></div>`).join("")}
-    </div>`).join("")+`</div>`;
+  document.getElementById("rhythmOut").innerHTML='<div class="grid g2">'+RHYTHMUS.map(d=>
+    `<div class="card"><h3>${d[0]}</h3>`+d[1].map(b=>
+      `<div class="item"><div style="width:105px;font-size:.76rem;color:var(--tx3);font-weight:700">${b[0]}</div>
+       <div class="w" style="font-size:.86rem">${b[1]}</div></div>`).join("")+`</div>`).join("")
+    +`</div><div class="card"><h2>Die 3 Regeln</h2><ul class="tick">
+      <li><b>Kontaktblock ist heilig.</b> 45 Min, Handy auf Nicht stören. Lieber 3 Nachrichten täglich als 20 am Sonntag.</li>
+      <li><b>Nach jedem Gespräch sofort Status setzen.</b> Der Rest passiert automatisch.</li>
+      <li><b>Sonntag 20 Uhr, 20 Minuten Wochenplanung.</b> Nächste Welle ansehen, Termine blocken, Backup ziehen.</li></ul></div>`;
 }
-
-/* ---- Leitfäden ---- */
-function renderGuides(){
-  document.getElementById("guideOut").innerHTML = LEITFAEDEN.map((g,i)=>`
-    <details class="acc" ${i===0?"open":""}>
-      <summary>${g.t}</summary>
-      <div class="body">
-        <p class="mini">${g.intro}</p>
-        ${g.parts.map(p=>`<h4 style="margin-top:14px">${p.h}</h4>
-          <div class="script">${esc(p.s)}</div>
-          <button class="sm noprint" onclick="cp(this)">📋 Kopieren</button>`).join("")}
-        ${g.tips.length?`<div class="hint" style="margin-top:14px"><b>Merken:</b><ul style="margin:6px 0 0;padding-left:18px">${g.tips.map(t=>`<li>${t}</li>`).join("")}</ul></div>`:""}
-      </div></details>`).join("");
+function renderGuideTiles(){
+  document.getElementById("guideTiles").innerHTML=GUIDES.map(g=>
+    `<button class="tile" onclick="openGuide('${g.id}')"><span class="ic">${g.ic}</span>
+     <span class="tt">${g.t}</span><span class="td">${g.d}</span></button>`).join("");
 }
-function cp(btn){
-  const t = btn.previousElementSibling.textContent;
-  navigator.clipboard.writeText(t).then(()=>toast("Kopiert"));
-}
-function copyMsg(id){
-  const c=S.contacts.find(x=>x.id===id);
-  let s = LEITFAEDEN[0].parts[0].s;
-  if(c.seg==="Familie") s = LEITFAEDEN[0].parts[1].s;
-  if(c.seg==="Selbstständig / Firma") s = LEITFAEDEN[0].parts[2].s;
-  navigator.clipboard.writeText(s.replace(/\[Name\]/g, c.name.split(" ")[0])).then(()=>toast("Nachricht kopiert"));
-}
-
-/* ---- Datenaufnahme ---- */
 function renderData(){
-  document.getElementById("dataOut").innerHTML = `
+  document.getElementById("dataOut").innerHTML=`
   <div class="grid g2">
     <div class="card"><h2>Pflichtdaten je Kunde</h2><ul class="tick">${DATENPUNKTE.map(d=>`<li>${d}</li>`).join("")}</ul></div>
     <div class="card"><h2>Sparten, die du durchgehst</h2><ul class="tick">${SPARTEN.map(d=>`<li>${d}</li>`).join("")}</ul></div>
   </div>
-  <div class="card">
-    <h2>Unterlagen, die der Kunde mitbringen soll</h2>
-    <p class="mini">Schick diese Liste 1–2 Tage vor dem Termin per WhatsApp. Spart im Termin locker 20 Minuten.</p>
+  <div class="card"><h2>Unterlagen-Nachricht für den Kunden</h2>
+    <p class="mini">1–2 Tage vor dem Termin schicken – der Button „Unterlagen" im Tab <b>Heute</b> macht das automatisch.</p>
     <div class="script">Hey [Name], freu mich auf [Tag]!
 
-Kannst du bitte bis dahin folgendes rauslegen (Foto oder PDF reicht völlig):
+Kannst du bis dahin folgendes rauslegen? Foto oder PDF reicht völlig:
 
 • Alle Versicherungspolicen, die du findest
 • Letzte Beitragsrechnungen
-• KFZ-Schein + letzte Beitragsrechnung
-• Bei Angestellten: letzte Gehaltsabrechnung
-• Bei Selbstständigen: letzter Steuerbescheid
+• KFZ-Schein
+• Angestellte: letzte Gehaltsabrechnung
+• Selbstständige: letzter Steuerbescheid
 • Renteninformation der Deutschen Rentenversicherung
-• Miet- oder Kaufvertrag der Wohnung
+• Miet- oder Kaufvertrag
 
-Wenn du was nicht findest – auch kein Problem, das kriegen wir zusammen raus. Bis [Tag]!</div>
-    <button class="sm noprint" onclick="cp(this)">📋 Kopieren</button>
-  </div>
-  <div class="card">
-    <h2>Nach dem Termin – in dieser Reihenfolge</h2>
-    <ul class="tick">
-      <li><b>Sofort (noch im Auto):</b> Status im Cockpit setzen + nächster Schritt + Datum</li>
-      <li><b>Am selben Tag:</b> Fotos der Policen in den Kundenordner, Notizen in Obsidian</li>
-      <li><b>Innerhalb 24h:</b> Kurze Dankesnachricht + Bestätigung des Folgetermins</li>
-      <li><b>Innerhalb 3 Tagen:</b> Auswertung / Angebot vorbereiten</li>
-      <li><b>Am Folgetermin-Vortag:</b> Erinnerung schicken</li>
-    </ul>
-  </div>`;
+Was du nicht findest, kriegen wir zusammen raus. Bis [Tag]!</div>
+    <button class="sm noprint" onclick="cp(this)">📋 Kopieren</button></div>
+  <div class="card"><h2>Nach dem Termin – in dieser Reihenfolge</h2><ul class="tick">
+    <li><b>Sofort:</b> Status im Cockpit setzen – Folgeschritt kommt automatisch</li>
+    <li><b>Am selben Tag:</b> Fotos in den Kundenordner, Notizen ergänzen</li>
+    <li><b>Innerhalb 24h:</b> Dankesnachricht + Folgetermin bestätigen</li>
+    <li><b>Innerhalb 3 Tagen:</b> Auswertung / Angebot vorbereiten</li></ul></div>`;
 }
-
-/* ---- Ordner ---- */
-function slug(s){
-  return String(s)
-    .replace(/ä/g,"ae").replace(/ö/g,"oe").replace(/ü/g,"ue")
-    .replace(/Ä/g,"Ae").replace(/Ö/g,"Oe").replace(/Ü/g,"Ue").replace(/ß/g,"ss")
-    .normalize("NFD").replace(/[\u0300-\u036f]/g,"")
-    .replace(/[^a-zA-Z0-9]+/g,"-").replace(/^-|-$/g,"");
-}
+function slug(s){return String(s).replace(/ä/g,"ae").replace(/ö/g,"oe").replace(/ü/g,"ue")
+  .replace(/Ä/g,"Ae").replace(/Ö/g,"Oe").replace(/Ü/g,"Ue").replace(/ß/g,"ss")
+  .normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[^a-zA-Z0-9]+/g,"-").replace(/^-|-$/g,"");}
 function renderFolder(){
-  document.getElementById("folderOut").innerHTML = `
+  document.getElementById("folderOut").innerHTML=`
   <div class="grid g2">
-    <div class="card"><h2>Struktur pro Kunde</h2>
-      <div class="script">Kunden/
+    <div class="card"><h2>Struktur pro Kunde</h2><div class="script">Kunden/
 └── ${slug(S.contacts[0]?S.contacts[0].name:"Max-Mustermann")}/
     ├── 01_Stammdaten/
     ├── 02_Bestandsvertraege/
@@ -892,306 +934,244 @@ function renderFolder(){
     ├── 05_Antraege_Policen/
     ├── 06_Schriftverkehr/
     ├── 07_Schadenfaelle/
-    └── README.md   ← Kurzprofil + Gesprächshistorie</div>
-    </div>
-    <div class="card"><h2>Zwei Orte, eine Wahrheit</h2>
-      <ul class="tick">
-        <li><b>iCloud Drive</b> = Ablage der echten Dokumente (PDFs, Fotos, Anträge)</li>
-        <li><b>Obsidian Vault</b> = Wissen &amp; Gesprächsnotizen (verlinkt, durchsuchbar)</li>
-        <li><b>Dieses Cockpit</b> = Steuerung: Status, Termine, nächste Schritte</li>
-      </ul>
-      <div class="hint">Nicht dreifach dokumentieren. Dokumente → iCloud. Gedanken → Obsidian. Zustand → Cockpit.</div>
-    </div>
+    └── README.md</div></div>
+    <div class="card"><h2>Drei Systeme, klare Trennung</h2><ul class="tick">
+      <li><b>iCloud</b> = die echten Dokumente (PDFs, Fotos, Anträge)</li>
+      <li><b>Obsidian</b> = Wissen und Gesprächsnotizen</li>
+      <li><b>Cockpit</b> = der Zustand: Status, Termine, nächste Schritte</li></ul>
+      <div class="hint">Nicht dreifach dokumentieren – das hält keine drei Wochen.</div></div>
   </div>
-  <div class="card">
-    <h2>Namenskonvention für Dateien</h2>
-    <div class="script">JJJJ-MM-TT_Kunde_Typ_Sparte.pdf
+  <div class="card"><h2>Dateinamen</h2><div class="script">JJJJ-MM-TT_Kunde_Typ_Sparte.pdf
 
 2026-08-12_Dogukan-Tok_Police_Privathaftpflicht.pdf
-2026-08-12_Dogukan-Tok_Analyse_Erstgespraech.pdf
 2026-08-19_Dogukan-Tok_Angebot_BU.pdf</div>
-    <p class="mini">Immer Datum zuerst – dann sortiert der Finder automatisch chronologisch.</p>
+    <p class="mini">Datum zuerst – dann sortiert der Finder automatisch chronologisch.</p></div>
+  <div class="card"><h2>Setup-Skript</h2>
+    <p class="mini">Legt für alle ${S.contacts.length} Kontakte die Ordner in iCloud an und erzeugt Obsidian-Notizen. Mehrfach ausführbar, überschreibt nichts.</p>
+    <div class="row"><button class="primary" onclick="dl('kunden-setup.sh',buildScript())">⬇️ kunden-setup.sh</button>
+    <span class="mini">danach im Terminal: <code>bash ~/Downloads/kunden-setup.sh</code></span></div></div>`;
+}
+
+/* ---- Auswertung ---- */
+function renderStats(){
+  const c=S.contacts;
+  const cnt=s=>c.filter(x=>x.status===s).length;
+  const ang=c.filter(x=>x.status!=="Neu").length;
+  const pct=(a,b)=>b?Math.round(a/b*100)+" %":"—";
+  const bySeg=SEGMENTS.map(s=>{
+    const l=c.filter(x=>x.seg===s);if(!l.length)return "";
+    const a=l.filter(x=>x.status!=="Neu").length;
+    const t=l.filter(x=>["Termin","Analyse","Angebot","Abschluss"].indexOf(x.status)>=0).length;
+    const ab=l.filter(x=>x.status==="Abschluss").length;
+    return `<tr><td>${s}</td><td>${l.length}</td><td>${a}</td><td>${t}</td><td>${ab}</td><td>${pct(ab,a)}</td></tr>`;
+  }).join("");
+  const days=Object.keys(S.log).sort().slice(-14);
+  document.getElementById("statsOut").innerHTML=`
+  <div class="grid g4" style="margin-bottom:14px">
+    <div class="kpi"><div class="n">${c.length}</div><div class="l">Kontakte</div></div>
+    <div class="kpi"><div class="n">${ang}</div><div class="l">Angesprochen</div><div class="bar"><i style="width:${c.length?ang/c.length*100:0}%"></i></div></div>
+    <div class="kpi"><div class="n">${cnt("Termin")+cnt("Analyse")}</div><div class="l">Termine / Analysen</div></div>
+    <div class="kpi"><div class="n">${cnt("Abschluss")}</div><div class="l">Abschlüsse</div></div>
   </div>
-  <div class="card">
-    <h2>Setup-Skript</h2>
-    <p class="mini">Legt für alle ${S.contacts.length} Kontakte die komplette Ordnerstruktur in iCloud an, verlinkt sie lokal und erzeugt fertige Obsidian-Notizen mit Frontmatter. Mehrfaches Ausführen ist sicher – vorhandene Dateien werden nicht überschrieben.</p>
-    <div class="row">
-      <button class="primary" onclick="dl('kunden-setup.sh', buildScript())">⬇️ kunden-setup.sh laden</button>
-      <span class="mini">danach im Terminal: <code>bash ~/Downloads/kunden-setup.sh</code></span>
-    </div>
+  <div class="card"><h2>Trichter</h2>
+    ${["Kontaktiert","Termin","Analyse","Angebot","Abschluss"].map(s=>{
+      const i=STATUS.indexOf(s);
+      const n=c.filter(x=>{const j=STATUS.indexOf(x.status);return j>=i&&j<=5;}).length;
+      return `<div style="margin-bottom:8px"><div class="row" style="font-size:.84rem"><b>${s}</b><div class="spacer"></div>
+        <span class="mini">${n} · ${pct(n,ang)} der Angesprochenen</span></div>
+        <div class="bar"><i style="width:${ang?n/ang*100:0}%"></i></div></div>`;}).join("")}
+  </div>
+  <div class="card"><h2>Quote je Segment</h2>
+    <div class="tablewrap"><table><thead><tr><th>Segment</th><th>Gesamt</th><th>Angespr.</th><th>Termine+</th><th>Abschl.</th><th>Quote</th></tr></thead>
+    <tbody>${bySeg}</tbody></table></div>
+    <p class="mini" style="margin-top:10px">Das Segment mit der besten Quote sagt dir, wo du in Monat 3 suchen solltest.</p></div>
+  <div class="card"><h2>Aktivität letzte 14 Tage</h2>
+    ${days.length?`<div class="row" style="align-items:flex-end;gap:6px;height:95px">`+
+      days.map(d=>`<div style="flex:1;text-align:center">
+        <div style="background:var(--acc);border-radius:4px 4px 0 0;height:${Math.min(S.log[d]*18,70)}px" title="${d}: ${S.log[d]}"></div>
+        <div class="sub" style="font-size:.65rem">${d.slice(8)}.</div></div>`).join("")+`</div>`
+      :`<p class="mini">Noch keine Aktivität erfasst. Sobald du Kontakte anschreibst, entsteht hier deine Kurve.</p>`}
   </div>`;
 }
-function buildScript(){
-  const L=[];
-  L.push("#!/bin/bash");
-  L.push("# Kunden-Ordnerstruktur + Obsidian-Notizen");
-  L.push("# Erzeugt vom Vertriebs-Cockpit am "+todayISO());
-  L.push("set -e");
-  L.push("");
-  L.push('ICLOUD="$HOME/Library/Mobile Documents/com~apple~CloudDocs/Versicherung/Kunden"');
-  L.push('VAULT="$HOME/Obsidian/Versicherung"           # <-- ggf. anpassen');
-  L.push('LOCAL="$HOME/Versicherung"                     # lokaler Schnellzugriff');
-  L.push("");
-  L.push('mkdir -p "$ICLOUD" "$VAULT/Kunden" "$VAULT/Wissen" "$VAULT/Taeglich"');
-  L.push('[ -e "$LOCAL" ] || ln -s "$ICLOUD/.." "$LOCAL"');
-  L.push("");
-  L.push('SUB=("01_Stammdaten" "02_Bestandsvertraege" "03_Analyse" "04_Angebote" "05_Antraege_Policen" "06_Schriftverkehr" "07_Schadenfaelle")');
-  L.push("");
-  L.push("mk(){ # $1=slug $2=name $3=beziehung $4=prio $5=segment $6=woche $7=status");
-  L.push('  d="$ICLOUD/$1"');
-  L.push('  for s in "${SUB[@]}"; do mkdir -p "$d/$s"; done');
-  L.push('  if [ ! -f "$d/README.md" ]; then');
-  L.push('    printf "# %s\\n\\n- Beziehung: %s\\n- Priorität: %s\\n- Segment: %s\\n- Kontaktwoche: %s\\n- Status: %s\\n\\n## Gesprächshistorie\\n\\n" "$2" "$3" "$4" "$5" "$6" "$7" > "$d/README.md"');
-  L.push("  fi");
-  L.push('  n="$VAULT/Kunden/$2.md"');
-  L.push('  if [ ! -f "$n" ]; then');
-  L.push('    { echo "---";');
-  L.push('      echo "typ: kunde";');
-  L.push('      echo "name: \\"$2\\"";');
-  L.push('      echo "beziehung: \\"$3\\"";');
-  L.push('      echo "prio: $4";');
-  L.push('      echo "segment: \\"$5\\"";');
-  L.push('      echo "woche: $6";');
-  L.push('      echo "status: $7";');
-  L.push('      echo "ordner: \\"$d\\"";');
-  L.push('      echo "tags: [kunde, prio-$4]";');
-  L.push('      echo "---";');
-  L.push('      echo "";');
-  L.push('      echo "# $2";');
-  L.push('      echo "";');
-  L.push('      echo "## Kontaktdaten";');
-  L.push('      echo "- Telefon: ";');
-  L.push('      echo "- E-Mail: ";');
-  L.push('      echo "";');
-  L.push('      echo "## Situation";');
-  L.push('      echo "- Familienstand: ";');
-  L.push('      echo "- Beruf: ";');
-  L.push('      echo "- Wohnsituation: ";');
-  L.push('      echo "";');
-  L.push('      echo "## Bestehende Verträge";');
-  L.push('      echo "";');
-  L.push('      echo "## Bedarf / Lücken";');
-  L.push('      echo "";');
-  L.push('      echo "## Gesprächsnotizen";');
-  L.push('      echo "";');
-  L.push('      echo "## Nächster Schritt";');
-  L.push('      echo "- [ ] Erstkontakt";');
-  L.push('    } > "$n"');
-  L.push("  fi");
-  L.push('  echo "  ok  $2"');
-  L.push("}");
-  L.push("");
-  L.push('echo "Lege Struktur an unter: $ICLOUD"');
-  L.push("");
-  for(const c of S.contacts){
-    L.push(`mk "${slug(c.name)}" ${q(c.name)} ${q(c.rel)} ${q(c.tier)} ${q(c.seg)} ${q("W"+c.week)} ${q(c.status)}`);
-  }
-  L.push("");
-  L.push('echo ""');
-  L.push('echo "Fertig. '+S.contacts.length+' Kundenordner + Obsidian-Notizen."');
-  L.push('echo "iCloud : $ICLOUD"');
-  L.push('echo "Vault  : $VAULT/Kunden"');
-  return L.join("\n");
-}
-function q(s){ return '"'+String(s||"").replace(/"/g,'\\"')+'"'; }
 
 /* ---- Export ---- */
 function renderExport(){
-  document.getElementById("exportOut").innerHTML = `
-  <div class="card"><h3>📅 Kalender-Erinnerungen (.ics)</h3>
-    <p class="mini">Alle Wochenwellen, Kontaktblöcke, Wochenplanungen und deine eingetragenen Wiedervorlagen – mit Alarm. Doppelklick auf die Datei importiert sie in Apple Kalender.</p>
-    <button class="primary" onclick="dl('vertrieb-erinnerungen.ics', buildICS())">⬇️ .ics laden</button></div>
-
-  <div class="card"><h3>📝 Obsidian-Wochenplan (.md)</h3>
-    <p class="mini">Ein fertiges Markdown-Dokument mit dem kompletten 8-Wochen-Plan, allen Kontakten pro Welle und Checkboxen. Direkt in den Vault ziehen.</p>
-    <button class="primary" onclick="dl('Vertriebsplan.md', buildMD())">⬇️ .md laden</button></div>
-
-  <div class="card"><h3>📁 Ordner-Setup (.sh)</h3>
-    <p class="mini">Legt iCloud-Ordnerstruktur und Obsidian-Kundennotizen für alle Kontakte an.</p>
-    <button class="primary" onclick="dl('kunden-setup.sh', buildScript())">⬇️ .sh laden</button></div>
-
-  <div class="card"><h3>📊 Kontaktliste (.csv)</h3>
-    <p class="mini">Für Numbers/Excel oder den Import in ein CRM.</p>
-    <button class="primary" onclick="dl('kontakte.csv', buildCSV())">⬇️ .csv laden</button></div>
-
+  document.getElementById("exportOut").innerHTML=`
   <div class="card"><h3>💾 Vollbackup (.json)</h3>
-    <p class="mini">Kompletter Datenstand. <b>Mach das jeden Freitag</b> und leg es in iCloud.</p>
-    <button class="primary" onclick="dl('cockpit-backup-'+todayISO()+'.json', JSON.stringify(S,null,2))">⬇️ .json laden</button></div>
-
+    <p class="mini">Kompletter Datenstand. <b>Jeden Freitag</b> ziehen und in iCloud legen.
+    ${S.lastBackup?"Letztes Backup: "+fmt(S.lastBackup):"Noch kein Backup gemacht."}</p>
+    <button class="primary" onclick="doBackup()">⬇️ Backup laden</button></div>
+  <div class="card"><h3>📅 Kalender (.ics)</h3>
+    <p class="mini">Wochen, Kontaktblöcke, Nachfass-Blöcke, Wochenplanung und deine Wiedervorlagen – mit Erinnerungen.</p>
+    <button class="primary" onclick="dl('vertrieb.ics',buildICS())">⬇️ .ics laden</button></div>
+  <div class="card"><h3>📝 Obsidian (.md)</h3>
+    <p class="mini">Kompletter Plan mit Checkboxen und Links auf die Kundennotizen.</p>
+    <button class="primary" onclick="dl('Vertriebsplan.md',buildMD())">⬇️ .md laden</button></div>
+  <div class="card"><h3>📁 Ordner-Setup (.sh)</h3>
+    <p class="mini">iCloud-Ordner + Obsidian-Notizen für alle Kontakte.</p>
+    <button class="primary" onclick="dl('kunden-setup.sh',buildScript())">⬇️ .sh laden</button></div>
+  <div class="card"><h3>📊 Tabelle (.csv)</h3>
+    <p class="mini">Für Numbers oder Excel.</p>
+    <button class="primary" onclick="dl('kontakte.csv',buildCSV())">⬇️ .csv laden</button></div>
   <div class="card"><h3>📇 Kontakte (.vcf)</h3>
-    <p class="mini">Alle Kontakte mit Telefonnummer als Visitenkarten fürs iPhone.</p>
-    <button class="primary" onclick="dl('kontakte.vcf', buildVCF())">⬇️ .vcf laden</button></div>`;
+    <p class="mini">Alle mit Nummer als Visitenkarten fürs iPhone.</p>
+    <button class="primary" onclick="dl('kontakte.vcf',buildVCF())">⬇️ .vcf laden</button></div>`;
+}
+function doBackup(){
+  dl("cockpit-backup-"+todayISO()+".json",JSON.stringify(S,null,2));
+  S.lastBackup=todayISO();save();renderAll();
 }
 
-function icsDate(d){ return d.getFullYear()+pad(d.getMonth()+1)+pad(d.getDate()); }
-function icsLocal(d,h,mi){ return icsDate(d)+"T"+pad(h)+pad(mi)+"00"; }
-function pad(n){ return String(n).padStart(2,"0"); }
-function icsStamp(){ return new Date().toISOString().replace(/[-:]/g,"").split(".")[0]+"Z"; }
-function ical(s){ return String(s).replace(/\\/g,"\\\\").replace(/\n/g,"\\n").replace(/,/g,"\\,").replace(/;/g,"\;"); }
-/* RFC 5545: Zeilen auf 75 Oktett falten */
+/* ---- Generatoren ---- */
+const pad=n=>String(n).padStart(2,"0");
+const icsDate=d=>d.getFullYear()+pad(d.getMonth()+1)+pad(d.getDate());
+const icsLocal=(d,h,m)=>icsDate(d)+"T"+pad(h)+pad(m)+"00";
+const icsStamp=()=>new Date().toISOString().replace(/[-:]/g,"").split(".")[0]+"Z";
+const ical=s=>String(s).replace(/\\/g,"\\\\").replace(/\n/g,"\\n").replace(/,/g,"\\,").replace(/;/g,"\\;");
 function fold(line){
-  const bl = t => new TextEncoder().encode(t).length;   // Oktette, nicht Zeichen
-  if(bl(line)<=73) return line;
-  const out=[]; let cur="", n=0;
-  for(const ch of line){
-    const c=bl(ch);
-    if(n+c>73){ out.push(cur); cur=" "; n=1; }
-    cur+=ch; n+=c;
-  }
-  out.push(cur);
-  return out.join("\r\n");
+  const bl=t=>new TextEncoder().encode(t).length;
+  if(bl(line)<=73)return line;
+  const out=[];let cur="",n=0;
+  for(const ch of line){const c=bl(ch);if(n+c>73){out.push(cur);cur=" ";n=1;}cur+=ch;n+=c;}
+  out.push(cur);return out.join("\r\n");
 }
-/* Ganztags-Termin (Wochen-Banner) */
-function evDay(id, start, title, desc, alarmDur){
-  const e=new Date(start); e.setDate(e.getDate()+1);
+function evDay(id,start,title,desc,al){
+  const e=new Date(start);e.setDate(e.getDate()+1);
   const L=["BEGIN:VEVENT","UID:"+id+"@cockpit","DTSTAMP:"+icsStamp(),
-    "DTSTART;VALUE=DATE:"+icsDate(start),"DTEND;VALUE=DATE:"+icsDate(e),
-    "SUMMARY:"+ical(title)];
-  if(desc) L.push("DESCRIPTION:"+ical(desc));
-  if(alarmDur) L.push("BEGIN:VALARM","TRIGGER;RELATED=START:"+alarmDur,"ACTION:DISPLAY","DESCRIPTION:"+ical(title),"END:VALARM");
-  L.push("END:VEVENT");
-  return L.map(fold).join("\r\n");
+    "DTSTART;VALUE=DATE:"+icsDate(start),"DTEND;VALUE=DATE:"+icsDate(e),"SUMMARY:"+ical(title)];
+  if(desc)L.push("DESCRIPTION:"+ical(desc));
+  if(al)L.push("BEGIN:VALARM","TRIGGER;RELATED=START:"+al,"ACTION:DISPLAY","DESCRIPTION:"+ical(title),"END:VALARM");
+  L.push("END:VEVENT");return L.map(fold).join("\r\n");
 }
-/* Termin mit Uhrzeit – bewusst ohne Zeitzone (schwebende Zeit = deine lokale Zeit) */
-function evTime(id, day, h, mi, durMin, title, desc, alarmMin){
-  const L=["BEGIN:VEVENT","UID:"+id+"@cockpit","DTSTAMP:"+icsStamp(),
-    "DTSTART:"+icsLocal(day,h,mi)];
-  const t=h*60+mi+durMin;
-  L.push("DTEND:"+icsLocal(day, Math.floor(t/60)%24, t%60));
+function evTime(id,day,h,mi,dur,title,desc,al){
+  const L=["BEGIN:VEVENT","UID:"+id+"@cockpit","DTSTAMP:"+icsStamp(),"DTSTART:"+icsLocal(day,h,mi)];
+  const t=h*60+mi+dur;L.push("DTEND:"+icsLocal(day,Math.floor(t/60)%24,t%60));
   L.push("SUMMARY:"+ical(title));
-  if(desc) L.push("DESCRIPTION:"+ical(desc));
-  if(alarmMin!=null) L.push("BEGIN:VALARM","TRIGGER:-PT"+alarmMin+"M","ACTION:DISPLAY","DESCRIPTION:"+ical(title),"END:VALARM");
-  L.push("END:VEVENT");
-  return L.map(fold).join("\r\n");
+  if(desc)L.push("DESCRIPTION:"+ical(desc));
+  if(al!=null)L.push("BEGIN:VALARM","TRIGGER:-PT"+al+"M","ACTION:DISPLAY","DESCRIPTION:"+ical(title),"END:VALARM");
+  L.push("END:VEVENT");return L.map(fold).join("\r\n");
 }
 function buildICS(){
-  const out=["BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//Vertriebs-Cockpit//DE","CALSCALE:GREGORIAN","X-WR-CALNAME:Vertrieb"];
+  const o=["BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//Vertriebs-Cockpit//DE","CALSCALE:GREGORIAN","X-WR-CALNAME:Vertrieb"];
   for(let n=1;n<=8;n++){
-    const s=weekStart(n), r=WOCHEN_ROLLEN[n-1];
-    const l=S.contacts.filter(c=>c.week===n);
-    // Wochen-Banner ganztags, Erinnerung Montag 8:00
-    out.push(evDay("w"+n, s, `Woche ${n}: ${r.t.replace(/&amp;/g,"&")}`,
-      r.z+"\n\nZiele:\n- "+r.f.join("\n- ")+"\n\nKontakte:\n- "+l.map(c=>c.name+(c.rel?" ("+c.rel+")":"")).join("\n- "), "PT8H"));
-    // Wochenplanung Sonntagabend davor
-    const so=new Date(s); so.setDate(so.getDate()-1);
-    out.push(evTime("p"+n, so, 20, 0, 20, `Wochenplanung W${n}`,
-      `Welle der Woche ${n} ansehen, Termine in den Kalender blocken, 3 Prioritäten festlegen.\n\nSchwerpunkt: ${r.t.replace(/&amp;/g,"&")}`, 15));
-    // Kontaktblöcke Mo-Do
-    for(let d=0; d<4; d++){
-      const day=weekStart(n); day.setDate(day.getDate()+d);
-      out.push(evTime("kb"+n+"-"+d, day, 17, 0, 45, "Kontaktblock – 3 Erstkontakte",
-        "Handy auf Nicht stören. Cockpit offen. 3 Namen, 3 Nachrichten. Danach sofort Status pflegen.", 10));
-    }
-    // Nachfassblock Freitag
-    const fr=weekStart(n); fr.setDate(fr.getDate()+4);
-    out.push(evTime("nf"+n, fr, 16, 0, 60, "Nachfass-Block – offene Angebote",
-      "Alle Kontakte mit Status Angebot oder Kontaktiert ohne Antwort durchgehen.", 10));
+    const s=weekStart(n),r=WOCHEN[n-1],l=S.contacts.filter(c=>c.week===n);
+    o.push(evDay("w"+n,s,"Woche "+n+": "+r[0],
+      r[1]+"\n\nZiele:\n- "+r[2].join("\n- ")+"\n\nKontakte:\n- "+l.map(c=>c.name+(c.rel?" ("+c.rel+")":"")).join("\n- "),"PT8H"));
+    const so=new Date(s);so.setDate(so.getDate()-1);
+    o.push(evTime("p"+n,so,20,0,20,"Wochenplanung W"+n,"Welle "+n+" ansehen, Termine blocken, Backup ziehen.\n\nSchwerpunkt: "+r[0],15));
+    for(let d=0;d<4;d++){const day=weekStart(n);day.setDate(day.getDate()+d);
+      o.push(evTime("kb"+n+"-"+d,day,17,0,45,"Kontaktblock – 3 Erstkontakte","Cockpit öffnen, Tab Heute. Die 3 Namen stehen schon da.",10));}
+    const fr=weekStart(n);fr.setDate(fr.getDate()+4);
+    o.push(evTime("nf"+n,fr,16,0,60,"Nachfass-Block + Backup","Offene Angebote durchgehen, danach JSON-Backup ziehen.",10));
   }
-  // persönliche Wiedervorlagen
-  S.contacts.filter(c=>c.nextDate).forEach((c,i)=>{
-    out.push(evTime("c"+i+"-"+c.id, parse(c.nextDate), 9, 0, 30, `${c.name}: ${c.nextAction||"Nächster Schritt"}`,
-      `Prio ${c.tier} · ${c.seg}${c.rel?" · "+c.rel:""}${c.phone?"\nTel: "+c.phone:""}\n\n${c.notes||""}`, 0));
-  });
-  out.push("END:VCALENDAR");
-  return out.join("\r\n");
+  S.contacts.filter(c=>c.nextDate).forEach((c,i)=>
+    o.push(evTime("c"+i+"-"+c.id,parse(c.nextDate),9,0,30,c.name+": "+(c.nextAction||"Nächster Schritt"),
+      "Prio "+c.tier+" · "+c.seg+(c.rel?" · "+c.rel:"")+(c.phone?"\nTel: "+c.phone:"")+"\n\n"+(c.notes||""),0)));
+  o.push("END:VCALENDAR");return o.join("\r\n");
 }
 function buildMD(){
-  const L=[];
-  L.push("---"); L.push("typ: plan"); L.push("erstellt: "+todayISO());
-  L.push("start: "+S.start); L.push("tags: [vertrieb, plan]"); L.push("---"); L.push("");
-  L.push("# Vertriebsplan – 8 Wochen"); L.push("");
-  L.push(`Start: **${fmt(S.start)}** · Ende: **${fmt(iso(weekEnd(8)))}** · ${S.contacts.length} Kontakte`); L.push("");
-  L.push("## Wochenrhythmus"); L.push("");
-  RHYTHMUS.forEach(d=>{ L.push("### "+d.d); d.bl.forEach(([t,x])=>L.push(`- **${t}** – ${x}`)); L.push(""); });
-  L.push("## Die 8 Wellen"); L.push("");
+  const L=["---","typ: plan","erstellt: "+todayISO(),"start: "+S.start,"tags: [vertrieb, plan]","---","",
+    "# Vertriebsplan – 8 Wochen","","Start **"+fmt(S.start)+"** · Ende **"+fmt(iso(weekEnd(8)))+"** · "+S.contacts.length+" Kontakte",""];
+  L.push("## Wochenrhythmus","");
+  RHYTHMUS.forEach(d=>{L.push("### "+d[0]);d[1].forEach(b=>L.push("- **"+b[0]+"** – "+b[1]));L.push("");});
+  L.push("## Die 8 Wellen","");
   for(let n=1;n<=8;n++){
-    const r=WOCHEN_ROLLEN[n-1];
-    L.push(`### Woche ${n} · ${r.t.replace(/&amp;/g,"&")}`);
-    L.push(`*${fmtLong(weekStart(n))} – ${fmtLong(weekEnd(n))}*`); L.push("");
-    L.push("> "+r.z); L.push("");
-    L.push("**Ziele**"); r.f.forEach(f=>L.push(`- [ ] ${f}`)); L.push("");
-    L.push("**Kontakte**");
-    S.contacts.filter(c=>c.week===n).forEach(c=>{
-      L.push(`- [ ] [[${c.name}]] — Prio ${c.tier}${c.rel?" · "+c.rel:""} · ${c.status}`);
-    });
+    const r=WOCHEN[n-1];
+    L.push("### Woche "+n+" · "+r[0],"*"+fmtS(weekStart(n))+" – "+fmtS(weekEnd(n))+"*","","> "+r[1],"","**Ziele**");
+    r[2].forEach(f=>L.push("- [ ] "+f));
+    L.push("","**Kontakte**");
+    S.contacts.filter(c=>c.week===n).forEach(c=>L.push("- [ ] [["+c.name+"]] — Prio "+c.tier+(c.rel?" · "+c.rel:"")+" · "+c.status));
     L.push("");
   }
-  L.push("## Kennzahlen (wöchentlich eintragen)"); L.push("");
-  L.push("| Woche | Erstkontakte | Termine | Analysen | Angebote | Abschlüsse |");
-  L.push("|---|---|---|---|---|---|");
-  for(let n=1;n<=8;n++) L.push(`| ${n} |  |  |  |  |  |`);
+  L.push("## Kennzahlen","","| Woche | Erstkontakte | Termine | Analysen | Angebote | Abschlüsse |","|---|---|---|---|---|---|");
+  for(let n=1;n<=8;n++)L.push("| "+n+" |  |  |  |  |  |");
   return L.join("\n");
 }
 function buildCSV(){
-  const h=["Name","Beziehung","Prio","Segment","Woche","Status","Telefon","EMail","Ort","NaechsterSchritt","Datum","LetzterKontakt","Sparten","Notizen"];
-  const rows=S.contacts.map(c=>[c.name,c.rel,c.tier,c.seg,"W"+c.week,c.status,c.phone,c.email,c.ort,c.nextAction,c.nextDate,c.lastContact,(c.sparten||[]).join(" | "),(c.notes||"").replace(/\n/g," ")]);
-  return "\uFEFF"+[h,...rows].map(r=>r.map(v=>'"'+String(v==null?"":v).replace(/"/g,'""')+'"').join(";")).join("\n");
+  const h=["Name","Beziehung","Prio","Segment","Woche","Status","Telefon","EMail","Ort","NaechsterSchritt","Datum","LetzterKontakt","Quelle","Sparten","Notizen"];
+  const rows=S.contacts.map(c=>[c.name,c.rel,c.tier,c.seg,"W"+c.week,c.status,c.phone,c.email,c.ort,
+    c.nextAction,c.nextDate,c.lastContact,c.quelle,c.sparten.join(" | "),(c.notes||"").replace(/\n/g," ")]);
+  return "\uFEFF"+[h].concat(rows).map(r=>r.map(v=>'"'+String(v==null?"":v).replace(/"/g,'""')+'"').join(";")).join("\n");
 }
 function buildVCF(){
   return S.contacts.map(c=>{
     const L=["BEGIN:VCARD","VERSION:3.0","FN:"+c.name,"N:;"+c.name+";;;"];
-    if(c.phone) L.push("TEL;TYPE=CELL:"+c.phone);
-    if(c.email) L.push("EMAIL:"+c.email);
-    L.push("CATEGORIES:Vertrieb,Prio-"+c.tier);
-    L.push("NOTE:"+ical(`${c.rel||c.seg} · Woche ${c.week} · ${c.status}`));
-    L.push("END:VCARD");
+    if(c.phone)L.push("TEL;TYPE=CELL:"+c.phone);
+    if(c.email)L.push("EMAIL:"+c.email);
+    L.push("CATEGORIES:Vertrieb,Prio-"+c.tier,"NOTE:"+ical((c.rel||c.seg)+" · W"+c.week+" · "+c.status),"END:VCARD");
     return L.join("\r\n");
   }).join("\r\n");
 }
+const q=s=>'"'+String(s==null?"":s).replace(/"/g,'\\"')+'"';
+function buildScript(){
+  const L=["#!/bin/bash","# Kunden-Ordner + Obsidian-Notizen · erzeugt am "+todayISO(),"set -e","",
+  'ICLOUD="$HOME/Library/Mobile Documents/com~apple~CloudDocs/Versicherung/Kunden"',
+  'VAULT="$HOME/Obsidian/Versicherung"           # <-- ggf. anpassen',
+  'LOCAL="$HOME/Versicherung"',"",
+  'mkdir -p "$ICLOUD" "$VAULT/Kunden" "$VAULT/Wissen"',
+  '[ -e "$LOCAL" ] || ln -s "$ICLOUD/.." "$LOCAL"',"",
+  'SUB=("01_Stammdaten" "02_Bestandsvertraege" "03_Analyse" "04_Angebote" "05_Antraege_Policen" "06_Schriftverkehr" "07_Schadenfaelle")',"",
+  "mk(){",'  d="$ICLOUD/$1"','  for s in "${SUB[@]}"; do mkdir -p "$d/$s"; done',
+  '  if [ ! -f "$d/README.md" ]; then',
+  '    printf "# %s\\n\\n- Beziehung: %s\\n- Priorität: %s\\n- Segment: %s\\n- Kontaktwoche: %s\\n- Status: %s\\n\\n## Gesprächshistorie\\n\\n" "$2" "$3" "$4" "$5" "$6" "$7" > "$d/README.md"',
+  "  fi",'  n="$VAULT/Kunden/$2.md"','  if [ ! -f "$n" ]; then','    { echo "---";',
+  '      echo "typ: kunde";','      echo "name: \\"$2\\"";','      echo "beziehung: \\"$3\\"";','      echo "prio: $4";',
+  '      echo "segment: \\"$5\\"";','      echo "woche: $6";','      echo "status: $7";','      echo "ordner: \\"$d\\"";',
+  '      echo "tags: [kunde, prio-$4]";','      echo "---"; echo "";','      echo "# $2"; echo "";',
+  '      echo "## Kontaktdaten"; echo "- Telefon: "; echo "- E-Mail: "; echo "";',
+  '      echo "## Situation"; echo "- Familienstand: "; echo "- Beruf: "; echo "- Wohnsituation: "; echo "";',
+  '      echo "## Bestehende Verträge"; echo "";','      echo "## Bedarf / Lücken"; echo "";',
+  '      echo "## Gesprächsnotizen"; echo "";','      echo "## Nächster Schritt"; echo "- [ ] Erstkontakt";',
+  '    } > "$n"',"  fi",'  echo "  ok  $2"',"}","",'echo "Lege an: $ICLOUD"',""];
+  S.contacts.forEach(c=>L.push("mk "+q(slug(c.name))+" "+q(c.name)+" "+q(c.rel)+" "+q(c.tier)+" "+q(c.seg)+" "+q("W"+c.week)+" "+q(c.status)));
+  L.push("",'echo ""','echo "Fertig. '+S.contacts.length+' Kundenordner + Notizen."','echo "iCloud : $ICLOUD"','echo "Vault  : $VAULT/Kunden"');
+  return L.join("\n");
+}
 function copyNote(id){
   const c=S.contacts.find(x=>x.id===id);
-  const L=["---","typ: kunde",`name: "${c.name}"`,`beziehung: "${c.rel}"`,`prio: ${c.tier}`,
-    `segment: "${c.seg}"`,`woche: ${c.week}`,`status: ${c.status}`,
-    `naechster_schritt: "${c.nextAction}"`,`termin: ${c.nextDate||""}`,
-    `tags: [kunde, prio-${c.tier}]`,"---","",`# ${c.name}`,"",
-    "## Kontaktdaten",`- Telefon: ${c.phone}`,`- E-Mail: ${c.email}`,`- Ort: ${c.ort}`,"",
-    "## Bedarf / Lücken", ...(c.sparten||[]).map(s=>`- [ ] ${s}`),"",
-    "## Datenaufnahme", ...DATENPUNKTE.map(d=>`- [${(c.daten||[]).includes(d)?"x":" "}] ${d}`),"",
-    "## Gesprächsnotizen", c.notes||"", "",
-    "## Nächster Schritt",`- [ ] ${c.nextAction} ${c.nextDate?"📅 "+c.nextDate:""}`];
-  navigator.clipboard.writeText(L.join("\n")).then(()=>toast("Obsidian-Notiz kopiert"));
-}
-
-function dl(name, content){
-  const b=new Blob([content],{type:"text/plain;charset=utf-8"});
-  const a=document.createElement("a");
-  a.href=URL.createObjectURL(b); a.download=name; a.click();
-  setTimeout(()=>URL.revokeObjectURL(a.href),1500);
-  toast(name+" geladen");
-}
-function doImport(){
-  const f=document.getElementById("importFile").files[0];
-  if(!f){ toast("Keine Datei gewählt"); return; }
-  const r=new FileReader();
-  r.onload=()=>{ try{ const d=JSON.parse(r.result);
-    if(!d.contacts) throw 0;
-    S=d; save(); renderAll(); toast("Backup eingespielt");
-  }catch(e){ alert("Datei konnte nicht gelesen werden."); } };
-  r.readAsText(f);
-}
-function resetAll(){
-  if(!confirm("Wirklich alles zurücksetzen? Alle Notizen und Status gehen verloren.")) return;
-  if(!confirm("Sicher? Mach vorher ein JSON-Backup.")) return;
-  localStorage.removeItem(LS); S=null; load(); renderAll(); toast("Zurückgesetzt");
+  const L=["---","typ: kunde",'name: "'+c.name+'"','beziehung: "'+c.rel+'"',"prio: "+c.tier,'segment: "'+c.seg+'"',
+    "woche: "+c.week,"status: "+c.status,'naechster_schritt: "'+c.nextAction+'"',"termin: "+(c.nextDate||""),
+    'quelle: "'+c.quelle+'"',"tags: [kunde, prio-"+c.tier+"]","---","","# "+c.name,"",
+    "## Kontaktdaten","- Telefon: "+c.phone,"- E-Mail: "+c.email,"- Ort: "+c.ort,"",
+    "## Bedarf / Lücken"].concat(c.sparten.map(s=>"- [ ] "+s),[""],
+    ["## Datenaufnahme"],DATENPUNKTE.map(d=>"- ["+(c.daten.indexOf(d)>=0?"x":" ")+"] "+d),[""],
+    ["## Gesprächsnotizen",c.notes||"","","## Nächster Schritt","- [ ] "+c.nextAction+(c.nextDate?" 📅 "+c.nextDate:"")]);
+  navigator.clipboard.writeText(L.join("\n")).then(()=>toast("Notiz kopiert"));
 }
 
 /* ---- Utils ---- */
-function esc(s){ return String(s==null?"":s).replace(/[&<>]/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[m])); }
-function attr(s){ return String(s==null?"":s).replace(/"/g,"&quot;"); }
-let tt;
-function toast(m){ const t=document.getElementById("toast"); t.textContent=m; t.classList.add("show");
-  clearTimeout(tt); tt=setTimeout(()=>t.classList.remove("show"),1800); }
-function toggleTheme(){
-  const h=document.documentElement;
-  const n = h.getAttribute("data-theme")==="light" ? "dark" : "light";
-  h.setAttribute("data-theme", n); localStorage.setItem("cockpit_theme", n);
+function dl(name,content){
+  const a=document.createElement("a");
+  a.href=URL.createObjectURL(new Blob([content],{type:"text/plain;charset=utf-8"}));
+  a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1500);toast(name+" geladen");
 }
+function doImport(){
+  const f=document.getElementById("importFile").files[0];
+  if(!f){toast("Keine Datei gewählt");return;}
+  const r=new FileReader();
+  r.onload=function(){try{const d=JSON.parse(r.result);if(!d.contacts)throw 0;S=d;load();renderAll();go("home");toast("Backup eingespielt");}
+    catch(e){alert("Datei konnte nicht gelesen werden.");}};
+  r.readAsText(f);
+}
+function resetAll(){
+  if(!confirm("Wirklich alles zurücksetzen?"))return;
+  if(!confirm("Sicher? Mach vorher ein Backup."))return;
+  localStorage.removeItem(LS);S=null;load();renderAll();go("home");toast("Zurückgesetzt");
+}
+function cp(btn){navigator.clipboard.writeText(btn.previousElementSibling.textContent).then(()=>toast("Kopiert"));}
+const esc=s=>String(s==null?"":s).replace(/[&<>]/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[m]));
+const at=s=>String(s==null?"":s).replace(/"/g,"&quot;");
+let tt;function toast(m){const t=document.getElementById("toast");t.textContent=m;t.classList.add("show");
+  clearTimeout(tt);tt=setTimeout(()=>t.classList.remove("show"),1800);}
+function toggleTheme(){const h=document.documentElement;
+  const n=h.getAttribute("data-theme")==="light"?"dark":"light";
+  h.setAttribute("data-theme",n);localStorage.setItem("cockpit_theme",n);}
 
 /* ---- Init ---- */
-document.documentElement.setAttribute("data-theme", localStorage.getItem("cockpit_theme") ||
-  (window.matchMedia && window.matchMedia("(prefers-color-scheme: light)").matches ? "light":"dark"));
-load(); renderTabs(); go("dash"); renderAll();
-document.addEventListener("keydown",e=>{ if(e.key==="Escape") closeDrawer(); });
+document.documentElement.setAttribute("data-theme",localStorage.getItem("cockpit_theme")||
+  (window.matchMedia&&window.matchMedia("(prefers-color-scheme: light)").matches?"light":"dark"));
+load();renderAll();go("home");
+document.addEventListener("keydown",e=>{if(e.key==="Escape")closeDrawer();});
 </script>
 </body>
 </html>

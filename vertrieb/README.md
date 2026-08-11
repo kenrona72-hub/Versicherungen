@@ -22,18 +22,54 @@ Das heißt konkret:
 - **Privates Fenster löscht alles.** Nicht im Private-Mode arbeiten.
 - **Jeden Freitag ein JSON-Backup** über den Export-Tab ziehen und in iCloud ablegen.
 
-## Die sechs Bereiche
+## Aufbau
 
-| Tab | Wofür |
+Die App startet auf einer **Startseite mit Kacheln**. Jeder Bereich ist eine eigene Seite –
+nichts liegt mehr auf einem Haufen. Über die Kachel „Start" oben rechts kommst du immer zurück.
+
+| Kachel | Wofür |
 |---|---|
-| Dashboard | Was heute ansteht, was überfällig ist, wie die Pipeline aussieht |
-| Kontakte | Alle 82 Namen – suchen, filtern, Status pflegen, Notizen schreiben |
-| 8-Wochen-Plan | Welche Kontakte in welcher Woche, mit Wochenzielen |
-| Wochenrhythmus | Die festen Tagesblöcke – das Skelett des Ganzen |
-| Leitfäden | Nachrichten, Telefonskripte, Analysegespräch, Einwände, Empfehlungen |
-| Datenaufnahme | Pflichtdaten je Kunde + Unterlagenliste für den Kunden |
-| Ordner | Ablagestruktur + Setup-Skript |
-| Export | .ics, .md, .sh, .csv, .vcf, .json |
+| 🔥 Heute loslegen | Der Arbeitsplatz: 3 automatisch ausgewählte Kontakte, Nachfassen, nächste Termine |
+| 👥 Kontakte | Alle Namen – suchen, filtern, Status pflegen, Notizen |
+| 🗓 8-Wochen-Plan | Welche Kontakte in welcher Woche, mit Wochenzielen |
+| ⏱ Wochenrhythmus | Die festen Tagesblöcke |
+| 💬 Leitfäden | Sechs Unterkacheln: Erstkontakt, Telefon, Analysegespräch, Abschluss, Empfehlungen, Mindset |
+| 📋 Datenaufnahme | Pflichtdaten je Kunde + Unterlagenliste |
+| 📁 Ordner & Ablage | Ablagestruktur + Setup-Skript |
+| 📊 Auswertung | Trichter, Quote je Segment, Aktivität der letzten 14 Tage |
+| ⬇️ Export & Backup | .ics, .md, .sh, .csv, .vcf, .json |
+
+## Was die App automatisch macht
+
+**WhatsApp mit fertiger Nachricht.** Ein Klick auf den grünen Button öffnet WhatsApp mit dem
+Chat des Kontakts und der passenden Nachricht – Vorname eingesetzt, Text passend zum Segment
+(Familie klingt anders als Selbstständige). Danach springt der Status automatisch auf
+*Kontaktiert* und die Wiedervorlage steht auf in 4 Tagen.
+
+**Folgeschritt nach Statuswechsel.** Du setzt nur den Status, alles andere kommt von allein:
+
+| Status | Nächster Schritt | Wiedervorlage |
+|---|---|---|
+| Kontaktiert | Nachfassen | + 4 Tage |
+| Termin | Analysegespräch führen | + 7 Tage |
+| Analyse | Angebot vorbereiten | + 3 Tage |
+| Angebot | Angebot nachfassen | + 4 Tage |
+| Abschluss | Unterlagen + Empfehlung fragen | + 2 Tage |
+| Später | Wiedervorlage | + 6 Wochen |
+
+**Tagesauswahl.** Der Tab *Heute* sucht dir die drei Kontakte für heute selbst zusammen:
+überfällige zuerst, dann die aktuelle Wochenwelle, dann Liegengebliebenes.
+
+**Nachzügler einsammeln.** Wer aus einer vergangenen Woche noch nicht angesprochen ist,
+erscheint als Hinweis auf der Startseite und wird per Klick in die aktuelle Woche geholt.
+
+**Backup-Erinnerung.** Liegt das letzte Backup mehr als 7 Tage zurück, sagt die Startseite Bescheid.
+
+**Empfehlungen.** Der Button *+ Empfehlung* im Kontakt legt den neuen Namen sofort an,
+vermerkt, von wem er kommt, und setzt die Wiedervorlage auf 48 Stunden.
+
+**Tagesziel.** 3 Kontakte pro Tag. Der Balken zeigt, wo du stehst; die Auswertung zeigt
+deine Aktivität der letzten zwei Wochen als Kurve.
 
 ## Ersteinrichtung (20 Minuten)
 
@@ -43,13 +79,16 @@ Das heißt konkret:
    steht, brauchst du irgendwann als echtes Segment. Mach das nicht auf einmal;
    korrigier jeden Kontakt, bevor du ihn anschreibst.
 3. **Wochen neu verteilen** – falls du viele Prioritäten geändert hast.
-4. **Ordner anlegen** – Tab *Ordner* → `kunden-setup.sh` laden → im Terminal:
+4. **Telefonnummern eintragen** – ohne Nummer öffnet WhatsApp nur den Text zum Weiterleiten,
+   mit Nummer direkt den richtigen Chat. Formate wie `0170 1234567` oder `+49 170 1234567`
+   funktionieren beide.
+5. **Ordner anlegen** – Tab *Ordner* → `kunden-setup.sh` laden → im Terminal:
    ```bash
    bash ~/Downloads/kunden-setup.sh
    ```
    Vorher im Skript den Pfad `VAULT` an deinen Obsidian-Vault anpassen.
-5. **Kalender füllen** – Tab *Export* → `.ics` laden → Doppelklick.
-6. **Obsidian** – Tab *Export* → `Vertriebsplan.md` in den Vault ziehen.
+6. **Kalender füllen** – Tab *Export* → `.ics` laden → Doppelklick.
+7. **Obsidian** – Tab *Export* → `Vertriebsplan.md` in den Vault ziehen.
 
 ## Was das Setup-Skript macht
 
