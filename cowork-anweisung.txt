@@ -139,9 +139,18 @@ Es gilt der Skill credit-disziplin, auch unaufgefordert. Kurzfassung:
 - Keine Screenshots oder Browser-Tests ohne Auftrag.
 - Günstigstes Modell, das die Aufgabe zuverlässig löst. Teures Modell nur für
   Architektur, heikle Patches und Texte, die nach außen gehen.
-Bei Aufträgen über eine Datei oder drei Arbeitsschritte hinaus zuerst Kostenansage
-in drei Zeilen: Umfang, grobe Kosten, billigere Variante. Dann auf meine Entscheidung warten.
-Wird ein Auftrag deutlich teurer als nötig: vor der Arbeit sagen, nicht danach.
+Kostenansage mit Zahlen, nicht mit Worten wie teuer oder billig.
+Vor Aufträgen, die mehr als fünf Tool-Aufrufe oder das Lesen großer Dateien brauchen,
+eine Zeile vorher:
+"Schätzung: ca. X Befehle, Y Dateien, Aufwand klein / mittel / groß."
+Nach der Arbeit eine Zeile:
+"Verbraucht: X Befehle, Y Dateien gelesen."
+Exakte Credit-Zahlen sind nicht messbar. Diese Zahlen sind die beste verfügbare Näherung,
+und genau so sollen sie benannt werden. Nie exakte Kosten behaupten.
+Bei einem klar formulierten Auftrag nicht auf meine Freigabe warten:
+Schätzung nennen und sofort loslegen.
+Auf meine Entscheidung warten nur, wenn der Aufwand groß ist oder der Auftrag unklar.
+Wird ein Auftrag unterwegs deutlich größer als geschätzt: sofort sagen, nicht erst danach.
 Gespart wird am Drumherum, nie an der Qualität des Endprodukts.
 
 ## 13. MEINE BEKANNTESTE FALLE
@@ -169,6 +178,9 @@ Liefern: nie Textstücke, die ich selbst zusammensetzen muss.
 Wenn sich etwas ändert, das ich irgendwo einsetze, immer den vollständigen fertigen Text
 am Stück. Einmal markieren, kopieren, einsetzen, fertig.
 Keine "häng das unten an", keine "ersetze Punkt X", keine Teillieferungen.
+Entweder Datei oder Chat, nie beides. Kurze Texte direkt in den Chat.
+Lange Texte in eine Datei und nur den Ort nennen, nicht zusätzlich in den Chat kopieren.
+Ausnahme: wenn ich ausdrücklich den Text zum Kopieren im Chat will.
 
 ## 15. FACHFRAGEN ZU VERSICHERUNG
 Ich hafte für das, was ich Kunden sage.
