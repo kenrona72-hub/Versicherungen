@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<title>Gesprächsbögen ARAG Vertrieb</title>
+<style>
+  @page { size: A4; margin: 11mm 14mm; }
+  * { box-sizing: border-box; }
+  html, body { margin:0; padding:0; }
+  body {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 10pt; line-height: 1.38; color: #000; background: #fff;
+  }
+  .sheet { page-break-after: always; }
+  .sheet:last-child { page-break-after: auto; }
+
+  /* Kopf */
+  .head { border-bottom: 2.2pt solid #000; padding-bottom: 5pt; margin-bottom: 11pt; }
+  .head .nr { font-size: 8pt; letter-spacing: 1.6pt; text-transform: uppercase; color: #666; }
+  .head h1 { font-size: 16.5pt; margin: 2pt 0 4pt; letter-spacing: -0.3pt; }
+  .head .sub { font-size: 9pt; color: #444; }
+  .meta { display:flex; gap: 14pt; margin-top: 7pt; font-size: 8.5pt; }
+  .meta > div { flex:1; border-bottom: 0.7pt solid #999; padding-bottom: 2pt; }
+  .meta span { color:#777; }
+
+  h2 { font-size: 10.5pt; margin: 8.5pt 0 4pt; padding: 3pt 7pt;
+       background: #f0f0f0; border-left: 3pt solid #000; }
+  h2 .n { display:inline-block; width: 15pt; font-weight: 800; }
+  h3 { font-size: 9.5pt; margin: 8pt 0 3pt; }
+
+  p { margin: 0 0 5pt; }
+  .say { border-left: 2.5pt solid #bbb; padding: 4pt 0 4pt 8pt; margin: 4pt 0 7pt;
+         font-style: italic; font-size: 9.5pt; }
+  .note { font-size: 8.5pt; color: #555; }
+
+  ul, ol { margin: 3pt 0 6pt; padding-left: 15pt; }
+  li { margin-bottom: 2.5pt; }
+  ul.box { list-style: none; padding-left: 0; }
+  ul.box li { padding-left: 16pt; position: relative; }
+  ul.box li::before {
+    content: ""; position: absolute; left: 0; top: 2.3pt;
+    width: 9pt; height: 9pt; border: 0.9pt solid #000;
+  }
+
+  table { width:100%; border-collapse: collapse; font-size: 9pt; margin: 5pt 0 7pt; }
+  th { background: #ececec; text-align: left; font-size: 8pt; text-transform: uppercase;
+       letter-spacing: 0.5pt; padding: 3.5pt 5pt; border: 0.7pt solid #888; }
+  td { border: 0.7pt solid #888; padding: 4.5pt; height: 17pt; vertical-align: top; }
+  td.lbl { background: #fafafa; font-weight: 600; width: 33%; }
+  table.t4 td.lbl { width: 21%; }
+  table.t4 td:not(.lbl) { width: 29%; }
+  .fill { color: #ccc; }
+
+  .line { border-bottom: 0.7pt solid #999; height: 15pt; margin-bottom: 4pt; }
+  .lines-3 .line { margin-bottom: 7pt; }
+
+  .two { display: flex; gap: 12pt; }
+  .two > div { flex: 1; }
+
+  .foot { position: relative; margin-top: 10pt; padding-top: 5pt;
+          border-top: 0.7pt solid #999; font-size: 7.5pt; color: #666; }
+  .sign { display:flex; gap: 20pt; margin-top: 12pt; }
+  .sign > div { flex:1; border-top: 0.7pt solid #000; padding-top: 3pt; font-size: 8pt; color:#555; }
+  .warnbox { border: 1pt solid #000; padding: 6pt 8pt; margin: 7pt 0; font-size: 9pt; }
+  .warnbox b { display:block; margin-bottom: 2pt; }
+</style>
+</head>
+<body>
+
+<!-- ══════════ 1 ══════════ -->
+<section class="sheet">
+  <div class="head">
+    <div class="nr">Bogen 1 · Erstgespräch</div>
+    <h1>Bedarfsaufnahme Rechtsschutz</h1>
+    <div class="sub">Im Gespräch ausfüllen. Ziel ist nicht der Abschluss, sondern ein vollständiges Bild.</div>
+    <div class="meta">
+      <div><span>Kunde</span></div>
+      <div><span>Datum</span></div>
+      <div><span>Ort / Telefon</span></div>
+    </div>
+  </div>
+
+  <h2><span class="n">1</span>Lebenssituation</h2>
+  <table class="t4">
+    <tr><td class="lbl">Geburtsdatum</td><td></td><td class="lbl">Familienstand</td><td></td></tr>
+    <tr><td class="lbl">Kinder (Anzahl / Alter)</td><td></td><td class="lbl">Partner berufstätig?</td><td></td></tr>
+    <tr><td class="lbl">Beruf / Arbeitgeber</td><td></td><td class="lbl">Angestellt / selbstständig</td><td></td></tr>
+    <tr><td class="lbl">Wohnsituation</td><td>Miete &nbsp;☐ &nbsp; Eigentum &nbsp;☐</td><td class="lbl">Seit wann dort</td><td></td></tr>
+    <tr><td class="lbl">Fahrzeug(e)</td><td></td><td class="lbl">Halter</td><td></td></tr>
+  </table>
+
+  <h2><span class="n">2</span>Welche Bereiche sind für ihn relevant?</h2>
+  <table>
+    <tr><th style="width:20%">Bereich</th><th style="width:44%">Was bei ihm konkret anliegen könnte</th><th>Relevant?</th></tr>
+    <tr><td><b>Privat</b></td><td></td><td>ja ☐ &nbsp; nein ☐ &nbsp; später ☐</td></tr>
+    <tr><td><b>Beruf</b></td><td></td><td>ja ☐ &nbsp; nein ☐ &nbsp; später ☐</td></tr>
+    <tr><td><b>Verkehr</b></td><td></td><td>ja ☐ &nbsp; nein ☐ &nbsp; später ☐</td></tr>
+    <tr><td><b>Wohnen / Miete</b></td><td></td><td>ja ☐ &nbsp; nein ☐ &nbsp; später ☐</td></tr>
+  </table>
+
+  <h2><span class="n">3</span>Bestehender Schutz</h2>
+  <table>
+    <tr><th>Gesellschaft</th><th>Sparte</th><th>Seit</th><th>Beitrag / Zahlweise</th><th>Police vorgelegt</th></tr>
+    <tr><td></td><td></td><td></td><td></td><td>☐</td></tr>
+    <tr><td></td><td></td><td></td><td></td><td>☐</td></tr>
+    <tr><td></td><td></td><td></td><td></td><td>☐</td></tr>
+  </table>
+  <p class="note">Policen immer abfotografieren. Ohne Unterlagen keine Aussage zu Deckung, Summen oder Wartezeiten.</p>
+
+  <h2><span class="n">4</span>Die vier Fragen, die das Gespräch tragen</h2>
+  <ol>
+    <li>Gab es bei Ihnen oder im Umfeld schon mal Ärger, der rechtlich hätte werden können?</li>
+    <li>Wann haben Sie zuletzt auf Ihre Verträge geschaut?</li>
+    <li>Was würde Sie finanziell am härtesten treffen?</li>
+    <li>Entscheiden Sie so etwas allein, oder reden Sie mit jemandem darüber?</li>
+  </ol>
+
+  <h2><span class="n">5</span>Ergebnis und nächster Schritt</h2>
+  <table>
+    <tr><td class="lbl">Was mir aufgefallen ist</td><td></td></tr>
+    <tr><td class="lbl">Vereinbart</td><td>Folgetermin ☐ &nbsp; Unterlagen nachreichen ☐ &nbsp; Angebot ☐ &nbsp; kein Bedarf ☐</td></tr>
+    <tr><td class="lbl">Wann genau</td><td></td></tr>
+    <tr><td class="lbl">Wer bringt was mit</td><td></td></tr>
+  </table>
+  <div class="foot">Erstinformation nach § 15 VersVermV übergeben ☐ &nbsp;·&nbsp; Beratung wird zusätzlich nach § 61 Abs. 1 VVG dokumentiert. Dieser Bogen ist Gesprächsstütze, keine Beratungsdokumentation.</div>
+</section>
+
+<!-- ══════════ 2 ══════════ -->
+<section class="sheet">
+  <div class="head">
+    <div class="nr">Bogen 2 · Einwand</div>
+    <h1>„Ich habe schon eine Rechtsschutz"</h1>
+    <div class="sub">Nicht dagegenreden. Gemeinsam nachsehen, ob der Schutz noch zur heutigen Situation passt.</div>
+    <div class="meta"><div><span>Kunde</span></div><div><span>Datum</span></div></div>
+  </div>
+
+  <h2><span class="n">1</span>Einstieg</h2>
+  <div class="say">„Das glaube ich Ihnen sofort, die meisten haben etwas. Die Frage ist eher, ob es noch passt. Verträge werden einmal gemacht und dann nie wieder angeschaut, und in der Zwischenzeit ändert sich das Leben. Schauen wir doch kurz gemeinsam drauf. Wenn alles gut ist, sage ich Ihnen das ehrlich und Sie haben trotzdem den Überblick."</div>
+
+  <h2><span class="n">2</span>Die sechs Fragen, die den Unterschied zeigen</h2>
+  <table>
+    <tr><th style="width:62%">Frage</th><th>Antwort des Kunden</th></tr>
+    <tr><td>Wann wurde der Vertrag abgeschlossen?</td><td></td></tr>
+    <tr><td>Welche Bereiche sind drin: Privat, Beruf, Verkehr, Wohnen?</td><td></td></tr>
+    <tr><td>Was hat sich seitdem bei Ihnen geändert? (Job, Familie, Wohnung, Fahrzeug)</td><td></td></tr>
+    <tr><td>Wie hoch ist Ihr Selbstbehalt?</td><td></td></tr>
+    <tr><td>Wissen Sie, was NICHT versichert ist?</td><td></td></tr>
+    <tr><td>Hatten Sie schon mal einen Fall? Wie lief die Abwicklung?</td><td></td></tr>
+  </table>
+
+  <h2><span class="n">3</span>Gegenüberstellung nach Sichtung der Police</h2>
+  <table>
+    <tr><th style="width:26%">Punkt</th><th style="width:37%">Bestehender Vertrag</th><th>Was fehlt oder besser wäre</th></tr>
+    <tr><td>Bereiche</td><td></td><td></td></tr>
+    <tr><td>Selbstbehalt</td><td></td><td></td></tr>
+    <tr><td>Wartezeiten</td><td></td><td></td></tr>
+    <tr><td>Beitrag</td><td></td><td></td></tr>
+  </table>
+
+  <div class="warnbox">
+    <b>Vorsicht, Haftung</b>
+    Keine Aussage über Deckung, Ausschlüsse oder Wartezeiten des bestehenden Vertrags ohne die Bedingungen gesehen zu haben. Im Zweifel: „Das schaue ich nach und melde mich morgen." Kündigung fremder Verträge nie empfehlen, solange der neue Schutz nicht steht.
+  </div>
+
+  <h2><span class="n">4</span>Ergebnis</h2>
+  <ul class="box">
+    <li>Bestehender Schutz passt. Kunde weiß jetzt Bescheid. Wiedervorlage in ____ Monaten.</li>
+    <li>Lücke gefunden. Angebot bis ____________ , Termin am ____________</li>
+    <li>Unterlagen fehlen noch. Kunde schickt bis ____________</li>
+  </ul>
+  <div class="sign"><div>Notizen</div></div>
+  <div class="lines-3" style="margin-top:4pt"><div class="line"></div><div class="line"></div></div>
+</section>
+
+<!-- ══════════ 3 ══════════ -->
+<section class="sheet">
+  <div class="head">
+    <div class="nr">Bogen 3 · Einwand</div>
+    <h1>„Ich muss noch darüber nachdenken"</h1>
+    <div class="sub">Der Satz bedeutet fast nie, was er sagt. Herausfinden, was wirklich dahintersteckt.</div>
+    <div class="meta"><div><span>Kunde</span></div><div><span>Datum</span></div></div>
+  </div>
+
+  <h2><span class="n">1</span>Die Öffnungsfrage</h2>
+  <div class="say">„Klar, absolut. Damit ich Ihnen dabei helfen kann: Worüber genau denken Sie nach? Ist es der Preis, der Umfang, oder das Gefühl, dass es zu schnell geht?"</div>
+  <p class="note">Dann schweigen und zuhören. Die erste Antwort ist selten die echte.</p>
+
+  <h2><span class="n">2</span>Was wirklich dahintersteckt, und was dann hilft</h2>
+  <table>
+    <tr><th style="width:24%">Dahinter steckt</th><th style="width:34%">Daran erkennbar</th><th>Was jetzt hilft</th></tr>
+    <tr><td><b>Preis</b></td><td>Fragt nach Beitrag, vergleicht, wirkt zögerlich bei Zahlen</td><td>Zahlweise und Umfang anpassen. Bogen „Budget" nutzen.</td></tr>
+    <tr><td><b>Umfang</b></td><td>Fragt nach Einzelheiten, was ist drin, was nicht</td><td>Punkt für Punkt durchgehen, offene Frage notieren und nachliefern</td></tr>
+    <tr><td><b>Tempo</b></td><td>Wirkt überrumpelt, sagt wenig, weicht aus</td><td>Druck rausnehmen, konkreten Rückruftermin vereinbaren</td></tr>
+    <tr><td><b>Partner</b></td><td>„Ich muss noch mit … reden"</td><td>Gemeinsamen Kurztermin anbieten, damit nichts verloren geht</td></tr>
+    <tr><td><b>Vertrauen</b></td><td>Höflich, aber unverbindlich, keine klare Antwort</td><td>Ehrlich ansprechen: „Habe ich etwas übersehen?"</td></tr>
+  </table>
+
+  <h2><span class="n">3</span>Der Abschluss dieses Gesprächs</h2>
+  <div class="say">„Sollen wir es so machen: Ich rufe Sie am ____________ um ______ Uhr an, dann haben Sie in Ruhe darüber geschlafen. Passt das?"</div>
+  <p class="note">Ein Termin ohne Datum ist kein Termin. Immer Tag und Uhrzeit festhalten.</p>
+
+  <table>
+    <tr><td class="lbl">Der echte Grund war</td><td></td></tr>
+    <tr><td class="lbl">Offene Frage, die ich klären muss</td><td></td></tr>
+    <tr><td class="lbl">Rückruf vereinbart am</td><td></td></tr>
+    <tr><td class="lbl">Wer entscheidet mit</td><td></td></tr>
+  </table>
+
+  <div class="warnbox">
+    <b>Zwei Regeln</b>
+    Nach dem Preis nennen: schweigen. Wer zuerst redet, verliert.<br>
+    Höchstens zweimal nachfassen. Danach Wiedervorlage in sechs bis acht Wochen, nicht weiter nachhaken.
+  </div>
+  <div class="foot">Beratung nach § 61 Abs. 1 VVG dokumentieren, auch wenn kein Abschluss zustande kommt.</div>
+</section>
+
+<!-- ══════════ 4 ══════════ -->
+<section class="sheet">
+  <div class="head">
+    <div class="nr">Bogen 4 · Budget</div>
+    <h1>Wenn wirklich wenig Geld da ist</h1>
+    <div class="sub">Reihenfolge festlegen statt alles abzusagen. Was muss zuerst stehen, was kann warten.</div>
+    <div class="meta"><div><span>Kunde</span></div><div><span>Datum</span></div></div>
+  </div>
+
+  <h2><span class="n">1</span>Der Satz, der die Tür offen hält</h2>
+  <div class="say">„Dann machen wir es anders herum. Wir schauen nicht, was Sie alles bräuchten, sondern was als Erstes stehen muss, damit ein einzelner Fall Sie nicht umwirft. Der Rest kommt später, wenn es besser passt."</div>
+
+  <h2><span class="n">2</span>Sortieren: existenzbedrohend oder ärgerlich?</h2>
+  <table>
+    <tr><th style="width:42%">Was passieren könnte</th><th style="width:26%">Was es ihn kosten würde</th><th>Einstufung</th></tr>
+    <tr><td></td><td></td><td>existenzbedrohend ☐<br>ärgerlich ☐</td></tr>
+    <tr><td></td><td></td><td>existenzbedrohend ☐<br>ärgerlich ☐</td></tr>
+    <tr><td></td><td></td><td>existenzbedrohend ☐<br>ärgerlich ☐</td></tr>
+    <tr><td></td><td></td><td>existenzbedrohend ☐<br>ärgerlich ☐</td></tr>
+  </table>
+  <p class="note">Faustregel im Gespräch: Was die Existenz trifft, kommt zuerst. Was nur ärgerlich ist, kann warten.</p>
+
+  <h2><span class="n">3</span>Reihenfolge, die wir vereinbaren</h2>
+  <table>
+    <tr><th style="width:8%">Stufe</th><th style="width:46%">Was wird abgesichert</th><th style="width:22%">Ab wann</th><th>Monatlich</th></tr>
+    <tr><td><b>1</b></td><td></td><td>sofort</td><td></td></tr>
+    <tr><td><b>2</b></td><td></td><td></td><td></td></tr>
+    <tr><td><b>3</b></td><td></td><td></td><td></td></tr>
+  </table>
+
+  <h2><span class="n">4</span>Stellschrauben, bevor wir absagen</h2>
+  <ul class="box">
+    <li>Zahlweise ändern (jährlich statt monatlich kann den Zuschlag sparen, Höhe ist tarifabhängig: ____________)</li>
+    <li>Selbstbehalt erhöhen</li>
+    <li>Umfang zunächst kleiner, später erweitern</li>
+    <li>Beginn auf einen späteren Termin legen: ____________</li>
+  </ul>
+
+  <h2><span class="n">5</span>Wenn heute wirklich nichts geht</h2>
+  <table>
+    <tr><td class="lbl">Wann wird es besser</td><td></td></tr>
+    <tr><td class="lbl">Was müsste sich ändern</td><td></td></tr>
+    <tr><td class="lbl">Wiedervorlage am</td><td></td></tr>
+  </table>
+  <div class="say" style="margin-top:6pt">„Dann melde ich mich im ____________ nochmal. Und falls vorher etwas passiert, rufen Sie mich einfach an, auch wenn wir nichts abgeschlossen haben."</div>
+  <div class="foot">Keine Beitragszahlen und keine Ersparnis nennen, die nicht belegt sind. Tarifabhängige Werte erst nach Berechnung eintragen.</div>
+</section>
+
+<!-- ══════════ 5 ══════════ -->
+<section class="sheet">
+  <div class="head">
+    <div class="nr">Bogen 5 · Wachstum</div>
+    <h1>Empfehlungen holen</h1>
+    <div class="sub">Nach jedem Gespräch, auch nach einer Absage. Das ist der einzige Weg, dass die Liste wächst.</div>
+    <div class="meta"><div><span>Bei wem gefragt</span></div><div><span>Datum</span></div></div>
+  </div>
+
+  <h2><span class="n">1</span>Der Einstieg</h2>
+  <div class="say">„Eine Sache noch: Ich baue mir gerade meinen Kundenstamm auf und lebe davon, dass Leute mich weiterempfehlen. Fällt Ihnen jemand ein, bei dem so ein Überblick auch Sinn machen würde? Zwei Namen reichen mir völlig."</div>
+
+  <h2><span class="n">2</span>Konkret fragen wirkt besser als allgemein</h2>
+  <table>
+    <tr><th style="width:56%">Statt „Kennen Sie jemanden?" lieber</th><th>Name</th></tr>
+    <tr><td>Wer hat bei Ihnen im Umfeld gerade ein Kind bekommen?</td><td></td></tr>
+    <tr><td>Wer ist bei Ihnen in der Firma neu angefangen?</td><td></td></tr>
+    <tr><td>Wer hat sich gerade selbstständig gemacht?</td><td></td></tr>
+    <tr><td>Wer zieht demnächst um oder hat eine Wohnung gekauft?</td><td></td></tr>
+    <tr><td>Wer hat sich gerade ein Auto geholt?</td><td></td></tr>
+    <tr><td>Wer hatte zuletzt Ärger, den er allein regeln musste?</td><td></td></tr>
+  </table>
+
+  <h2><span class="n">3</span>Namen festhalten</h2>
+  <table>
+    <tr><th style="width:24%">Name</th><th style="width:20%">Kontakt</th><th style="width:30%">Anlass</th><th style="width:14%">Name nennen?</th><th>Bis wann</th></tr>
+    <tr><td></td><td></td><td></td><td>ja ☐ nein ☐</td><td></td></tr>
+    <tr><td></td><td></td><td></td><td>ja ☐ nein ☐</td><td></td></tr>
+    <tr><td></td><td></td><td></td><td>ja ☐ nein ☐</td><td></td></tr>
+    <tr><td></td><td></td><td></td><td>ja ☐ nein ☐</td><td></td></tr>
+    <tr><td></td><td></td><td></td><td>ja ☐ nein ☐</td><td></td></tr>
+    <tr><td></td><td></td><td></td><td>ja ☐ nein ☐</td><td></td></tr>
+  </table>
+
+  <h2><span class="n">4</span>Auch bei einer Absage</h2>
+  <div class="say">„Alles gut, kein Problem, dafür ist es ja unverbindlich. Eine Frage hätte ich trotzdem: Kennen Sie jemanden, für den es gerade interessanter wäre als für Sie?"</div>
+
+  <div class="warnbox">
+    <b>Drei Regeln</b>
+    Sofort fragen, solange die gute Stimmung da ist.<br>
+    Empfohlene innerhalb von 48 Stunden anschreiben, sonst ist der Anlass kalt.<br>
+    Dem Empfehlungsgeber Rückmeldung geben. Das erzeugt die nächste Empfehlung.
+  </div>
+  <div class="foot">Kontaktdaten Dritter nur mit Einverständnis der empfohlenen Person weiterverarbeiten. Bei Unsicherheit: um Erlaubnis bitten, bevor der Kontakt aufgenommen wird.</div>
+</section>
+
+<!-- ══════════ 6 ══════════ -->
+<section class="sheet">
+  <div class="head">
+    <div class="nr">Bogen 6 · Telefon</div>
+    <h1>Spickzettel Terminvereinbarung</h1>
+    <div class="sub">Neben das Telefon legen. Ziel des Anrufs ist nur der Termin, nicht die Beratung.</div>
+    <div class="meta"><div><span>Datum</span></div><div><span>Block von / bis</span></div></div>
+  </div>
+
+  <h2><span class="n">1</span>Ablauf in sechs Schritten</h2>
+  <ol>
+    <li>Begrüßen mit Namen. „Haben Sie kurz zwei Minuten?"</li>
+    <li>Grund in einem Satz.</li>
+    <li>Nutzen in einem Satz.</li>
+    <li>Terminfrage mit zwei Alternativen.</li>
+    <li>Bestätigen und Unterlagen ankündigen.</li>
+    <li>Verabschieden. Nicht weiterreden.</li>
+  </ol>
+
+  <h2><span class="n">2</span>Formulierung</h2>
+  <div class="say">„Hallo ____________, haben Sie kurz zwei Minuten?<br><br>
+  Ich rufe an wegen dem, was ich Ihnen geschrieben habe. Ich gehe gerade mit Leuten, die ich kenne, einmal ihre Verträge durch.<br><br>
+  Sie sehen danach schwarz auf weiß, was Sie zahlen, wofür, und wo etwas doppelt ist oder fehlt.<br><br>
+  Was passt Ihnen besser: Mittwoch um 18 Uhr oder Samstag um 11?"</div>
+
+  <h2><span class="n">3</span>Kurzantworten auf die drei häufigsten Sätze</h2>
+  <table>
+    <tr><th style="width:26%">Er sagt</th><th>Du sagst</th></tr>
+    <tr><td>„Keine Zeit"</td><td>„Verstehe. Deswegen dauert es auch nur 30 Minuten, und wir machen es dann, wann es Ihnen passt, auch abends oder samstags. Wann wäre in den nächsten zwei Wochen überhaupt ein Fenster?"</td></tr>
+    <tr><td>„Hab schon alles"</td><td>„Glaube ich sofort. Die Frage ist eher, ob es noch passt. Wenn alles gut ist, sage ich Ihnen das ehrlich."</td></tr>
+    <tr><td>„Will nichts kaufen"</td><td>„Müssen Sie auch nicht. Beim ersten Termin verkaufe ich gar nichts, ich schaue mir nur an, was Sie haben."</td></tr>
+  </table>
+
+  <h2><span class="n">4</span>Strichliste für heute</h2>
+  <table>
+    <tr><th style="width:22%">Name</th><th style="width:13%">erreicht</th><th style="width:13%">Termin</th><th style="width:15%">Rückruf am</th><th>Notiz</th></tr>
+    <tr><td></td><td>☐</td><td>☐</td><td></td><td></td></tr>
+    <tr><td></td><td>☐</td><td>☐</td><td></td><td></td></tr>
+    <tr><td></td><td>☐</td><td>☐</td><td></td><td></td></tr>
+    <tr><td></td><td>☐</td><td>☐</td><td></td><td></td></tr>
+    <tr><td></td><td>☐</td><td>☐</td><td></td><td></td></tr>
+    <tr><td></td><td>☐</td><td>☐</td><td></td><td></td></tr>
+  </table>
+  <div class="foot">Beim Telefonieren aufstehen, die Stimme klingt sofort anders. Zwei Terminvorschläge statt „Wann hätten Sie Zeit?".</div>
+</section>
+
+<!-- ══════════ 7 ══════════ -->
+<section class="sheet">
+  <div class="head">
+    <div class="nr">Bogen 7 · Für den Kunden</div>
+    <h1>Das bringen Sie bitte zum Termin mit</h1>
+    <div class="sub">Dem Kunden mitgeben oder vorher abfotografiert schicken. Spart im Termin rund 20 Minuten.</div>
+    <div class="meta"><div><span>Für</span></div><div><span>Termin am</span></div><div><span>Uhrzeit / Ort</span></div></div>
+  </div>
+
+  <h2><span class="n">1</span>Unterlagen</h2>
+  <ul class="box">
+    <li><b>Alle Versicherungspolicen</b>, die Sie finden. Auch die, bei denen Sie nicht sicher sind, was es ist.</li>
+    <li><b>Letzte Beitragsrechnungen</b> dazu</li>
+    <li><b>Fahrzeugschein</b> und letzte Kfz-Rechnung</li>
+    <li><b>Angestellte:</b> letzte Gehaltsabrechnung</li>
+    <li><b>Selbstständige:</b> letzter Steuerbescheid</li>
+    <li><b>Renteninformation</b> der Deutschen Rentenversicherung</li>
+    <li><b>Miet- oder Kaufvertrag</b> der Wohnung</li>
+  </ul>
+  <p class="note">Foto oder PDF reicht völlig. Was Sie nicht finden, klären wir gemeinsam.</p>
+
+  <h2><span class="n">2</span>Kurz überlegen, damit wir die Zeit gut nutzen</h2>
+  <ul class="box">
+    <li>Hat sich bei Ihnen im letzten Jahr etwas geändert? Job, Wohnung, Familie, Fahrzeug</li>
+    <li>Gibt es etwas, wo Sie selbst schon gedacht haben: darum müsste ich mich mal kümmern</li>
+    <li>Was haben Sie in den nächsten fünf Jahren vor?</li>
+    <li>Entscheiden Sie so etwas allein, oder soll jemand dabei sein?</li>
+  </ul>
+  <div class="lines-3"><div class="line"></div><div class="line"></div><div class="line"></div></div>
+
+  <h2><span class="n">3</span>Was in diesem Termin passiert</h2>
+  <table>
+    <tr><td class="lbl">Dauer</td><td>etwa 30 bis 45 Minuten</td></tr>
+    <tr><td class="lbl">Was wir machen</td><td>Ich schaue mir an, was Sie haben, und stelle Fragen. Ich mache mir Notizen.</td></tr>
+    <tr><td class="lbl">Was wir nicht machen</td><td>Es wird nichts abgeschlossen und nichts unterschrieben.</td></tr>
+    <tr><td class="lbl">Danach</td><td>Sie bekommen eine Übersicht: was Sie haben, was es kostet, wo Lücken sind.</td></tr>
+  </table>
+
+  <div class="sign">
+    <div>Ihr Ansprechpartner</div>
+    <div>Telefon / E-Mail</div>
+  </div>
+  <div class="foot">Ihre Unterlagen werden vertraulich behandelt und ausschließlich zur Beratung verwendet. Erstinformation nach § 15 VersVermV erhalten Sie zu Beginn des Termins.</div>
+</section>
+
+</body>
+</html>
