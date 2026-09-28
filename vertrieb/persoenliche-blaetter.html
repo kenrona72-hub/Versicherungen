@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<title>Persönliche Blätter Ken</title>
+<style>
+  @page { size: A4; margin: 11mm 14mm; }
+  * { box-sizing: border-box; }
+  html, body { margin:0; padding:0; }
+  body { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+         font-size: 10pt; line-height: 1.38; color: #000; background: #fff; }
+  .sheet { page-break-after: always; }
+  .sheet:last-child { page-break-after: auto; }
+
+  .head { border-bottom: 2.2pt solid #000; padding-bottom: 5pt; margin-bottom: 11pt; }
+  .head .nr { font-size: 8pt; letter-spacing: 1.6pt; text-transform: uppercase; color: #666; }
+  .head h1 { font-size: 16.5pt; margin: 2pt 0 4pt; letter-spacing: -0.3pt; }
+  .head .sub { font-size: 9pt; color: #444; }
+  .meta { display:flex; gap: 14pt; margin-top: 7pt; font-size: 8.5pt; }
+  .meta > div { flex:1; border-bottom: 0.7pt solid #999; padding-bottom: 2pt; }
+  .meta span { color:#777; }
+
+  h2 { font-size: 10.5pt; margin: 8.5pt 0 4pt; padding: 3pt 7pt;
+       background: #f0f0f0; border-left: 3pt solid #000; }
+  h2 .n { display:inline-block; width: 15pt; font-weight: 800; }
+  p { margin: 0 0 5pt; }
+  .say { border-left: 2.5pt solid #bbb; padding: 4pt 0 4pt 8pt; margin: 4pt 0 7pt;
+         font-style: italic; font-size: 9.5pt; }
+  .note { font-size: 8.5pt; color: #555; }
+
+  ul, ol { margin: 3pt 0 6pt; padding-left: 15pt; }
+  li { margin-bottom: 2.5pt; }
+  ul.box { list-style: none; padding-left: 0; }
+  ul.box li { padding-left: 16pt; position: relative; }
+  ul.box li::before { content: ""; position: absolute; left: 0; top: 2.3pt;
+    width: 9pt; height: 9pt; border: 0.9pt solid #000; }
+
+  table { width:100%; border-collapse: collapse; font-size: 9pt; margin: 5pt 0 7pt; }
+  th { background: #ececec; text-align: left; font-size: 8pt; text-transform: uppercase;
+       letter-spacing: 0.5pt; padding: 3.5pt 5pt; border: 0.7pt solid #888; }
+  td { border: 0.7pt solid #888; padding: 4.5pt; height: 17pt; vertical-align: top; }
+  td.lbl { background: #fafafa; font-weight: 600; width: 33%; }
+  td.ok { background: #f6f6f6; }
+
+  .warnbox { border: 1pt solid #000; padding: 6pt 8pt; margin: 7pt 0; font-size: 9pt; }
+  .warnbox b { display:block; margin-bottom: 2pt; }
+  .big { border: 1.6pt solid #000; padding: 8pt 10pt; margin: 8pt 0; }
+  .big .t { font-size: 11pt; font-weight: 800; margin-bottom: 3pt; }
+  .foot { margin-top: 10pt; padding-top: 5pt; border-top: 0.7pt solid #999;
+          font-size: 7.5pt; color: #666; }
+  .two { display:flex; gap: 12pt; } .two > div { flex:1; }
+</style>
+</head>
+<body>
+
+<!-- ══════════ A ══════════ -->
+<section class="sheet">
+  <div class="head">
+    <div class="nr">Blatt A · Pflichten</div>
+    <h1>Wofür du persönlich haftest</h1>
+    <div class="sub">Nicht die ARAG haftet dafür, sondern du. Einmal ausfüllen, dann hängt es an der Wand.</div>
+    <div class="meta"><div><span>Ausgefüllt am</span></div><div><span>Nächste Prüfung dieses Blatts</span></div></div>
+  </div>
+
+  <h2><span class="n">1</span>Deine Registrierung</h2>
+  <table>
+    <tr><td class="lbl">Registernummer (Vermittlerregister)</td><td></td></tr>
+    <tr><td class="lbl">Eingetragen als</td><td>gebundener Vertreter nach § 34d Abs. 7 GewO ☐ &nbsp; anderes: ____________</td></tr>
+    <tr><td class="lbl">Wer meldet Änderungen</td><td>ich ☐ &nbsp; die ARAG ☐ &nbsp; geklärt am ____________</td></tr>
+  </table>
+  <p class="note">Wenn du nicht sicher bist, wie du eingetragen bist: bei der Vertriebsleitung nachfragen und hier eintragen. Rate nicht.</p>
+
+  <h2><span class="n">2</span>Weiterbildung nach § 34d Abs. 9 GewO</h2>
+  <div class="big">
+    <div class="t">15 Stunden pro Kalenderjahr. Gesetzlich, nicht verhandelbar.</div>
+    Die Pflicht hängt an deiner Person. Der Nachweis muss auf Verlangen vorgelegt werden können.
+  </div>
+  <table>
+    <tr><th style="width:26%">Jahr</th><th style="width:24%">Stunden gemacht</th><th style="width:24%">Noch offen</th><th>Nachweis liegt wo</th></tr>
+    <tr><td>2026</td><td></td><td></td><td></td></tr>
+    <tr><td>2027</td><td></td><td></td><td></td></tr>
+  </table>
+  <p class="note">Stunden sammeln sich nicht ins nächste Jahr. Was im Dezember fehlt, ist verloren und muss im selben Jahr nachgeholt werden.</p>
+
+  <h2><span class="n">3</span>In jedem Kundenkontakt</h2>
+  <ul class="box">
+    <li><b>Erstinformation</b> nach § 15 VersVermV beim ersten Geschäftskontakt übergeben. Vor der Beratung, nicht danach.</li>
+    <li><b>Beratung dokumentieren</b> nach § 61 Abs. 1 VVG: Wünsche und Bedürfnisse, Rat, Begründung.</li>
+    <li><b>Auch bei Nichtabschluss</b> dokumentieren. Gerade da.</li>
+    <li><b>Verzicht des Kunden</b> auf Beratung oder Dokumentation nur schriftlich und gesondert.</li>
+  </ul>
+
+  <h2><span class="n">4</span>Was ich noch klären muss</h2>
+  <table>
+    <tr><th style="width:52%">Frage an Vertriebsleitung / Rechtsabteilung</th><th style="width:22%">Bis wann</th><th>Antwort</th></tr>
+    <tr><td>Wie lange muss ich Beratungsdokumentationen aufbewahren?</td><td></td><td></td></tr>
+    <tr><td>Welche Vorlagen sind für mich verbindlich vorgegeben?</td><td></td><td></td></tr>
+    <tr><td>Was gilt bei WhatsApp-Kontakt mit Kunden?</td><td></td><td></td></tr>
+    <tr><td>Wer ist im Schadenfall mein Ansprechpartner?</td><td></td><td></td></tr>
+  </table>
+
+  <div class="warnbox">
+    <b>Die teuerste Regel</b>
+    Nie eine Aussage zu Deckung, Summen, Wartezeiten oder Ausschlüssen treffen, ohne die Bedingungen vor dir zu haben. Ein Satz zu viel im Gespräch kostet mehr als jede Verzögerung. „Das schaue ich nach und melde mich morgen" ist immer die bessere Antwort.
+  </div>
+  <div class="foot">Dieses Blatt ist eine persönliche Merkhilfe, keine Rechtsberatung. Verbindlich ist, was in Gesetz, Vertrag und den Vorgaben deines Versicherers steht.</div>
+</section>
+
+<!-- ══════════ B ══════════ -->
+<section class="sheet">
+  <div class="head">
+    <div class="nr">Blatt B · Arbeitsweise</div>
+    <h1>Dein Betriebssystem</h1>
+    <div class="sub">Deine eigenen Regeln auf einem Blatt. Über den Schreibtisch hängen.</div>
+  </div>
+
+  <h2><span class="n">1</span>Die Rangordnung, wenn du nicht weißt, was dran ist</h2>
+  <table>
+    <tr><td class="ok" style="width:8%"><b>1</b></td><td class="lbl" style="width:38%">Kundenkontakt und Abschlüsse</td><td>Das ist das Geld. Alles andere ist nachgelagert.</td></tr>
+    <tr><td class="ok"><b>2</b></td><td class="lbl">Pflichtschulungen mit Frist</td><td>Persönliche Haftung. Läuft nicht weg, wird aber teurer.</td></tr>
+    <tr><td class="ok"><b>3</b></td><td class="lbl">SchutzCheck testen</td><td>Nur mit echten Menschen. Kein Weiterbau.</td></tr>
+    <tr><td class="ok"><b>4</b></td><td class="lbl">Halbfertiges abschließen</td><td>Abschließen oder archivieren. Nicht liegenlassen.</td></tr>
+    <tr><td class="ok"><b>5</b></td><td class="lbl">Neues Werkzeug bauen</td><td>Zuletzt. Fast immer zuletzt.</td></tr>
+  </table>
+
+  <h2><span class="n">2</span>Deine bekannteste Falle</h2>
+  <div class="big">
+    <div class="t">Werkzeugbau als Ersatzhandlung</div>
+    Du baust Systeme schneller, als du sie benutzt. Mehrere aktive Projekte, keins abgeschlossen.
+    Das Bauen fühlt sich nach Fortschritt an. Es ist aber keiner.
+  </div>
+  <p><b>Die Pflichtfrage, bevor etwas Neues entsteht:</b></p>
+  <div class="say">„Welche Aufgabe erledigt das heute, die sonst liegen bleibt, und existiert dafür schon etwas?"</div>
+  <p class="note">Wenn die Antwort schwammig ist oder das Werkzeug schon existiert: nicht bauen. Benutzen.</p>
+
+  <h2><span class="n">3</span>Wie du arbeitest, ohne dich zu verlieren</h2>
+  <ul class="box">
+    <li><b>Kleinste Einheit zuerst.</b> Nie mit dem größten Brocken anfangen. Das ist der häufigste Grund, warum ein Arbeitstag gar nicht startet.</li>
+    <li><b>20 Minuten arbeiten, 5 Minuten Pause.</b> Höchstens zwei Blöcke pro Tag.</li>
+    <li><b>Ein Ziel pro Tag, höchstens drei Aufgaben.</b> Die erste unter zehn Minuten.</li>
+    <li><b>Keine Gesamtsummen anschauen.</b> Nicht „noch 140 Stunden", sondern „der nächste Block".</li>
+    <li><b>Nach jedem Gespräch zwei Minuten dokumentieren.</b> Sonst ist es in drei Tagen weg.</li>
+  </ul>
+
+  <h2><span class="n">4</span>Dein Tagesziel heute</h2>
+  <table>
+    <tr><td class="lbl">Das eine Ergebnis, das heute fertig wird</td><td></td></tr>
+    <tr><td class="lbl">Aufgabe 1 (unter 10 Minuten)</td><td></td></tr>
+    <tr><td class="lbl">Aufgabe 2</td><td></td></tr>
+    <tr><td class="lbl">Aufgabe 3</td><td></td></tr>
+  </table>
+  <p class="note">Keine vierte Aufgabe nachschieben, auch wenn Zeit übrig ist.</p>
+  <div class="foot">Wenn du merkst, dass du gerade ein Werkzeug baust statt zu arbeiten: dieses Blatt nochmal lesen, Abschnitt 2.</div>
+</section>
+
+<!-- ══════════ C ══════════ -->
+<section class="sheet">
+  <div class="head">
+    <div class="nr">Blatt C · Steuerung</div>
+    <h1>Die Zahlen, die dein Geschäft steuern</h1>
+    <div class="sub">Jeden Sonntag 10 Minuten eintragen. Mehr braucht es nicht.</div>
+    <div class="meta"><div><span>Zeitraum von</span></div><div><span>bis</span></div></div>
+  </div>
+
+  <h2><span class="n">1</span>Worauf du täglich schaust, und worauf nicht</h2>
+  <div class="two">
+    <div>
+      <p><b>Kontrollierbar, täglich anschauen</b></p>
+      <ul>
+        <li>Anzahl Erstkontakte</li>
+        <li>Anzahl vereinbarter Termine</li>
+        <li>Anzahl geführter Analysen</li>
+      </ul>
+    </div>
+    <div>
+      <p><b>Nicht kontrollierbar, monatlich anschauen</b></p>
+      <ul>
+        <li>Abschlüsse</li>
+        <li>Umsatz</li>
+        <li>Antwortquote</li>
+      </ul>
+    </div>
+  </div>
+  <p class="note">Wer auf die linke Liste schaut, hält durch. Wer auf die rechte schaut, hört nach drei Wochen auf.</p>
+
+  <h2><span class="n">2</span>Womit du rechnen solltest</h2>
+  <table>
+    <tr><th style="width:44%">Schritt</th><th style="width:28%">Realistische Quote</th><th>Heißt für dich</th></tr>
+    <tr><td>Angeschrieben → Antwort</td><td>etwa 6 von 10</td><td>4 melden sich nicht. Normal.</td></tr>
+    <tr><td>Antwort → Termin</td><td>etwa die Hälfte</td><td>Nachfassen holt nochmal welche</td></tr>
+    <tr><td>Termin → Angebot</td><td>die meisten</td><td>Wer kommt, will meistens auch wissen, was geht</td></tr>
+    <tr><td>Angebot → Abschluss</td><td>knapp die Hälfte</td><td>Hier entscheidet das Nachfassen</td></tr>
+  </table>
+  <p class="note">Richtwerte zur Orientierung, keine Garantie. Trag nach acht Wochen deine echten Zahlen daneben.</p>
+
+  <h2><span class="n">3</span>Deine Wochenwerte</h2>
+  <table>
+    <tr><th style="width:11%">Woche</th><th>Erstkontakte</th><th>Antworten</th><th>Termine</th><th>Analysen</th><th>Angebote</th><th>Abschlüsse</th><th>Empfehlungen</th></tr>
+    <tr><td><b>1</b></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+    <tr><td><b>2</b></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+    <tr><td><b>3</b></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+    <tr><td><b>4</b></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+    <tr><td><b>5</b></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+    <tr><td><b>6</b></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+    <tr><td><b>7</b></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+    <tr><td><b>8</b></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+  </table>
+
+  <div class="warnbox">
+    <b>Die Spalte, die über alles entscheidet</b>
+    Empfehlungen. Deine Liste ist endlich. Wenn nach acht Wochen keine 20 neuen Namen dazugekommen sind, war der Zeitraum trotz Abschlüssen nicht erfolgreich. Frag in jedem Gespräch, auch bei Absagen.
+  </div>
+</section>
+
+<!-- ══════════ D ══════════ -->
+<section class="sheet">
+  <div class="head">
+    <div class="nr">Blatt D · Haftung</div>
+    <h1>Was du sagen darfst und was nicht</h1>
+    <div class="sub">Das Blatt, das dich vor dem teuersten Fehler schützt. Vor jedem Kundengespräch überfliegen.</div>
+  </div>
+
+  <h2><span class="n">1</span>Nie ohne Unterlagen vor dir</h2>
+  <table>
+    <tr><th style="width:36%">Thema</th><th>Warum gefährlich</th></tr>
+    <tr><td><b>Deckungssummen</b></td><td>Tarif- und vertragsabhängig. Eine falsche Zahl ist eine Falschberatung.</td></tr>
+    <tr><td><b>Wartezeiten</b></td><td>Unterscheiden sich je nach Baustein und Vertrag.</td></tr>
+    <tr><td><b>Ausschlüsse</b></td><td>Der Kunde erinnert sich später genau an dein „das ist drin".</td></tr>
+    <tr><td><b>Beiträge und Ersparnis</b></td><td>Erst nach Berechnung. Nie geschätzt nennen.</td></tr>
+    <tr><td><b>Fremde Verträge</b></td><td>Ohne die Bedingungen gesehen zu haben: keine Bewertung.</td></tr>
+  </table>
+
+  <h2><span class="n">2</span>Der Satz, der dich immer rettet</h2>
+  <div class="say">„Gute Frage. Da will ich Ihnen nichts Falsches sagen. Ich schaue das nach und melde mich morgen bei Ihnen."</div>
+  <p class="note">Das wirkt kompetenter als jede improvisierte Antwort. Und du hast einen guten Grund, nochmal anzurufen.</p>
+
+  <h2><span class="n">3</span>Kündigung bestehender Verträge</h2>
+  <div class="big">
+    <div class="t">Nie zur Kündigung raten, solange der neue Schutz nicht steht.</div>
+    Entsteht dazwischen eine Lücke und es passiert etwas, haftest du. Erst Annahme, dann Kündigung.
+  </div>
+
+  <h2><span class="n">4</span>Bei Freunden und Familie</h2>
+  <ul class="box">
+    <li>Wenn nichts passt: das ehrlich sagen. Ein „bei dir ist alles gut, lass es so" bringt dir mehr Empfehlungen als ein durchgedrückter Abschluss.</li>
+    <li>Dieselbe Dokumentation wie bei jedem anderen. Gerade hier.</li>
+    <li>Keine Sonderzusagen, die du nicht halten kannst.</li>
+  </ul>
+
+  <h2><span class="n">5</span>Daten</h2>
+  <ul class="box">
+    <li>Gesundheitsdaten, Einkommen und IBAN gehören nicht in einen WhatsApp-Chat.</li>
+    <li>Kundenunterlagen in den Kundenordner, nicht in den Downloads-Ordner.</li>
+    <li>Kontaktdaten von Empfohlenen nur mit deren Einverständnis weiterverarbeiten.</li>
+    <li>Tonaufnahme eines Gesprächs nur mit schriftlicher Einwilligung.</li>
+  </ul>
+
+  <h2><span class="n">6</span>Meine offenen Fragen dazu</h2>
+  <table>
+    <tr><td style="height:22pt"></td></tr>
+    <tr><td style="height:22pt"></td></tr>
+  </table>
+  <div class="foot">Persönliche Merkhilfe, keine Rechtsberatung. Im Zweifel Vertriebsleitung oder Rechtsabteilung fragen, bevor du es dem Kunden sagst.</div>
+</section>
+
+<!-- ══════════ E ══════════ -->
+<section class="sheet">
+  <div class="head">
+    <div class="nr">Blatt E · Lernen</div>
+    <h1>Pflichtstunden ohne Überforderung</h1>
+    <div class="sub">Nie die Gesamtzahl anschauen. Immer nur den nächsten Block.</div>
+    <div class="meta"><div><span>Woche vom</span></div><div><span>bis</span></div></div>
+  </div>
+
+  <h2><span class="n">1</span>Die Regel</h2>
+  <div class="big">
+    <div class="t">20 Minuten. Höchstens zwei Blöcke am Tag. Kleinstes Modul zuerst.</div>
+    Ein fast fertiges Modul vor einem neuen. Abgeschlossen schlägt angefangen, immer.
+  </div>
+
+  <h2><span class="n">2</span>Blöcke diese Woche</h2>
+  <table>
+    <tr><th style="width:13%">Tag</th><th style="width:44%">Modul oder Kapitel</th><th style="width:13%">Minuten</th><th style="width:15%">Abgeschlossen</th><th>Nachweis da</th></tr>
+    <tr><td>Mo</td><td></td><td></td><td>☐</td><td>☐</td></tr>
+    <tr><td>Di</td><td></td><td></td><td>☐</td><td>☐</td></tr>
+    <tr><td>Mi</td><td></td><td></td><td>☐</td><td>☐</td></tr>
+    <tr><td>Do</td><td></td><td></td><td>☐</td><td>☐</td></tr>
+    <tr><td>Fr</td><td></td><td></td><td>☐</td><td>☐</td></tr>
+  </table>
+
+  <h2><span class="n">3</span>Wenn ein Block nicht stattgefunden hat</h2>
+  <p>Nicht nachholen wollen. Nicht verdoppeln. Einfach am nächsten Tag weitermachen.
+  Der einzige Fehler, der zählt, ist aufzuhören.</p>
+  <table>
+    <tr><td class="lbl">Was kam dazwischen</td><td></td></tr>
+    <tr><td class="lbl">Lässt sich das nächste Woche vermeiden</td><td>ja ☐ &nbsp; nein ☐ &nbsp; wie: ____________</td></tr>
+  </table>
+
+  <h2><span class="n">4</span>Nach einem Test oder einer Challenge</h2>
+  <table>
+    <tr><td class="lbl">Ergebnis</td><td></td></tr>
+    <tr><td class="lbl">Welche Themen saßen nicht</td><td></td></tr>
+    <tr><td class="lbl">Nächster Block dazu am</td><td></td></tr>
+  </table>
+  <p class="note">Bestanden ist bestanden. 70 Prozent zählen genauso wie 95. Weiter zum nächsten Modul, nicht zurück zum alten.</p>
+
+  <h2><span class="n">5</span>Der Stand, den du wirklich brauchst</h2>
+  <table>
+    <tr><td class="lbl">Nächste Frist</td><td></td></tr>
+    <tr><td class="lbl">Was bis dahin fertig sein muss</td><td></td></tr>
+    <tr><td class="lbl">Nächster Block</td><td></td></tr>
+  </table>
+  <div class="foot">Nur diese drei Zeilen. Alles andere lähmt mehr, als es hilft.</div>
+</section>
+
+</body>
+</html>
