@@ -1,8 +1,11 @@
-# Regeln für dieses Projekt: so wenig Credits wie möglich verbrauchen
+# Projektregeln
 
-- **Nie automatisch stündliche PR-Checks oder Wiedervorlagen einrichten.** Nur wenn der User es ausdrücklich verlangt.
-- **Bestehende Dateien mit Edit ändern, nicht komplett neu schreiben.** Nur bei Neuerstellung eine Datei komplett schreiben.
-- **Keine Playwright-/Browser-Tests und Screenshots**, außer der User bittet ausdrücklich darum.
-- **Kurze Antworten.** Kein wiederholtes Zusammenfassen von bereits Gesagtem, keine langen Erklärblöcke, wenn eine kurze Antwort reicht.
-- **Erst fragen, dann große Arbeit starten**, wenn der Auftrag mehrdeutig ist oder mehrere Dateien/viele Schritte betrifft.
-- Standardmodell: **Sonnet**, nicht Opus, außer ausdrücklich anders gewünscht.
+Die vollständigen Arbeitsregeln stehen in `cowork-anweisung.txt` in diesem Verzeichnis.
+Das ist die einzige gültige Quelle. Vor der Arbeit in diesem Projekt dort nachsehen.
+
+Kurzfassung der wichtigsten Punkte:
+- Bestehende Dateien patchen, nicht neu schreiben.
+- Keine automatischen Loops, Tests oder Screenshots ohne ausdrücklichen Auftrag.
+- Kostenansage mit Zahlen vor Aufträgen über fünf Tool-Aufrufe.
+- Kurze Antworten, vollständige Arbeit.
+- Fertig heißt: getestet, gespeichert, committet, gepusht, nächster Schritt genannt.
