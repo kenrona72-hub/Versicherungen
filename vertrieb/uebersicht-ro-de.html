@@ -2,172 +2,188 @@
 <html lang="de">
 <head>
 <meta charset="UTF-8">
-<title>Versicherungsübersicht · Prezentare asigurări</title>
+<title>Prezentare asigurări · Versicherungsübersicht</title>
 <style>
-  @page { size: A4; margin: 9mm 13mm; }
+  @page { size: A4; margin: 10mm 12mm; }
   * { box-sizing: border-box; }
   html, body { margin:0; padding:0; }
   body { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-         font-size: 8.1pt; line-height: 1.26; color: #000; background: #fff; }
+         font-size: 8.1pt; line-height: 1.3; color:#111; background:#fff; }
 
-  .head { border-bottom: 2.2pt solid #000; padding-bottom: 4pt; margin-bottom: 7pt; }
-  .head h1 { font-size: 13.5pt; margin: 0 0 1pt; letter-spacing: -0.3pt; }
-  .head h1 .de { font-size: 11pt; font-weight: 600; color: #444; display:block; margin-top:1pt; }
-  .head .sub { font-size: 8.5pt; color: #555; margin-top: 3pt; }
+  :root { --g:#F2B705; --gl:#FFF7DF; }
 
-  .cols { display: flex; gap: 11pt; }
-  .cols > div { flex: 1; }
-  .cols .ro { padding-right: 9pt; border-right: 0.7pt solid #ccc; }
-  .lang { font-size: 7pt; letter-spacing: 1.3pt; text-transform: uppercase;
-          color: #888; margin-bottom: 3pt; }
+  /* Kopf */
+  .head { border-bottom: 2.5pt solid #F2B705; padding-bottom: 5pt; margin-bottom: 7pt; }
+  .head h1 { font-size: 13.5pt; margin:0; letter-spacing:-0.3pt; line-height:1.15; }
+  .head h1 span { display:block; font-size: 10.5pt; font-weight:600; color:#555; margin-top:2pt; }
+  .tags { margin-top:5pt; font-size:8pt; }
+  .tags b { display:inline-block; background:#FFF7DF; border:0.8pt solid #F2B705;
+            padding:1.5pt 7pt; border-radius:9pt; margin-right:4pt; font-weight:700; }
 
-  h2 { font-size: 8.9pt; margin: 5.5pt 0 2.5pt; padding: 2.5pt 7pt;
-       background: #f0f0f0; border-left: 3pt solid #000; }
-  h2 .n { display:inline-block; width: 14pt; font-weight: 800; }
-  p { margin: 0 0 4pt; }
-  ul { margin: 2pt 0 4pt; padding-left: 13pt; }
-  li { margin-bottom: 2pt; }
-  ul.box { list-style:none; padding-left:0; }
-  ul.box li { padding-left: 15pt; position: relative; }
-  ul.box li::before { content:""; position:absolute; left:0; top:2pt;
-    width: 8.5pt; height: 8.5pt; border: 0.9pt solid #000; }
+  /* Abschnitte */
+  h2 { font-size:9pt; margin:6.5pt 0 3pt; padding:0 0 3pt 0;
+       border-bottom:1pt solid #ddd; display:flex; align-items:center; gap:6pt; }
+  h2 .n { display:inline-flex; align-items:center; justify-content:center;
+          width:14pt; height:14pt; background:#F2B705; border-radius:50%;
+          font-size:8pt; font-weight:800; color:#111; flex:none; }
+  h2 .de { font-weight:600; color:#666; font-size:8.6pt; }
 
-  table { width:100%; border-collapse: collapse; font-size: 8.6pt; margin: 4pt 0 6pt; }
-  th { background:#ececec; text-align:left; font-size:7.4pt; text-transform:uppercase;
-       letter-spacing:0.4pt; padding:3pt 4pt; border:0.7pt solid #888; }
-  th small { display:block; text-transform:none; letter-spacing:0; color:#666; font-weight:400; }
-  td small { display:block; color:#666; font-size:7.1pt; font-weight:400; }
-  td { border:0.7pt solid #888; padding:2.5pt 3pt; height:11pt; vertical-align:top; }
-  td.lbl { background:#fafafa; font-weight:600; width:30%; }
+  .cols { display:flex; gap:12pt; }
+  .cols > div { flex:1; }
+  .cols .ro { padding-right:10pt; border-right:0.7pt solid #e2e2e2; }
+  .lang { font-size:6.8pt; letter-spacing:1.4pt; text-transform:uppercase;
+          color:#999; font-weight:700; }
 
-  .big { border:1.5pt solid #000; padding:5pt 8pt; margin:5pt 0; }
-  .big .t { font-weight:800; margin-bottom:2pt; }
-  .sign { display:flex; gap:16pt; margin-top:8pt; }
-  .sign > div { flex:1; border-top:0.7pt solid #000; padding-top:3pt; font-size:7.6pt; color:#555; }
-  .foot { margin-top:8pt; padding-top:4pt; border-top:0.7pt solid #999; font-size:7pt; color:#666; }
+  p { margin:0 0 4pt; }
+  .lead { font-weight:700; }
+  ul { margin:2pt 0 4pt; padding-left:12pt; }
+  li { margin-bottom:2pt; }
+  ul.tick { list-style:none; padding-left:0; }
+  ul.tick li { padding-left:13pt; position:relative; }
+  ul.tick li::before { content:"✕"; position:absolute; left:0; top:0;
+    color:#F2B705; font-weight:800; font-size:8.5pt; }
+
+  .gelb { background:#FFF7DF; border:1pt solid #F2B705; padding:6pt 8pt; margin:4pt 0 5pt; }
+  .plus { background:#fafafa; border-left:3pt solid #F2B705; padding:5pt 8pt; margin:4pt 0 0; }
+
+  table { width:100%; border-collapse:collapse; font-size:8.4pt; margin:5pt 0 4pt; }
+  th { background:#F2B705; text-align:left; font-size:7.3pt; text-transform:uppercase;
+       letter-spacing:0.4pt; padding:3.5pt 5pt; border:0.7pt solid #C99A04; color:#111; }
+  th small { display:block; text-transform:none; letter-spacing:0; font-weight:400; color:#5a4602; }
+  td { border:0.7pt solid #bbb; padding:3pt 5pt; height:13pt; vertical-align:middle; }
+  td small { display:block; color:#888; font-size:7pt; font-weight:400; }
+  td.art { background:#fcfcfc; font-weight:700; }
+
+  .sign { display:flex; gap:18pt; margin-top:10pt; }
+  .sign > div { flex:1; border-top:0.8pt solid #111; padding-top:3pt; font-size:7.4pt; color:#666; }
+  .foot { margin-top:7pt; padding-top:4pt; border-top:0.7pt solid #ddd;
+          font-size:6.8pt; color:#777; }
 </style>
 </head>
 <body>
 
 <div class="head">
-  <h1>Prezentare generală a asigurărilor dumneavoastră
-    <span class="de">Übersicht über Ihre Versicherungen</span></h1>
-  <div class="sub">Gratuit și fără obligații · Kostenlos und unverbindlich</div>
+  <h1>Prezentarea asigurărilor dumneavoastră
+    <span>Ihre Versicherungsübersicht</span></h1>
+  <div class="tags">
+    <b>GRATUIT · KOSTENLOS</b>
+    <b>FĂRĂ OBLIGAȚII · UNVERBINDLICH</b>
+  </div>
 </div>
 
-<div class="cols" style="margin-bottom:2pt"><div class="ro"><div class="lang">Română</div></div><div><div class="lang">Deutsch</div></div></div>
-<h2><span class="n">1</span>Ce fac eu pentru dumneavoastră &nbsp;·&nbsp; Was ich für Sie mache</h2>
+<div class="cols" style="margin-bottom:1pt">
+  <div class="ro"><div class="lang">Română</div></div>
+  <div><div class="lang">Deutsch</div></div>
+</div>
+
+<h2><span class="n">1</span>Ce primiți de la mine <span class="de">· Was Sie von mir bekommen</span></h2>
 <div class="cols">
   <div class="ro">
-    <p>Adun toate asigurările dumneavoastră într-o listă clară. Veți vedea:</p>
-    <ul>
-      <li>ce asigurări aveți și la ce firme</li>
-      <li>cât plătiți lunar în total</li>
-      <li>unde plătiți de două ori sau unde lipsește o protecție importantă</li>
-    </ul>
-    <p>Apoi vă spun cinstit ce părere am. Dacă totul este în regulă, vă spun și asta.</p>
+    <p>O listă clară cu toate asigurările dumneavoastră: ce aveți, la ce firmă și cât plătiți în total.</p>
+    <p>Verific unde plătiți de două ori și unde lipsește ceva important. La final vă spun cinstit ce cred. <b>Dacă totul este deja bine, vă spun și asta.</b></p>
   </div>
   <div>
-    <p>Ich bringe alle Ihre Versicherungen in eine klare Liste. Sie sehen dann:</p>
-    <ul>
-      <li>welche Versicherungen Sie haben und bei welchen Firmen</li>
-      <li>was Sie monatlich insgesamt zahlen</li>
-      <li>wo Sie doppelt zahlen oder wichtiger Schutz fehlt</li>
-    </ul>
-    <p>Danach sage ich Ihnen ehrlich meine Einschätzung. Wenn alles passt, sage ich Ihnen das auch.</p>
+    <p>Eine klare Liste aller Ihrer Versicherungen: was Sie haben, bei welcher Firma und was Sie insgesamt zahlen.</p>
+    <p>Ich prüfe, wo Sie doppelt zahlen und wo etwas Wichtiges fehlt. Am Ende sage ich Ihnen ehrlich, was ich denke. <b>Wenn alles schon gut ist, sage ich Ihnen das auch.</b></p>
   </div>
 </div>
 
-<h2><span class="n">2</span>Ce NU se întâmplă &nbsp;·&nbsp; Was NICHT passiert</h2>
-<div class="big">
+<h2><span class="n">2</span>Unde este șmecheria? <span class="de">· Wo ist der Haken?</span></h2>
+<div class="cols">
+  <div class="ro">
+    <p class="lead">Nicăieri. Așa funcționează meseria mea:</p>
+    <p>Dacă la final încheiați un contract, sunt plătit de societatea de asigurări. <b>Nu de dumneavoastră.</b></p>
+    <p>Dacă nu încheiați nimic, rămâneți cu prezentarea și eu am investit timp. Acesta este riscul meu, nu al dumneavoastră.</p>
+  </div>
+  <div>
+    <p class="lead">Nirgends. So funktioniert mein Beruf:</p>
+    <p>Wenn am Ende ein Vertrag zustande kommt, zahlt mich die Versicherung. <b>Nicht Sie.</b></p>
+    <p>Kommt keiner zustande, behalten Sie trotzdem die Übersicht und ich habe Zeit investiert. Das ist mein Risiko, nicht Ihres.</p>
+  </div>
+</div>
+<div class="plus">
   <div class="cols">
     <div class="ro">
-      <div class="t">Nu semnați nimic astăzi.</div>
-      Nu se reziliază niciun contract. Nu plătiți nimic. Nu se schimbă nimic fără acordul dumneavoastră scris.
-      Puteți spune „nu" în orice moment, fără explicații.
+      <p style="margin:0"><b>Lucrez împreună cu o brokeriță independentă.</b> Ea are acces la datele contractelor dumneavoastră și putem compara mai multe societăți, nu doar una.</p>
     </div>
     <div>
-      <div class="t">Sie unterschreiben heute nichts.</div>
-      Es wird kein Vertrag gekündigt. Sie zahlen nichts. Es ändert sich nichts ohne Ihre schriftliche Zustimmung.
-      Sie können jederzeit Nein sagen, ohne Begründung.
+      <p style="margin:0"><b>Ich arbeite mit einer unabhängigen Maklerin zusammen.</b> Sie kommt an Ihre Vertragsdaten heran, und wir können mehrere Gesellschaften vergleichen, nicht nur eine.</p>
     </div>
   </div>
 </div>
 
-<h2><span class="n">3</span>De ce este gratuit &nbsp;·&nbsp; Warum es kostenlos ist</h2>
-<div class="cols">
-  <div class="ro">
-    <p>Sunt agent de asigurări și sunt plătit de societatea de asigurări, nu de dumneavoastră. De aceea această analiză nu vă costă nimic.</p>
-    <p>Cinstit: lucrez pentru <b>o singură societate</b> și nu pot compara toate firmele de pe piață. Vă arăt ce aveți acum și ce v-aș putea oferi eu. Decizia este a dumneavoastră.</p>
-  </div>
-  <div>
-    <p>Ich bin Versicherungsvertreter und werde von der Versicherungsgesellschaft bezahlt, nicht von Ihnen. Deshalb kostet Sie diese Übersicht nichts.</p>
-    <p>Ehrlich gesagt: Ich arbeite für <b>eine Gesellschaft</b> und kann nicht alle Anbieter vergleichen. Ich zeige Ihnen, was Sie haben und was ich anbieten könnte. Die Entscheidung liegt bei Ihnen.</p>
+<h2><span class="n">3</span>Ce NU se întâmplă <span class="de">· Was NICHT passiert</span></h2>
+<div class="gelb">
+  <div class="cols">
+    <div class="ro" style="border-color:#E8CE7A">
+      <ul class="tick">
+        <li>Nu semnați nimic astăzi.</li>
+        <li>Nu se reziliază niciun contract.</li>
+        <li>Nu plătiți nimic, niciun cent.</li>
+        <li>Nimic nu se schimbă fără acordul dumneavoastră scris.</li>
+        <li>Puteți spune „nu" oricând, fără să explicați de ce.</li>
+      </ul>
+    </div>
+    <div>
+      <ul class="tick">
+        <li>Sie unterschreiben heute nichts.</li>
+        <li>Es wird kein Vertrag gekündigt.</li>
+        <li>Sie zahlen keinen Cent.</li>
+        <li>Nichts ändert sich ohne Ihre schriftliche Zustimmung.</li>
+        <li>Sie können jederzeit Nein sagen, ohne Begründung.</li>
+      </ul>
+    </div>
   </div>
 </div>
 
-<h2><span class="n">4</span>De ce am nevoie &nbsp;·&nbsp; Was ich brauche</h2>
+<h2><span class="n">4</span>De ce am nevoie <span class="de">· Was ich brauche</span></h2>
 <div class="cols">
   <div class="ro">
-    <p><b>Fotografii ale polițelor de asigurare.</b> O poză cu telefonul este suficientă. Prima pagină ajunge, acolo scrie tot ce îmi trebuie.</p>
-    <p>Dacă nu găsiți o poliță: scrieți doar numele firmei în tabel. Restul căutăm împreună.</p>
+    <p><b>Numărul poliței</b> pentru fiecare asigurare. Îl găsiți pe prima pagină a contractului sau pe factura anuală.</p>
+    <p>Cel mai simplu: <b>faceți o poză cu prima pagină</b> și trimiteți-o. Atunci am tot ce îmi trebuie.</p>
+    <p class="foot" style="border:none;margin:0;padding:0">Nu găsiți ceva? Scrieți doar numele firmei.</p>
   </div>
   <div>
-    <p><b>Fotos der Versicherungspolicen.</b> Ein Handyfoto reicht. Die erste Seite genügt, da steht alles drauf, was ich brauche.</p>
-    <p>Wenn Sie eine Police nicht finden: einfach nur den Namen der Firma in die Tabelle schreiben. Den Rest suchen wir gemeinsam.</p>
+    <p><b>Die Versicherungsnummer</b> für jede Versicherung. Sie steht auf der ersten Seite des Vertrags oder auf der Jahresrechnung.</p>
+    <p>Am einfachsten: <b>ein Foto der ersten Seite</b> schicken. Dann habe ich alles, was ich brauche.</p>
+    <p class="foot" style="border:none;margin:0;padding:0">Etwas nicht gefunden? Schreiben Sie nur den Firmennamen.</p>
   </div>
 </div>
 
 <table>
   <tr>
-    <th style="width:26%">Ce asigurare<small>Welche Versicherung</small></th>
-    <th style="width:24%">Societatea<small>Gesellschaft</small></th>
-    <th style="width:26%">Numărul poliței<small>Versicherungsnummer</small></th>
-    <th style="width:14%">Pe lună<small>Monatlich</small></th>
-    <th>Foto<small>Foto da</small></th>
+    <th style="width:23%">Ce asigurare<small>Welche Versicherung</small></th>
+    <th style="width:23%">Societatea<small>Firma</small></th>
+    <th style="width:28%">Numărul poliței<small>Versicherungsnummer</small></th>
+    <th style="width:14%">Pe lună<small>Pro Monat</small></th>
+    <th>Poză<small>Foto</small></th>
   </tr>
-  <tr><td>Auto<small>Kfz</small></td><td></td><td></td><td></td><td>☐</td></tr>
-  <tr><td>Răspundere civilă<small>Haftpflicht</small></td><td></td><td></td><td></td><td>☐</td></tr>
-  <tr><td>Protecție juridică<small>Rechtsschutz</small></td><td></td><td></td><td></td><td>☐</td></tr>
-  <tr><td>Bunuri casnice<small>Hausrat</small></td><td></td><td></td><td></td><td>☐</td></tr>
-  <tr><td></td><td></td><td></td><td></td><td>☐</td></tr>
+  <tr><td class="art">Auto<small>Kfz</small></td><td></td><td></td><td></td><td>☐</td></tr>
+  <tr><td class="art">Răspundere civilă<small>Haftpflicht</small></td><td></td><td></td><td></td><td>☐</td></tr>
+  <tr><td class="art">Protecție juridică<small>Rechtsschutz</small></td><td></td><td></td><td></td><td>☐</td></tr>
+  <tr><td class="art">Bunuri casnice<small>Hausrat</small></td><td></td><td></td><td></td><td>☐</td></tr>
+  <tr><td class="art"></td><td></td><td></td><td></td><td>☐</td></tr>
 </table>
 
-<h2><span class="n">5</span>Cum continuăm &nbsp;·&nbsp; Wie es weitergeht</h2>
-<div class="cols">
+<table style="margin-top:7pt">
+  <tr>
+    <td class="art" style="width:19%">Numele dumneavoastră<small>Ihr Name</small></td><td style="width:31%"></td>
+    <td class="art" style="width:19%">Telefon / WhatsApp</td><td></td>
+  </tr>
+</table>
+
+<div class="cols" style="margin-top:5pt; font-size:7.8pt">
   <div class="ro">
-    <ul class="box">
-      <li>Îmi trimiteți fotografiile prin fiica dumneavoastră sau pe WhatsApp.</li>
-      <li>Pregătesc prezentarea generală și, dacă are sens, o ofertă.</li>
-      <li>Vin personal, explic totul pe îndelete și răspund la întrebări.</li>
-      <li>Abia atunci decideți dumneavoastră. Fără grabă.</li>
-    </ul>
+    Sunt de acord ca datele mele să fie folosite pentru această prezentare generală
+    și transmise brokeriței partenere în acest scop. Îmi pot retrage acordul oricând.
   </div>
   <div>
-    <ul class="box">
-      <li>Sie schicken mir die Fotos über Ihre Tochter oder per WhatsApp.</li>
-      <li>Ich erstelle die Übersicht und, wenn es Sinn ergibt, ein Angebot.</li>
-      <li>Ich komme persönlich vorbei, erkläre alles in Ruhe und beantworte Fragen.</li>
-      <li>Erst dann entscheiden Sie. Ohne Eile.</li>
-    </ul>
+    Ich bin damit einverstanden, dass meine Daten für diese Übersicht verwendet und zu
+    diesem Zweck an die Partner-Maklerin weitergegeben werden. Ich kann die Einwilligung
+    jederzeit widerrufen.
   </div>
 </div>
 
-<table>
-  <tr><td class="lbl">Numele meu<small>Mein Name</small></td><td></td>
-      <td class="lbl" style="width:22%">Telefon / WhatsApp</td><td></td></tr>
-</table>
-
-<div class="cols" style="margin-top:4pt">
-  <div class="ro" style="font-size:8.4pt">
-    Sunt de acord ca datele mele să fie folosite pentru această prezentare generală.
-    Îmi pot retrage acordul oricând.
-  </div>
-  <div style="font-size:8.4pt">
-    Ich bin damit einverstanden, dass meine Daten für diese Übersicht verwendet werden.
-    Ich kann die Einwilligung jederzeit widerrufen.
-  </div>
-</div>
 <div class="sign">
   <div>Data · Datum</div>
   <div>Semnătura · Unterschrift</div>
