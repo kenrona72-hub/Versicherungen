@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<title>Asigurările dumneavoastră · Ihre Versicherungen</title>
+<style>
+  @page { size: A4; margin: 0; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; color: #1b1b1b; background: #fff; }
+
+  .page { width: 210mm; height: 297mm; padding: 15mm 15mm 11mm; position: relative;
+          display: flex; flex-direction: column; page-break-after: always; overflow: hidden; }
+  .page:last-child { page-break-after: auto; }
+
+  /* Gelber Streifen links als Markenzeichen */
+  .page::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 6mm; background: #F2B705; }
+
+  /* Zweisprachig: RO groß, DE klein darunter */
+  .de { display: block; color: #7a7a7a; font-weight: 400; }
+
+  /* Kopf */
+  .kicker { font-size: 7.5pt; font-weight: 700; letter-spacing: 2pt; color: #9a7400; text-transform: uppercase; }
+  h1 { font-size: 25pt; line-height: 1.08; letter-spacing: -0.6pt; margin-top: 5pt; }
+  h1 .de { font-size: 14pt; letter-spacing: -0.2pt; margin-top: 4pt; }
+
+  .badges { display: flex; gap: 7pt; margin-top: 13pt; }
+  .badge { flex: 1; background: #FFF4CC; border: 1pt solid #F2B705; border-radius: 7pt;
+           padding: 7pt 10pt; font-size: 9.5pt; font-weight: 800; display: flex; align-items: center; gap: 7pt; }
+  .badge .de { font-size: 7.8pt; font-weight: 500; color: #6b5a1e; }
+  .badge .chk { flex: none; width: 17pt; height: 17pt; border-radius: 50%; background: #F2B705;
+                display: flex; align-items: center; justify-content: center; font-size: 10pt; }
+
+  /* Abschnittstitel */
+  .sec { margin-top: 20pt; }
+  .sec h2 { font-size: 13pt; letter-spacing: -0.2pt; display: flex; align-items: baseline; gap: 8pt;
+            padding-bottom: 5pt; border-bottom: 1.2pt solid #1b1b1b; margin-bottom: 10pt; }
+  .sec h2 .de { display: inline; font-size: 9.5pt; }
+  .sec h2 .no { font-size: 9pt; font-weight: 800; color: #9a7400; }
+
+  /* Drei Karten */
+  .cards { display: flex; gap: 9pt; }
+  .card { flex: 1; border: 1pt solid #e6e6e6; border-radius: 9pt; padding: 12pt 11pt 11pt; }
+  .card .ic { width: 30pt; height: 30pt; border-radius: 8pt; background: #FFF4CC;
+              display: flex; align-items: center; justify-content: center; margin-bottom: 9pt; }
+  .card .ic svg { width: 17pt; height: 17pt; }
+  .card .t { font-size: 11pt; font-weight: 800; line-height: 1.2; }
+  .card .t .de { font-size: 8.8pt; font-weight: 600; margin-top: 1pt; }
+  .card .s { font-size: 8.4pt; line-height: 1.35; margin-top: 6pt; color: #333; }
+  .card .s .de { font-size: 7.8pt; margin-top: 1pt; }
+
+  /* Haken-Block */
+  .hook { display: flex; gap: 14pt; background: #FFF9E6; border-radius: 10pt; padding: 14pt 15pt; }
+  .hook .big { flex: none; width: 34%; border-right: 1pt solid #EBD48A; padding-right: 13pt; }
+  .hook .big .q { font-size: 8.5pt; font-weight: 700; color: #9a7400; }
+  .hook .big .a { font-size: 26pt; font-weight: 900; letter-spacing: -0.8pt; line-height: 1; margin-top: 5pt; }
+  .hook .big .a .de { font-size: 12pt; font-weight: 700; letter-spacing: 0; margin-top: 3pt; }
+  .hook ul { list-style: none; flex: 1; display: flex; flex-direction: column; gap: 7pt; justify-content: center; }
+  .hook li { font-size: 9.4pt; font-weight: 700; line-height: 1.25; padding-left: 15pt; position: relative; }
+  .hook li::before { content: ""; position: absolute; left: 0; top: 3pt; width: 7pt; height: 7pt;
+                     border-radius: 50%; background: #F2B705; }
+  .hook li .de { font-size: 8.2pt; font-weight: 400; margin-top: 1pt; }
+
+  .partner { display: flex; align-items: center; gap: 11pt; margin-top: 9pt;
+             border: 1.4pt solid #F2B705; border-radius: 10pt; padding: 10pt 13pt; }
+  .partner .ic { flex: none; width: 30pt; height: 30pt; border-radius: 50%; background: #F2B705;
+                 display: flex; align-items: center; justify-content: center; }
+  .partner .ic svg { width: 17pt; height: 17pt; }
+  .partner .t { font-size: 10pt; font-weight: 800; }
+  .partner .t .de { font-size: 8.4pt; font-weight: 500; }
+  .partner .s { font-size: 8.4pt; margin-top: 3pt; color: #333; }
+  .partner .s .de { font-size: 7.8pt; }
+
+  /* Was nicht passiert */
+  .nots { display: grid; grid-template-columns: 1fr 1fr; gap: 8pt; }
+  .not { display: flex; align-items: center; gap: 9pt; border: 1pt solid #e6e6e6; border-radius: 8pt; padding: 9pt 11pt; }
+  .not .x { flex: none; width: 19pt; height: 19pt; border-radius: 50%; border: 1.6pt solid #1b1b1b;
+            display: flex; align-items: center; justify-content: center; font-size: 10pt; font-weight: 900; }
+  .not .t { font-size: 9.6pt; font-weight: 800; line-height: 1.2; }
+  .not .t .de { font-size: 8pt; font-weight: 500; }
+  .free { margin-top: 9pt; text-align: center; font-size: 10.5pt; font-weight: 800; }
+  .free .de { display: inline; font-size: 9pt; margin-left: 6pt; }
+
+  /* Fuß */
+  .foot { margin-top: auto; display: flex; justify-content: space-between; align-items: flex-end;
+          padding-top: 8pt; border-top: 0.8pt solid #e2e2e2; font-size: 7.2pt; color: #8a8a8a; }
+  .next { font-size: 9pt; font-weight: 800; color: #1b1b1b; }
+  .next .de { display: inline; font-size: 8pt; margin-left: 4pt; }
+
+  /* ---------- Seite 2 ---------- */
+  .steps { display: flex; gap: 9pt; }
+  .step { flex: 1; position: relative; border: 1pt solid #e6e6e6; border-radius: 9pt; padding: 12pt 11pt 10pt; }
+  .step .n { width: 22pt; height: 22pt; border-radius: 50%; background: #F2B705; font-weight: 900;
+             font-size: 11pt; display: flex; align-items: center; justify-content: center; margin-bottom: 8pt; }
+  .step .t { font-size: 10.5pt; font-weight: 800; line-height: 1.2; }
+  .step .t .de { font-size: 8.6pt; font-weight: 600; }
+  .step .s { font-size: 8.2pt; line-height: 1.35; margin-top: 5pt; color: #333; }
+  .step .s .de { font-size: 7.6pt; }
+  .tip { margin-top: 8pt; font-size: 8.6pt; color: #333; }
+  .tip b { color: #9a7400; }
+  .tip .de { display: inline; font-size: 8pt; margin-left: 5pt; }
+
+  table { width: 100%; border-collapse: separate; border-spacing: 0; font-size: 9pt; }
+  th { background: #1b1b1b; color: #fff; text-align: left; font-size: 8.2pt; font-weight: 800;
+       padding: 6pt 8pt; }
+  th .de { color: #bdbdbd; font-size: 7.2pt; font-weight: 400; }
+  th:first-child { border-top-left-radius: 8pt; }
+  th:last-child { border-top-right-radius: 8pt; }
+  td { height: 30pt; border-bottom: 1pt solid #dcdcdc; border-right: 1pt solid #efefef; padding: 5pt 8pt; vertical-align: middle; }
+  td:last-child { border-right: none; }
+  td.art { font-weight: 800; font-size: 9.4pt; background: #FFF9E6; }
+  td.art .de { font-size: 7.6pt; font-weight: 400; }
+  tr:last-child td { border-bottom: 1.2pt solid #1b1b1b; }
+
+  .contact { display: flex; gap: 9pt; }
+  .field { flex: 1; border: 1pt solid #dcdcdc; border-radius: 8pt; padding: 7pt 10pt 20pt; }
+  .field .l { font-size: 8pt; font-weight: 800; }
+  .field .l .de { display: inline; font-size: 7.4pt; margin-left: 4pt; }
+
+  .sendto { display: flex; align-items: center; gap: 12pt; margin-top: 9pt; background: #FFF4CC;
+            border: 1pt solid #F2B705; border-radius: 8pt; padding: 9pt 12pt; }
+  .sendto .l { flex: none; font-size: 9pt; font-weight: 800; }
+  .sendto .l .de { font-size: 7.6pt; font-weight: 500; }
+  .sendto .line { flex: 1; border-bottom: 1pt solid #9a7400; height: 14pt; font-size: 7.2pt; color: #9a7400; }
+
+  .consent { margin-top: 14pt; display: flex; gap: 14pt; font-size: 8pt; line-height: 1.4; color: #333; }
+  .consent > div { flex: 1; }
+  .consent .de { display: block; }
+  .sign { display: flex; gap: 20pt; margin-top: 24pt; }
+  .sign > div { flex: 1; border-top: 1pt solid #1b1b1b; padding-top: 4pt; font-size: 8pt; font-weight: 700; }
+  .sign .de { display: inline; font-weight: 400; margin-left: 4pt; }
+  .legal { font-size: 6.6pt; color: #9a9a9a; line-height: 1.4; }
+</style>
+</head>
+<body>
+
+<!-- ═════════════ SEITE 1 ═════════════ -->
+<section class="page">
+  <div class="kicker">Prezentare personală · Persönliche Übersicht</div>
+  <h1>Asigurările dumneavoastră.<br>Clar și simplu.
+    <span class="de">Ihre Versicherungen. Klar und einfach.</span></h1>
+
+  <div class="badges">
+    <div class="badge"><span class="chk">✓</span><div>Gratuit<span class="de">Kostenlos</span></div></div>
+    <div class="badge"><span class="chk">✓</span><div>Fără obligații<span class="de">Unverbindlich</span></div></div>
+    <div class="badge"><span class="chk">✓</span><div>Fără semnătură<span class="de">Ohne Unterschrift</span></div></div>
+  </div>
+
+  <div class="sec">
+    <h2><span class="no">01</span>Ce primiți<span class="de">Was Sie bekommen</span></h2>
+    <div class="cards">
+      <div class="card">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#1b1b1b" stroke-width="2.2" stroke-linecap="round"><path d="M8 6h12M8 12h12M8 18h12"/><circle cx="3.5" cy="6" r="1.2" fill="#1b1b1b"/><circle cx="3.5" cy="12" r="1.2" fill="#1b1b1b"/><circle cx="3.5" cy="18" r="1.2" fill="#1b1b1b"/></svg></div>
+        <div class="t">O listă clară<span class="de">Eine klare Liste</span></div>
+        <div class="s">Toate asigurările, pe o singură pagină.<span class="de">Alle Versicherungen auf einer Seite.</span></div>
+      </div>
+      <div class="card">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#1b1b1b" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5a4.5 4.5 0 1 0 0 7M7 10.5h6M7 13.5h6"/></svg></div>
+        <div class="t">Plătiți de două ori?<span class="de">Doppelt gezahlt?</span></div>
+        <div class="s">Găsesc ce plătiți în plus.<span class="de">Ich finde, was Sie zu viel zahlen.</span></div>
+      </div>
+      <div class="card">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#1b1b1b" stroke-width="2.2" stroke-linejoin="round"><path d="M12 3l8 3v6c0 4.5-3.4 8-8 9-4.6-1-8-4.5-8-9V6l8-3z"/><path d="M8.5 12l2.5 2.5 4.5-5" stroke-linecap="round"/></svg></div>
+        <div class="t">Ce lipsește?<span class="de">Was fehlt?</span></div>
+        <div class="s">Văd unde nu sunteți protejați.<span class="de">Ich sehe, wo Schutz fehlt.</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <h2><span class="no">02</span>Unde este șmecheria?<span class="de">Wo ist der Haken?</span></h2>
+    <div class="hook">
+      <div class="big">
+        <div class="q">Răspunsul cinstit · Die ehrliche Antwort</div>
+        <div class="a">Nicăieri.<span class="de">Nirgends.</span></div>
+      </div>
+      <ul>
+        <li>Sunt plătit de societatea de asigurări, nu de dumneavoastră.<span class="de">Mich bezahlt die Versicherung, nicht Sie.</span></li>
+        <li>Dacă nu încheiați nimic, riscul este al meu.<span class="de">Schließen Sie nichts ab, ist das mein Risiko.</span></li>
+        <li>Dacă totul este deja bine, vă spun cinstit.<span class="de">Ist schon alles gut, sage ich es ehrlich.</span></li>
+      </ul>
+    </div>
+    <div class="partner">
+      <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#1b1b1b" stroke-width="2.2" stroke-linecap="round"><circle cx="8" cy="8" r="3.2"/><circle cx="16.5" cy="8" r="3.2"/><path d="M2.5 20c.6-3.4 2.8-5.5 5.5-5.5s4.9 2.1 5.5 5.5M11 20c.6-3.4 2.8-5.5 5.5-5.5S21.4 16.6 22 20"/></svg></div>
+      <div>
+        <div class="t">Lucrez împreună cu o brokeriță independentă.<span class="de">Ich arbeite mit einer unabhängigen Maklerin zusammen.</span></div>
+        <div class="s">Comparăm mai multe societăți, nu doar una.<span class="de">Wir vergleichen mehrere Gesellschaften, nicht nur eine.</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <h2><span class="no">03</span>Ce NU se întâmplă<span class="de">Was NICHT passiert</span></h2>
+    <div class="nots">
+      <div class="not"><span class="x">✕</span><div class="t">Nu semnați nimic.<span class="de">Keine Unterschrift.</span></div></div>
+      <div class="not"><span class="x">✕</span><div class="t">Nu se reziliază nimic.<span class="de">Keine Kündigung.</span></div></div>
+      <div class="not"><span class="x">✕</span><div class="t">Nu plătiți nimic.<span class="de">Keine Kosten.</span></div></div>
+      <div class="not"><span class="x">✕</span><div class="t">Nimic fără acordul dvs.<span class="de">Nichts ohne Ihr Okay.</span></div></div>
+    </div>
+    <div class="free">Puteți spune „nu" oricând.<span class="de">Sie können jederzeit Nein sagen.</span></div>
+  </div>
+
+  <div class="foot">
+    <span>Pagina 1 din 2 · Seite 1 von 2</span>
+    <span class="next">Vă rog completați pagina 2 →<span class="de">Bitte Seite 2 ausfüllen</span></span>
+  </div>
+</section>
+
+<!-- ═════════════ SEITE 2 ═════════════ -->
+<section class="page">
+  <div class="kicker">De completat · Zum Ausfüllen</div>
+  <h1>Ce am nevoie de la dumneavoastră
+    <span class="de">Was ich von Ihnen brauche</span></h1>
+
+  <div class="sec" style="margin-top:16pt">
+    <h2><span class="no">01</span>În trei pași<span class="de">In drei Schritten</span></h2>
+    <div class="steps">
+      <div class="step">
+        <div class="n">1</div>
+        <div class="t">Căutați polița<span class="de">Police suchen</span></div>
+        <div class="s">Prima pagină a contractului sau factura anuală.<span class="de">Erste Vertragsseite oder Jahresrechnung.</span></div>
+      </div>
+      <div class="step">
+        <div class="n">2</div>
+        <div class="t">Notați numărul<span class="de">Nummer eintragen</span></div>
+        <div class="s">Numărul poliței, în tabelul de mai jos.<span class="de">Versicherungsnummer in die Tabelle unten.</span></div>
+      </div>
+      <div class="step">
+        <div class="n">3</div>
+        <div class="t">Trimiteți<span class="de">Zurückschicken</span></div>
+        <div class="s">O poză pe WhatsApp este suficientă.<span class="de">Ein Foto per WhatsApp genügt.</span></div>
+      </div>
+    </div>
+    <div class="tip"><b>Nu găsiți ceva?</b> Scrieți doar numele firmei.<span class="de">Etwas nicht gefunden? Nur den Firmennamen eintragen.</span></div>
+  </div>
+
+  <div class="sec" style="margin-top:16pt">
+    <h2><span class="no">02</span>Asigurările dumneavoastră<span class="de">Ihre Versicherungen</span></h2>
+    <table>
+      <tr>
+        <th style="width:24%">Asigurare<span class="de">Versicherung</span></th>
+        <th style="width:24%">Societatea<span class="de">Firma</span></th>
+        <th style="width:34%">Numărul poliței<span class="de">Versicherungsnummer</span></th>
+        <th>Pe lună<span class="de">Pro Monat</span></th>
+      </tr>
+      <tr><td class="art">Auto<span class="de">Kfz</span></td><td></td><td></td><td></td></tr>
+      <tr><td class="art">Răspundere civilă<span class="de">Haftpflicht</span></td><td></td><td></td><td></td></tr>
+      <tr><td class="art">Protecție juridică<span class="de">Rechtsschutz</span></td><td></td><td></td><td></td></tr>
+      <tr><td class="art">Bunuri casnice<span class="de">Hausrat</span></td><td></td><td></td><td></td></tr>
+      <tr><td class="art">Altele<span class="de">Sonstige</span></td><td></td><td></td><td></td></tr>
+      <tr><td class="art">&nbsp;</td><td></td><td></td><td></td></tr>
+    </table>
+  </div>
+
+  <div class="sec" style="margin-top:16pt">
+    <h2><span class="no">03</span>Datele dumneavoastră<span class="de">Ihre Angaben</span></h2>
+    <div class="contact">
+      <div class="field"><div class="l">Nume<span class="de">Name</span></div></div>
+      <div class="field"><div class="l">Telefon / WhatsApp</div></div>
+    </div>
+    <div class="sendto">
+      <div class="l">Trimiteți la<span class="de">Schicken an</span></div>
+      <div class="line"></div>
+      <div class="l">WhatsApp</div>
+      <div class="line"></div>
+    </div>
+
+    <div class="consent">
+      <div>Sunt de acord ca datele mele să fie folosite pentru această prezentare și transmise brokeriței partenere. Pot retrage acordul oricând.</div>
+      <div class="de">Ich bin einverstanden, dass meine Daten für diese Übersicht genutzt und an die Partner-Maklerin weitergegeben werden. Widerruf jederzeit möglich.</div>
+    </div>
+    <div class="sign">
+      <div>Data<span class="de">Datum</span></div>
+      <div>Semnătura<span class="de">Unterschrift</span></div>
+    </div>
+  </div>
+
+  <div class="foot">
+    <span class="legal">Informațiile inițiale conform § 15 VersVermV se înmânează separat. Consilierea se documentează conform § 61 alin. 1 VVG.<br>Erstinformation nach § 15 VersVermV wird separat übergeben. Beratung wird nach § 61 Abs. 1 VVG dokumentiert.</span>
+    <span>Pagina 2 din 2 · Seite 2 von 2</span>
+  </div>
+</section>
+
+</body>
+</html>

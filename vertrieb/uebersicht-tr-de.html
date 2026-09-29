@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<title>Sigortalarınız · Ihre Versicherungen</title>
+<style>
+  @page { size: A4; margin: 0; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; color: #1b1b1b; background: #fff; }
+
+  .page { width: 210mm; height: 297mm; padding: 15mm 15mm 11mm; position: relative;
+          display: flex; flex-direction: column; page-break-after: always; overflow: hidden; }
+  .page:last-child { page-break-after: auto; }
+
+  .page::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 6mm; background: #F2B705; }
+
+  /* Zweisprachig: TR groß, DE klein darunter */
+  .de { display: block; color: #7a7a7a; font-weight: 400; }
+
+  .kicker { font-size: 7.5pt; font-weight: 700; letter-spacing: 2pt; color: #9a7400; text-transform: uppercase; }
+  h1 { font-size: 25pt; line-height: 1.08; letter-spacing: -0.6pt; margin-top: 5pt; }
+  h1 .de { font-size: 14pt; letter-spacing: -0.2pt; margin-top: 4pt; }
+
+  .badges { display: flex; gap: 7pt; margin-top: 8pt; }
+  .badge { flex: 1; background: #FFF4CC; border: 1pt solid #F2B705; border-radius: 7pt;
+           padding: 7pt 10pt; font-size: 9.5pt; font-weight: 800; display: flex; align-items: center; gap: 7pt; }
+  .badge .de { font-size: 7.8pt; font-weight: 500; color: #6b5a1e; }
+  .badge .chk { flex: none; width: 17pt; height: 17pt; border-radius: 50%; background: #F2B705;
+                display: flex; align-items: center; justify-content: center; font-size: 10pt; }
+
+  .sec { margin-top: 12pt; }
+  .sec h2 { font-size: 13pt; letter-spacing: -0.2pt; display: flex; align-items: baseline; gap: 8pt;
+            padding-bottom: 5pt; border-bottom: 1.2pt solid #1b1b1b; margin-bottom: 10pt; }
+  .sec h2 .de { display: inline; font-size: 9.5pt; }
+  .sec h2 .no { font-size: 9pt; font-weight: 800; color: #9a7400; }
+
+  .cards { display: flex; gap: 9pt; }
+  .card { flex: 1; border: 1pt solid #e6e6e6; border-radius: 9pt; padding: 12pt 11pt 11pt; }
+  .card .ic { width: 30pt; height: 30pt; border-radius: 8pt; background: #FFF4CC;
+              display: flex; align-items: center; justify-content: center; margin-bottom: 9pt; }
+  .card .ic svg { width: 17pt; height: 17pt; }
+  .card .t { font-size: 11pt; font-weight: 800; line-height: 1.2; }
+  .card .t .de { font-size: 8.8pt; font-weight: 600; margin-top: 1pt; }
+  .card .s { font-size: 8.4pt; line-height: 1.35; margin-top: 6pt; color: #333; }
+  .card .s .de { font-size: 7.8pt; margin-top: 1pt; }
+
+  .hook { display: flex; gap: 14pt; background: #FFF9E6; border-radius: 10pt; padding: 11pt 15pt; }
+  .hook .big { flex: none; width: 34%; border-right: 1pt solid #EBD48A; padding-right: 13pt; }
+  .hook .big .q { font-size: 8.5pt; font-weight: 700; color: #9a7400; }
+  .hook .big .a { font-size: 26pt; font-weight: 900; letter-spacing: -0.8pt; line-height: 1; margin-top: 5pt; }
+  .hook .big .a .de { font-size: 12pt; font-weight: 700; letter-spacing: 0; margin-top: 3pt; }
+  .hook ul { list-style: none; flex: 1; display: flex; flex-direction: column; gap: 7pt; justify-content: center; }
+  .hook li { font-size: 9.4pt; font-weight: 700; line-height: 1.25; padding-left: 15pt; position: relative; }
+  .hook li::before { content: ""; position: absolute; left: 0; top: 3pt; width: 7pt; height: 7pt;
+                     border-radius: 50%; background: #F2B705; }
+  .hook li .de { font-size: 8.2pt; font-weight: 400; margin-top: 1pt; }
+
+  .nots { display: grid; grid-template-columns: 1fr 1fr; gap: 8pt; margin-top: 10pt; }
+  .not { display: flex; align-items: center; gap: 9pt; border: 1pt solid #e6e6e6; border-radius: 8pt; padding: 9pt 11pt; }
+  .not .x { flex: none; width: 19pt; height: 19pt; border-radius: 50%; border: 1.6pt solid #1b1b1b;
+            display: flex; align-items: center; justify-content: center; font-size: 10pt; font-weight: 900; }
+  .not .t { font-size: 9.6pt; font-weight: 800; line-height: 1.2; }
+  .not .t .de { font-size: 8pt; font-weight: 500; }
+  .free { margin-top: 9pt; text-align: center; font-size: 10.5pt; font-weight: 800; }
+  .free .de { display: inline; font-size: 9pt; margin-left: 6pt; }
+
+  .foot { margin-top: auto; display: flex; justify-content: space-between; align-items: flex-end;
+          padding-top: 8pt; border-top: 0.8pt solid #e2e2e2; font-size: 7.2pt; color: #8a8a8a; }
+  .next { font-size: 9pt; font-weight: 800; color: #1b1b1b; }
+  .next .de { display: inline; font-size: 8pt; margin-left: 4pt; }
+
+  /* ---------- Seite 2 ---------- */
+  .steps { display: flex; gap: 9pt; }
+  .step { flex: 1; position: relative; border: 1pt solid #e6e6e6; border-radius: 9pt; padding: 9pt 10pt 8pt; }
+  .step .n { width: 20pt; height: 20pt; border-radius: 50%; background: #F2B705; font-weight: 900;
+             font-size: 10pt; display: flex; align-items: center; justify-content: center; margin-bottom: 5pt; }
+  .step .t { font-size: 10.5pt; font-weight: 800; line-height: 1.2; }
+  .step .t .de { font-size: 8.6pt; font-weight: 600; }
+  .step .s { font-size: 8.2pt; line-height: 1.35; margin-top: 5pt; color: #333; }
+  .step .s .de { font-size: 7.6pt; }
+  .tip { margin-top: 8pt; font-size: 8.6pt; color: #333; }
+  .tip b { color: #9a7400; }
+  .tip .de { display: inline; font-size: 8pt; margin-left: 5pt; }
+
+  table { width: 100%; border-collapse: separate; border-spacing: 0; font-size: 9pt; }
+  th { background: #1b1b1b; color: #fff; text-align: left; font-size: 8.2pt; font-weight: 800;
+       padding: 6pt 8pt; }
+  th .de { color: #bdbdbd; font-size: 7.2pt; font-weight: 400; }
+  th:first-child { border-top-left-radius: 8pt; }
+  th:last-child { border-top-right-radius: 8pt; }
+  td { height: 30pt; border-bottom: 1pt solid #dcdcdc; border-right: 1pt solid #efefef; padding: 5pt 8pt; vertical-align: middle; }
+  td:last-child { border-right: none; }
+  td.art { font-weight: 800; font-size: 9.4pt; background: #FFF9E6; }
+  td.art .de { font-size: 7.6pt; font-weight: 400; }
+  tr:last-child td { border-bottom: 1.2pt solid #1b1b1b; }
+
+  .contact { display: flex; gap: 9pt; }
+  .field { flex: 1; border: 1pt solid #dcdcdc; border-radius: 8pt; padding: 7pt 10pt 20pt; }
+  .field .l { font-size: 8pt; font-weight: 800; }
+  .field .l .de { display: inline; font-size: 7.4pt; margin-left: 4pt; }
+
+  .sendto { display: flex; align-items: center; gap: 12pt; margin-top: 9pt; background: #FFF4CC;
+            border: 1pt solid #F2B705; border-radius: 8pt; padding: 9pt 12pt; }
+  .sendto .l { flex: none; font-size: 9pt; font-weight: 800; }
+  .sendto .l .de { font-size: 7.6pt; font-weight: 500; }
+  .sendto .line { flex: 1; border-bottom: 1pt solid #9a7400; height: 14pt; font-size: 7.2pt; color: #9a7400; }
+
+  .consent { margin-top: 14pt; display: flex; gap: 14pt; font-size: 8pt; line-height: 1.4; color: #333; }
+  .consent > div { flex: 1; }
+  .consent .de { display: block; }
+  .sign { display: flex; gap: 20pt; margin-top: 24pt; }
+  .sign > div { flex: 1; border-top: 1pt solid #1b1b1b; padding-top: 4pt; font-size: 8pt; font-weight: 700; }
+  .sign .de { display: inline; font-weight: 400; margin-left: 4pt; }
+  .legal { font-size: 6.6pt; color: #9a9a9a; line-height: 1.4; }
+</style>
+</head>
+<body>
+
+<!-- ═════════════ SEITE 1 ═════════════ -->
+<section class="page">
+  <div class="kicker">Kişisel sunum · Persönliche Übersicht</div>
+  <h1>Sigortalarınız.<br>Açık ve basit.
+    <span class="de">Ihre Versicherungen. Klar und einfach.</span></h1>
+
+  <div class="badges">
+    <div class="badge"><span class="chk">✓</span><div>Ücretsiz<span class="de">Kostenlos</span></div></div>
+    <div class="badge"><span class="chk">✓</span><div>Taahhüt yok<span class="de">Unverbindlich</span></div></div>
+    <div class="badge"><span class="chk">✓</span><div>İmza yok<span class="de">Ohne Unterschrift</span></div></div>
+  </div>
+
+  <div class="sec">
+    <h2><span class="no">01</span>Ne alıyorsunuz<span class="de">Was Sie bekommen</span></h2>
+    <div class="cards">
+      <div class="card">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#1b1b1b" stroke-width="2.2" stroke-linecap="round"><path d="M8 6h12M8 12h12M8 18h12"/><circle cx="3.5" cy="6" r="1.2" fill="#1b1b1b"/><circle cx="3.5" cy="12" r="1.2" fill="#1b1b1b"/><circle cx="3.5" cy="18" r="1.2" fill="#1b1b1b"/></svg></div>
+        <div class="t">Net bir liste<span class="de">Eine klare Liste</span></div>
+        <div class="s">Tüm sigortalarınız, tek bir sayfada.<span class="de">Alle Versicherungen auf einer Seite.</span></div>
+      </div>
+      <div class="card">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#1b1b1b" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5a4.5 4.5 0 1 0 0 7M7 10.5h6M7 13.5h6"/></svg></div>
+        <div class="t">İki kez mi ödüyorsunuz?<span class="de">Doppelt gezahlt?</span></div>
+        <div class="s">Fazla ödediğiniz yeri buluyorum.<span class="de">Ich finde, was Sie zu viel zahlen.</span></div>
+      </div>
+      <div class="card">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#1b1b1b" stroke-width="2.2" stroke-linejoin="round"><path d="M12 3l8 3v6c0 4.5-3.4 8-8 9-4.6-1-8-4.5-8-9V6l8-3z"/><path d="M8.5 12l2.5 2.5 4.5-5" stroke-linecap="round"/></svg></div>
+        <div class="t">Ne eksik?<span class="de">Was fehlt?</span></div>
+        <div class="s">Nerede korumasız olduğunuzu görüyorum.<span class="de">Ich sehe, wo Schutz fehlt.</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <h2><span class="no">02</span>Bit yeniği nerede?<span class="de">Wo ist der Haken?</span></h2>
+    <div class="hook">
+      <div class="big">
+        <div class="q">Dürüst cevap · Die ehrliche Antwort</div>
+        <div class="a">Hiçbir yerde.<span class="de">Nirgends.</span></div>
+      </div>
+      <ul>
+        <li>Beni sigorta şirketi öder, siz değil.<span class="de">Mich bezahlt die Versicherung, nicht Sie.</span></li>
+        <li>Anlaşma olmazsa, risk bana ait.<span class="de">Schließen Sie nichts ab, ist das mein Risiko.</span></li>
+        <li>Her şey zaten yolundaysa, size dürüstçe söylerim.<span class="de">Ist schon alles gut, sage ich es ehrlich.</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="sec">
+    <h2><span class="no">03</span>Ne OLMAZ<span class="de">Was NICHT passiert</span></h2>
+    <div class="nots">
+      <div class="not"><span class="x">✕</span><div class="t">Bugün hiçbir şey imzalamazsınız.<span class="de">Keine Unterschrift.</span></div></div>
+      <div class="not"><span class="x">✕</span><div class="t">Hiçbir sözleşme iptal olmaz.<span class="de">Keine Kündigung.</span></div></div>
+      <div class="not"><span class="x">✕</span><div class="t">Hiçbir şey ödemezsiniz.<span class="de">Keine Kosten.</span></div></div>
+      <div class="not"><span class="x">✕</span><div class="t">Onayınız olmadan hiçbir şey değişmez.<span class="de">Nichts ohne Ihr Okay.</span></div></div>
+    </div>
+    <div class="free">İstediğiniz an „hayır" diyebilirsiniz.<span class="de">Sie können jederzeit Nein sagen.</span></div>
+  </div>
+
+  <div class="sec">
+    <h2><span class="no">04</span>Nasıl devam ediyoruz<span class="de">Wie es weitergeht</span></h2>
+    <div class="steps">
+      <div class="step">
+        <div class="n">1</div>
+        <div class="t">2. sayfayı doldurursunuz<span class="de">Sie füllen Seite 2 aus</span></div>
+        <div class="s">Sadece poliçe numaraları, başka bir şey değil.<span class="de">Nur die Versicherungsnummern, nichts weiter.</span></div>
+      </div>
+      <div class="step">
+        <div class="n">2</div>
+        <div class="t">Ben her şeye bakarım<span class="de">Ich prüfe alles</span></div>
+        <div class="s">Sizin için net bir özet hazırlarım.<span class="de">Ich erstelle eine klare Übersicht für Sie.</span></div>
+      </div>
+      <div class="step">
+        <div class="n">3</div>
+        <div class="t">Birlikte konuşuruz<span class="de">Wir sprechen gemeinsam</span></div>
+        <div class="s">Her şeyi sakin sakin, isterseniz Türkçe açıklarım.<span class="de">Ich erkläre alles in Ruhe, auf Wunsch mit Übersetzung.</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="foot">
+    <span>Sayfa 1 / 2 · Seite 1 von 2</span>
+    <span class="next">Lütfen 2. sayfayı doldurun →<span class="de">Bitte Seite 2 ausfüllen</span></span>
+  </div>
+</section>
+
+<!-- ═════════════ SEITE 2 ═════════════ -->
+<section class="page">
+  <div class="kicker">Doldurulacak · Zum Ausfüllen</div>
+  <h1>Sizden neye ihtiyacım var
+    <span class="de">Was ich von Ihnen brauche</span></h1>
+
+  <div class="sec" style="margin-top:16pt">
+    <h2><span class="no">01</span>Üç adımda<span class="de">In drei Schritten</span></h2>
+    <div class="steps">
+      <div class="step">
+        <div class="n">1</div>
+        <div class="t">Poliçeyi bulun<span class="de">Police suchen</span></div>
+        <div class="s">Sözleşmenin ilk sayfası veya yıllık fatura.<span class="de">Erste Vertragsseite oder Jahresrechnung.</span></div>
+      </div>
+      <div class="step">
+        <div class="n">2</div>
+        <div class="t">Numarayı yazın<span class="de">Nummer eintragen</span></div>
+        <div class="s">Poliçe numarasını aşağıdaki tabloya yazın.<span class="de">Versicherungsnummer in die Tabelle unten.</span></div>
+      </div>
+      <div class="step">
+        <div class="n">3</div>
+        <div class="t">Gönderin<span class="de">Zurückschicken</span></div>
+        <div class="s">WhatsApp'tan bir fotoğraf yeterli.<span class="de">Ein Foto per WhatsApp genügt.</span></div>
+      </div>
+    </div>
+    <div class="tip"><b>Bir şey bulamadınız mı?</b> Sadece firmanın adını yazın.<span class="de">Etwas nicht gefunden? Nur den Firmennamen eintragen.</span></div>
+  </div>
+
+  <div class="sec" style="margin-top:16pt">
+    <h2><span class="no">02</span>Sigortalarınız<span class="de">Ihre Versicherungen</span></h2>
+    <table>
+      <tr>
+        <th style="width:24%">Sigorta<span class="de">Versicherung</span></th>
+        <th style="width:24%">Şirket<span class="de">Firma</span></th>
+        <th style="width:34%">Poliçe numarası<span class="de">Versicherungsnummer</span></th>
+        <th>Aylık<span class="de">Pro Monat</span></th>
+      </tr>
+      <tr><td class="art">Araç<span class="de">Kfz</span></td><td></td><td></td><td></td></tr>
+      <tr><td class="art">Sorumluluk<span class="de">Haftpflicht</span></td><td></td><td></td><td></td></tr>
+      <tr><td class="art">Hukuki koruma<span class="de">Rechtsschutz</span></td><td></td><td></td><td></td></tr>
+      <tr><td class="art">Ev eşyası<span class="de">Hausrat</span></td><td></td><td></td><td></td></tr>
+      <tr><td class="art">İşyeri / dükkân<span class="de">Betrieb / Laden</span></td><td></td><td></td><td></td></tr>
+      <tr><td class="art">Diğer<span class="de">Sonstige</span></td><td></td><td></td><td></td></tr>
+    </table>
+  </div>
+
+  <div class="sec" style="margin-top:16pt">
+    <h2><span class="no">03</span>Bilgileriniz<span class="de">Ihre Angaben</span></h2>
+    <div class="contact">
+      <div class="field"><div class="l">İsim<span class="de">Name</span></div></div>
+      <div class="field"><div class="l">Telefon / WhatsApp</div></div>
+    </div>
+    <div class="sendto">
+      <div class="l">Kime gönderilecek<span class="de">Schicken an</span></div>
+      <div class="line"></div>
+      <div class="l">WhatsApp</div>
+      <div class="line"></div>
+    </div>
+
+    <div class="consent">
+      <div>Bilgilerimin bu sunum için kullanılmasını kabul ediyorum. Onayımı istediğim zaman geri çekebilirim.</div>
+      <div class="de">Ich bin einverstanden, dass meine Daten für diese Übersicht genutzt werden. Widerruf jederzeit möglich.</div>
+    </div>
+    <div class="sign">
+      <div>Tarih<span class="de">Datum</span></div>
+      <div>İmza<span class="de">Unterschrift</span></div>
+    </div>
+  </div>
+
+  <div class="foot">
+    <span class="legal">§ 15 VersVermV uyarınca ilk bilgilendirme ayrıca teslim edilir. Danışmanlık § 61 fıkra 1 VVG uyarınca belgelenir.<br>Erstinformation nach § 15 VersVermV wird separat übergeben. Beratung wird nach § 61 Abs. 1 VVG dokumentiert.</span>
+    <span>Sayfa 2 / 2 · Seite 2 von 2</span>
+  </div>
+</section>
+
+</body>
+</html>
